@@ -1,12 +1,25 @@
 {
-.  inputs.nixpkgs.url = github:NixOS/nixpkgs/nixos-unstable;
-  inputs.home-manager.url = github:nix-community/home-manager;
+  description = "nixos by tahlon"
+  
+  inputs = {
+    nixpkgs.url = github:NixOS/nixpkgs/nixos-unstable;
+    home-manager.url = github:nix-community/home-manager;
+  };
 
-  outputs = { self, nixpkgs, ... }@attrs: {
-    nixosConfigurations.athena = nixpkgs.lib.nixosSystem {
+  outputs = { self, nixpkgs, home-manager }: {
+    let
       system = "x86_64-linux";
-      specialArgs = attrs;
-      modules = [ ./hosts/configuration.nix ];
+    in
+    {
+      nixosConfigurations = {
+        tahlon-desktop = nixpkgs.lib.nixosSystem {
+          system = system;
+          modules = [
+            ./hosts/tahlon-desktop.nix
+            ./home-manager/default.nix
+          ];
+        };   
+      };
     };
   };
 }
