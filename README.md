@@ -7,7 +7,7 @@ This repository contains a modular NixOS configuration designed to support multi
 - **`flake.nix`**: The main entry point for the NixOS configurations.
 - **`LICENSE`**: A standard MIT License for ease of distribution and modification.
 - **`README.md`**: This file, which provides an overview of the repository.
-- **`home-manager``: Contains user-specific configurations managed by Home Manager.
+- **`home-manager`**: Contains user-specific configurations managed by Home Manager.
 - **`hosts`**: Defines the hosts I use in my day-to-day.
 - **`modules`**: Contains reusable modules for hardware, networking, security, services, and shells.
 - **`overlays`**: Custom packages or package overrides.
