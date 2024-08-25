@@ -1,0 +1,3 @@
+              - name: The Determinate Nix Installer
+                uses: DeterminateSystems/nix-installer-action@v13
+            
