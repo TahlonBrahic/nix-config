@@ -1,6 +1,6 @@
 { config, pkgs, ...}:
 {
-  yland.windowManager.hyprland = {
+  wayland.windowManager.hyprland = {
     # Whether to enable Hyprland wayland compositor
     enable = true;
     # The hyprland package to use
