@@ -1,41 +1,64 @@
 {
-  description = "NixOS configuration with dynamic display managers and window managers";
+  description = "Tahlon's Nix-Config suited for multiple devices.";
 
   inputs = {
+    ❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀NixOS Packages❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀
     nixpkgs.url = "github:NixOS/nixpkgs";
+    nixpkgs-unstables.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
+    ❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀
   };
 
-  outputs = { self, nixpkgs, home-manager }:
-    let
-      system = "x86_64-linux";
-    in
-    {
-      nixosConfigurations = {
-        tahlon-desktop = nixpkgs.lib.nixosSystem {
-          system = system;
-          modules = [
-            ./hosts/tahlon-desktop/default.nix
-            ./profiles/gaming.nix    # Select the gaming profile
+  sops-nix = {
+    ❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀Secrets Managements❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀
+    url = "github:mic92/sops-nix";
+    inputs.nixpkgs.follows = "nixpkgs";
+    ❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀
+  };
 
-            # Select the desired window manager
-            ./modules/window-managers/gnome.wayland.nix  # GNOME with Wayland
-            # ./modules/window-managers/gnome.x11.nix    # GNOME with X11
-            # ./modules/window-managers/hyprland.nix
-            # ./modules/window-managers/i3.nix
-            # ./modules/window-managers/sway.nix
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    ...
+  }@inputs:
+  let
+    inherit (self) outputs;
+    forAllSystems = nixpkgs.lib.genAttrs [
+      "x86_64-linux"
+    ];
+    inherit (nixpkgs) lib;
+    configVars = import ./vars { inherit input lib; };
+    configLib = import ./lib { inherit lib; };
+    specialArgs = {
+      inherit
+        inputs
+        outputs
+        configVars
+        configLib
+        nixpkgs
+        ;
+    };
+  in
+  {
+    nixosModules = import ./modules;
+    overlays = import ./overlays { inherit inputs outputs; };
+    packages = forAllSystems (
+      system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in 
+      import ./pkgs { inherit pkgs};
+    );
 
-            # Select the appropriate display manager
-            ./modules/display-managers/gdm.nix    # Use GDM
-            # ./modules/display-managers/lightdm.nix  # Use LightDM
-            # ./modules/display-managers/sddm.nix     # Use SDDM
-
-            ./home-manager/default.nix
-          ];
-        };
-
-        # Other machine configurations
+    nixosConfigurations = {
+      athena = lib.nixosSystem {
+        modules = [
+          home-manager.nixosModules.home-manager
+          { home-manager.extraSpecialArgs= specialArgs; }
+          ./hosts/athena/default.nix
+        ];
       };
     };
+  };
 }
-
