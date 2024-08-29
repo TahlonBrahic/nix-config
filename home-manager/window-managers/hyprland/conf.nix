@@ -13,5 +13,3 @@ animations {
     animation = fade, 1, 10, default
     animation = workspaces, 1, 5, wind
 }
-
-
