@@ -1,0 +1,1 @@
+import ./fish.nix

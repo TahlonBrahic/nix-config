@@ -1,0 +1,1 @@
+import ./fastfetch.nix
