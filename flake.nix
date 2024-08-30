@@ -28,14 +28,10 @@
       "x86_64-linux"
     ];
     inherit (nixpkgs) lib;
-    configVars = import ./vars { inherit input lib; };
-    configLib = import ./lib { inherit lib; };
     specialArgs = {
       inherit
         inputs
         outputs
-        configVars
-        configLib
         nixpkgs
         ;
     };
@@ -51,6 +47,7 @@
       import ./pkgs { inherit pkgs};
     );
 
+    ❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀Athena: QEMU❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀
     nixosConfigurations = {
       athena = lib.nixosSystem {
         modules = [
@@ -60,5 +57,6 @@
         ];
       };
     };
+    ❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀
   };
 }
