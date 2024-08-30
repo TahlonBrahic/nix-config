@@ -1,0 +1,1 @@
+import ./nvchad.nix

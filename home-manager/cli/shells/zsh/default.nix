@@ -1,6 +1,1 @@
-{ config, lib, pkgs, ... }
-{
-  imports = [
-  ];
-};
-
+import ./zsh.nix
