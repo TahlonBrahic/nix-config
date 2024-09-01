@@ -11,6 +11,7 @@
     ❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀Dot Files❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀
     home-manager = {
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     ❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀
 
@@ -30,6 +31,7 @@
     ❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀Disk Partioning❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀
     disko = {
       url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     ❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀
 
@@ -41,7 +43,6 @@
     home-manager,
     ...
   }@inputs:
-  let
     inherit (self) outputs;
     forAllSystems = nixpkgs.lib.genAttrs [
       "x86_64-linux"
