@@ -1,4 +1,4 @@
-{ }:
+{ lib, config, pkgs, ... }:
 
 {
   outputs = inputs@{ self, ... }:
@@ -18,9 +18,16 @@
         user = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
-            (./. +)
-          ]
+            
+          ];
+
+          
         };
       };
+
+      users.users.${developmentProfile.username} = {
+        isNormalUser = true;
+        description = "";
+      }
     };
 }
