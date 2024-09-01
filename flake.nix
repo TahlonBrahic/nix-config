@@ -2,18 +2,37 @@
   description = "Tahlon's Nix-Config suited for multiple devices.";
 
   inputs = {
+    
     ❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀NixOS Packages❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀
     nixpkgs.url = "github:NixOS/nixpkgs";
     nixpkgs-unstables.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager";
     ❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀
-  };
+    
+    ❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀Dot Files❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀
+    home-manager = {
+      url = "github:nix-community/home-manager";
+    };
+    ❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀
 
-  sops-nix = {
-    ❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀Secrets Managements❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀
-    url = "github:mic92/sops-nix";
-    inputs.nixpkgs.follows = "nixpkgs";
-    ❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀
+    ❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀Secrets Managements❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀
+    sops-nix = {
+        url = "github:mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    ❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀
+
+    ❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀Ephemeral Storage❀ ❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀
+    impermanence = {
+      url = "github:nix-community/impermanence";
+    };
+    ❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀
+
+    ❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀Disk Partioning❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀
+    disko = {
+      url = "github:nix-community/disko";
+    };
+    ❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀
+
   };
 
   outputs = {
@@ -57,6 +76,6 @@
         ];
       };
     };
-    ❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀
+    ❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀
   };
 }
