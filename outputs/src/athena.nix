@@ -2,7 +2,6 @@
   inputs,
   lib,
   system,
-  genSpecialArgs,
   ...
 } @ args:
 
@@ -11,16 +10,16 @@
   base-modules = {
     nixos-modules = [
       # common
-      "secrets/nixos.nix"
-      "modules/nixos/desktop.nix"
+      # "secrets/nixos.nix"
+      # "modules/nixos/desktop.nix"
       # host specific
-      "hosts/idols-${name}"
+      # "hosts/idols-${name}"
     ];
     home-modules = [
       # common
-      "../../home/"
+      # "../../home/"
       # host specific
-      "hosts/${name}/home.nix"
+      # "hosts/${name}/home.nix"
     ];
   };
 }
