@@ -65,7 +65,7 @@
       efiSupport = true;
       device = "/dev/vda1";
     };
-  }
+  };
 
   system.stateVersion = "24.05";
 }
