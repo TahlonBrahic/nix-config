@@ -23,7 +23,7 @@
   };
 in {
   nixosConfigurations.${name} = { # This needs to be made into a function
-    nixpkgs // {
+    
       modules = nixos-modules
       ++ (
         lib.options ((lib.lists.length home-modules) > 0)
@@ -37,6 +37,5 @@ in {
           }
         ]
       );
-    }
   };
 }
