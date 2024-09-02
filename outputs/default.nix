@@ -1,1 +1,1 @@
-import ./src/
+import ./src/default.nix
