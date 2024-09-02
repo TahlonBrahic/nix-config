@@ -2,6 +2,7 @@
   let
     system = "x86_64-linux";
     pkgs = import inputs.nixpkgs { inherit system; };
+    home-manager = import inputs.home-manager { inherit system; };
   in {
     nixosConfigurations = {
       athena = pkgs.lib.nixosSystem {
@@ -10,7 +11,7 @@
       };
     };
     homeConfigurations = {
-      tahlon = inputs.home-manager.lib.homeManagerConfiguration {
+      tahlon = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ ../home/hosts/athena/home.nix ];
       };
