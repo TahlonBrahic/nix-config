@@ -1,4 +1,5 @@
 { self, nixpkgs, ... } @ inputs:
+
 let
   inherit (inputs.nixpkgs) lib;
 
@@ -12,14 +13,15 @@ let
       };
     };
 
-    args = {inherit inputs tempArgs; };
+  args = { inherit inputs tempArgs; };
 
-    allSystems = { 
-      x86_64-linux = import ./src/athena.nix { inherit args; system = "x86_64-linux";};
-    };
+  allSystems = { 
+    x86_64-linux = import ./src/athena.nix { inherit args; system = "x86_64-linux"; };
+  };
 
-    packages = x: lib.genAttrs (builtins.attrNames allSystems) (system: allSystems.${system}.packages or {} );
-    in
-    {
-      inherit packages;
-    }   
+in 
+{
+  # This block can be used to return or export whatever is needed from hosts in ./src/
+  inherit allSystems;
+}
+
