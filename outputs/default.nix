@@ -15,7 +15,7 @@ let
 
   args = { inherit inputs tempArgs; };
 
-  # Import from src/athena.nix, relative to the current directory
+  # Importing the athena configuration correctly
   allSystems = {
     athena = import ./src/athena.nix args;
   };
@@ -23,8 +23,6 @@ let
 in 
 {
   # Export the nixosConfigurations
-  nixosConfigurations = {
-    athena = allSystems.athena.nixosConfigurations.athena;
-  };
+  nixosConfigurations = allSystems.athena.nixosConfigurations;
 }
 
