@@ -21,7 +21,7 @@ let
 
 in 
 {
-  # This block can be used to return or export whatever is needed from hosts in ./src/
-  inherit allSystems;
+  nixosConfigurations = {
+    athena = allSystems.x86_64-linux.nixosConfigurations.athena;
+  };
 }
-
