@@ -1,4 +1,5 @@
-{ self, nixpkgs, ... } @ inputs: let
+{ self, nixpkgs, ... } @ inputs:
+let
   inherit (inputs.nixpkgs) lib;
 
   tempArgs = inputs //
@@ -13,8 +14,8 @@
 
     args = {inherit inputs tempArgs; };
 
-    systems = { 
-      import ./src/athena.nix (args // {system = "x86_64-linux";});
+    allSystems = { 
+      x86_64-linux = import ./src/athena.nix ( inherit args; system = "x86_64-linux";);
     };
 
     packages = x: lib.genAttrs (builtins.attrNames allSystems) (system: allSystems.${system}.packages or {} );
