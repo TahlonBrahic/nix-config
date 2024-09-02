@@ -1,7 +1,7 @@
 { inputs, ... }:
   let
     system = "x86_64-linux";
-    pkgs = import nixpkgs { inherit system; };
+    pkgs = import inputs.nixpkgs { inherit system; };
   in {
     nixosConfigurations = {
       athena = nixpkgs.lib.nixosSystem {
