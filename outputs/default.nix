@@ -17,7 +17,7 @@ let
 
   # Import from src/athena.nix, relative to the current directory
   allSystems = {
-    athena = import ./src/athena.nix { inherit args; };
+    athena = import ./src/athena.nix args;
   };
 
 in 
