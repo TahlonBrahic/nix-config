@@ -24,7 +24,7 @@
 in {
   nixosConfigurations.${name} = { # This needs to be made into a function
     
-      modules = nixos-modules
+      modules = base-modules.nixos-modules
       ++ (
         lib.options ((lib.lists.length home-modules) > 0)
         [
