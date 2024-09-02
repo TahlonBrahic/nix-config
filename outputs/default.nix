@@ -4,7 +4,7 @@
     pkgs = import inputs.nixpkgs { inherit system; };
   in {
     nixosConfigurations = {
-      athena = nixpkgs.lib.nixosSystem {
+      athena = pkgs.lib.nixosSystem {
         inherit system;
         modules = [ ../hosts/athena/default.nix ];
       };
