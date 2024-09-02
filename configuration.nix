@@ -55,17 +55,11 @@
     };
   };
 
-  boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot/efi";
-    };
-    grub = {
-      enable = true;
-      efiSupport = true;
-      device = "/dev/vda1";
-    };
-  };
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  services.qemuGuest.enable = true;
+  services.spice-vdagentd.enable = true;
 
   system.stateVersion = "24.05";
 }
