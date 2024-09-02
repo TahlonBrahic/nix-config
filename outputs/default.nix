@@ -15,7 +15,7 @@ let
 
   args = { inherit inputs tempArgs; };
 
-  # Define allSystems for all your x86_64 Linux configurations
+  # Import from src/athena.nix, relative to the current directory
   allSystems = {
     athena = import ./src/athena.nix { inherit args; };
   };
