@@ -15,13 +15,16 @@ let
 
   args = { inherit inputs tempArgs; };
 
-  allSystems = { 
-    x86_64-linux = import ../src/athena.nix { inherit args; system = "x86_64-linux"; };
+  # Define allSystems for all your x86_64 Linux configurations
+  allSystems = {
+    athena = import ../src/athena.nix { inherit args; };
   };
 
 in 
 {
+  # Export the nixosConfigurations
   nixosConfigurations = {
-    athena = allSystems.x86_64-linux.nixosConfigurations.athena;
+    athena = allSystems.athena.nixosConfigurations.athena;
   };
 }
+
