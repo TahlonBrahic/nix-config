@@ -17,7 +17,7 @@ let
 
   # Importing the athena configuration correctly
   allSystems = {
-    athena = import ./src/athena.nix;
+    athena = { import ./src/athena.nix; }
   };
 
 in 
