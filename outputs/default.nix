@@ -15,14 +15,9 @@ let
 
   args = { inherit inputs tempArgs; };
 
-  # Importing the athena configuration correctly
-  allSystems = {
-    athena = [ import ./src/athena.nix; ];
-  };
-
+  allSystems = import ./src/athena.nix;
 in 
 {
-  # Export the nixosConfigurations
-  nixosConfigurations = allSystems.athena.nixosConfigurations;
+  nixosConfigurations = allSystems.nixosConfigurations;
 }
 
