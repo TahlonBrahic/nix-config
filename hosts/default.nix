@@ -10,7 +10,7 @@
   
   sops = lib.mkIf (isInstall && username == "tahlon") {
     age = {
-      keyFile = "/home/${username}/.config/sops/age/keys.txt"
+      keyFile = "/home/tahlon/.config/sops/age/keys.txt"
       generateKey = false;
     };
     defaultSopsFile = ../secrets/secrets.yaml
