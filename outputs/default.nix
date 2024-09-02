@@ -11,7 +11,7 @@
       };
     };
 
-    args = {inherit inputs tempArgs};
+    args = {inherit inputs tempArgs; };
 
     systems = { 
       import ./src (args // {system = "x86_64-linux";});
