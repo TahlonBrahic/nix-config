@@ -15,7 +15,7 @@ let
     args = {inherit inputs tempArgs; };
 
     allSystems = { 
-      x86_64-linux = import ./src/athena.nix ( inherit args; system = "x86_64-linux";);
+      x86_64-linux = import ./src/athena.nix { inherit args; system = "x86_64-linux";};
     };
 
     packages = x: lib.genAttrs (builtins.attrNames allSystems) (system: allSystems.${system}.packages or {} );
