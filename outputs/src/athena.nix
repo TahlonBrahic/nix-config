@@ -1,6 +1,7 @@
 {
   inputs,
   system,
+  lib,
   ...
 } @ args:
   let
