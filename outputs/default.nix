@@ -17,7 +17,7 @@ let
 
   # Define allSystems for all your x86_64 Linux configurations
   allSystems = {
-    athena = import ../src/athena.nix { inherit args; };
+    athena = import ./src/athena.nix { inherit args; };
   };
 
 in 
