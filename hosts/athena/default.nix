@@ -1,5 +1,5 @@
 imports = [
-  ./home.nix
+#  ./home.nix
   ./host.nix
   ./hardware-configuration.nix
 ];  
