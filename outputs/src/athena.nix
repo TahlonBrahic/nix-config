@@ -10,7 +10,7 @@
   base-modules = {
     nixos-modules = [
       # common
-      # "../../"
+      "../../modules/security/default.nix"
       # host specific
       # "hosts/${name}"
     ];
@@ -21,21 +21,6 @@
       # "hosts/${name}/home.nix"
     ];
   };
-
-  modules-hyprland = {
-    nixos-modules =
-      [
-        {
-          ../../modules/clamav/
-        }
-      ]
-      # ++ base-modules.nixos-modules;
-    home-modules =
-      [
-      ]
-      # ++ base-modules.home-modules;
-  };
-  systemConfiguration = modu
 in {
   nixosConfigurations = {
     "${name}" = args;
