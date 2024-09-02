@@ -65,7 +65,7 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
       in 
-      import ./pkgs { inherit pkgs };
+      import ./pkgs { inherit pkgs; };
     );
 
 #    ❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀Athena: QEMU❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀
