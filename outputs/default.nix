@@ -1,24 +1,13 @@
-{ self, nixpkgs, ... } @ inputs:
-
-let
-  inherit (inputs.nixpkgs) lib;
-
-  tempArgs = inputs //
-    {
-      pkgs-unstable = import inputs.nixpkgs-unstable {
-        config.allowUnfree = true;
-      }; 
-      pkgs-stable = import inputs.nixpkgs {
-        config.allowUnfree = true;
+{ nixpkgs, home-manager, ... }:
+  let
+    lib = nixpkgs.lib;
+    system = "86_64-linux";
+    pkgs = import nixpkgs { inherit system; };
+  in {
+    homeConfigurations = {
+      tahlon = home-manager.lib.home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [ ../home/hosts/athena/home.nix ];
       };
     };
-
-  args = { inherit inputs tempArgs; };
-
-  nixosSystems = {
-    allSystems = import ./src/athena.nix;
   };
-in 
-{
-  nixosConfigurations = nixosSystems.allSystems;
-}
