@@ -61,10 +61,11 @@
       efiSysMountPoint = "/boot/efi";
     };
     grub = {
+      enable = true;
       efiSupport = true;
-      device = "nodev";
+      device = "/dev/vda1";
     };
-  };
+  }
 
   system.stateVersion = "24.05";
 }

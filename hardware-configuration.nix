@@ -10,7 +10,7 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/boot/efi" =
+  fileSystems."/" =
     { device = "/dev/disk/by-uuid/bfbb2b4f-d7d4-4a26-bfa2-55148077754d";
       fsType = "ext4";
     };
