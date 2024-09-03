@@ -5,7 +5,7 @@
     pkgs = import nixpkgs { inherit system; };
   in {
     homeConfigurations = {
-      tahlon = home-manager.lib.home-manager.lib.homeManagerConfiguration {
+      tahlon = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ ../home/hosts/athena/home.nix ];
       };
