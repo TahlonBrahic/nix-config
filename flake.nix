@@ -41,7 +41,11 @@
   };
 
   #outputs = { self, nixpkgs, home-manager, ... }@inputs: import ./outputs/default.nix { inherit inputs; };
-  outputs = inputs@{ nixpkgs, home-manager, ... }: {
+  outputs = { nixpkgs, home-manager, ... } @ inputs:
+  let
+    inherit (self) outputs:
+  in
+  {
     nixosConfigurations = {
       athena = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
