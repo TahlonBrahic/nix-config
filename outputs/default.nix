@@ -13,7 +13,7 @@
     homeConfigurations = {
       tahlon = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ../home/hosts/athena/home.nix ];
+        modules = [ ../hosts/athena/home.nix ];
       };
     };
   }
