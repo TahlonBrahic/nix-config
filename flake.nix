@@ -1,8 +1,6 @@
 {
   description = "Tahlon's Nix-Config suited for multiple devices.";
 
-  outputs = inputs: import ./outputs inputs;
-
   inputs = { 
     nixpkgs = {
       url = "github:NixOS/nixpkgs";
@@ -41,4 +39,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+
+  outputs = inputs: import ./outputs/default.nix { inherit inputs; };
 }
