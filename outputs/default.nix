@@ -8,8 +8,8 @@
       athena = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [ ../hosts/athena/default.nix ];
-      }
-    }
+      };
+    };
     homeConfigurations = {
       tahlon = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
