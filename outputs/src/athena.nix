@@ -1,9 +1,12 @@
 {
-  inputs
+  inputs,
+  system,
   ...
 } @ args:
   let
   name = "athena";
+  system = "x86_64-linux";
+  nixpkgs = import nixpkgs {inherit system;};
   base-modules = {
     nixos-modules = [
       # common
@@ -32,6 +35,7 @@
       ]
       # ++ base-modules.home-modules;
   };
+  systemConfiguration = modu
 in {
   nixosConfigurations = {
     "${name}" = args;
