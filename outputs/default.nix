@@ -10,4 +10,4 @@
         modules = [ ../home/hosts/athena/home.nix ];
       };
     };
-  };
+  }
