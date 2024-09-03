@@ -40,5 +40,5 @@
     };
   };
 
-  outputs = inputs: import ./outputs/default.nix { inherit inputs; };
+  outputs = { self, nixpkgs, ... }@inputs: import ./outputs/default.nix { inherit inputs; };
 }
