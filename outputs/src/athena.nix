@@ -22,7 +22,21 @@
     ];
   };
 in {
-  nixosConfigurations = {
-    "${name}" = args;
+  nixosConfigurations.${name} = { # This needs to be made into a function
+    nixpkgs {
+      modules = nixos-modules
+      ++ (
+        lib.options ((lib.lists.length home-modules) > 0)
+        [
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            #home-manager.extraSpecialArgs = ;
+            home-manager.users.tahlon.imports = home-modules;
+          }
+        ]
+      );
+    }
   };
 }
