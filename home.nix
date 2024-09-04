@@ -69,6 +69,13 @@
     usbutils # lsusb
   ];
 
+  wayland.windowManager.sway = {
+    enable = true;
+    config = rec {
+      terminal = "alacritty";
+    }; 
+  };
+
   # basic configuration of git, please change to your own
   programs.git = {
     enable = true;
