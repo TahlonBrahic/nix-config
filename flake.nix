@@ -1,66 +1,26 @@
-{
-  description = "Tahlon's Nix-Config suited for multiple devices.";
+{ 
+  description = "Tahlon's configuration";
 
-  inputs = { 
-    nixpkgs = {
-      url = "github:NixOS/nixpkgs";
-    };
-
-    nixpkgs-unstable = { 
-      url = "github:NixOS/nixpkgs/nixos-unstable";
-    };  
-
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    sops-nix = {
-        url = "github:mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    impermanence = {
-      url = "github:nix-community/impermanence";
-    };
-
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    lanzaboote = {
-      url = "github:nix-community/lanzaboote/v0.4.1";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  #outputs = { self, nixpkgs, home-manager, ... }@inputs: import ./outputs/default.nix { inherit inputs; };
-  outputs = { self, nixpkgs, home-manager, ... } @ inputs:
-  let
-    inherit (self) outputs;
-  in
-  {
+  outputs = inputs@{ nixpkgs, home-manager, ... }: {
     nixosConfigurations = {
-      athena = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
+        athena = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
           ./configuration.nix
-          ];
-        };
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.tahlon = import ./home.nix;
+          }
+        ];
       };
-
-      homeConfigurations = {
-        "tahlon@athena" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = {inherit inputs outputs;};
-          modules = [./home.nix];
-        };
-      };
+    };
   };
 }
