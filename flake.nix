@@ -7,6 +7,6 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs: import ./outputs { inherit inputs; };
+  outputs = inputs: import ./outputs inputs;
 
 }
