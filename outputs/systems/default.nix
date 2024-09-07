@@ -2,7 +2,7 @@
 
 {
   source = builtins.filter (name: lib.strings.hasSuffix ".nix" name) (builtins.attrNames (builtins.readDir ./src));
-  data = map (file: import (./src + "/" file) { inherit inputs args; }) source;
+  data = map (file: import (./src + "/" file) { inherit inputs; }) source;
   dataWithoutPaths = builtins.attrValues (lib.attrsets.concatAttrs data);
 
   outputs = {
