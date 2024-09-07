@@ -1,5 +1,8 @@
-imports = [
-#  ./home.nix
-  ./host.nix
-  ./hardware-configuration.nix
-];  
+{ ... }:
+
+{
+  imports = [
+    ./hardware-configuration.nix
+    ./configuration.nix
+  ];  
+}

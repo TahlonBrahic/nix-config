@@ -1,9 +1,9 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ./waybar.nix
-  ];
+  home.manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.users.tahlon = {
 
   home.username = "tahlon";
   home.homeDirectory = "/home/tahlon";
@@ -48,4 +48,5 @@
   fonts.fontconfig.enable = true;
 
   programs.home-manager.enable = true;
+  };
 }
