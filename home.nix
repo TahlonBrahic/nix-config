@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ./waybar.nix
+  ];
+
   home.username = "tahlon";
   home.homeDirectory = "/home/tahlon";
 
@@ -33,15 +37,15 @@
         enable = true;
         config = {
           modifier = "Mod4";
-  #        bars = [{
-  #          command = "${waybar}/bin/waybar";
-  #        }];
+          bars = [{
+            command = "\${pkgs.waybar}/bin/waybar";
+          }];
         };
       };
     };
   };
 
-  home-manager.users.tahlon.fonts.fontconfig.enable = true;
+  fonts.fontconfig.enable = true;
 
   programs.home-manager.enable = true;
 }
