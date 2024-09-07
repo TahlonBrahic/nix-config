@@ -1,8 +1,8 @@
-{ inputs, lib, ... }:
+{ inputs, ... }:
 
 {
   nixosConfigurations = {
-    athena = lib.nixosSystem {
+    athena = inputs.lib.nixosSystem {
       modules = [
         ../../../hosts/athena/configuration.nix
 	inputs.home-manager.nixosModules.home-manager {
