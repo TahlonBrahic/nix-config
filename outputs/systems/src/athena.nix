@@ -8,7 +8,7 @@
 	home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
 	  home-manager.useUserPackages = true;
-	  home-manager.users.tahlon = import ../../../users/i3t;	 
+	  home-manager.users.tahlon = import ../../../users/i3t/home.nix;	 
 	};
       ];
     };
