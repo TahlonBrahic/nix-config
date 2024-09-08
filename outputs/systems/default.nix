@@ -1,4 +1,4 @@
-{ ... }@inputs:
+{ lib, ... }@inputs:
 
 {
   source = builtins.filter (name: lib.strings.hasSuffix ".nix" name) (builtins.attrNames (builtins.readDir ./src));
@@ -6,6 +6,6 @@
   dataWithoutPaths = builtins.attrValues data;
 
   outputs = {
-    nixosConfigurations = inputs.lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) dataWithoutPaths);
+    nixosConfigurations = lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) dataWithoutPaths);
   };
 }

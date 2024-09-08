@@ -1,7 +1,10 @@
-{ self, nixpkgs, home-manager, lib, ... }@inputs:
+{ self, nixpkgs, home-manager, ... }@inputs:
 
-{
-  systems = import ./systems { inherit inputs; };
+let
+  inherit (inputs.nixpkgs) lib;
+  inherit (inputs.self) self;
+  systems = import ./systems { inherit inputs lib self; };
   systemValues = builtins.attrValues systems;
-  nixosConfigurations = lib.attrsets.mergAttrsList (map (it: it.nixosConfigurations or {}) systemValues);
+in {
+  nixosConfigurations = lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) systemValues);
 }
