@@ -3,9 +3,10 @@
 {
   nixosConfigurations = {
     athena = lib.nixosSystem {
-      modules = [
+      system = "x86_64-linux";
+      	modules = [
         ../../../hosts/athena/configuration.nix
-      ];
+      	];
     };
   };
 }
