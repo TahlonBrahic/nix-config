@@ -33,9 +33,9 @@
         enable = true;
         config = {
           modifier = "Mod4";
-          bars = [{
-            command = "\${pkgs.waybar}/bin/waybar";
-          }];
+#          bars = [{
+#            command = "\${pkgs.waybar}/bin/waybar";
+#          }];
         };
       };
     };
