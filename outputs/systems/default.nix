@@ -1,11 +1,15 @@
 { lib, ... }@inputs:
 
-{
-  source = builtins.filter (name: lib.strings.hasSuffix ".nix" name) (builtins.attrNames (builtins.readDir ./src));
-  data = map (file: import (./src + "/" file) { inherit inputs; }) source;
+let
+  configurations = builtins.readDir ./src;
+
+  data = builtins.listToAttrs (map (fileName: {
+    name = fileName;
+    value = builtins.trace ("Importing file: ${fileName}") (import (./src + "/${fileName}") { inherit lib; });
+  }) (builtins.attrNames configurations));
+
   dataWithoutPaths = builtins.attrValues data;
 
-  outputs = {
-    nixosConfigurations = lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) dataWithoutPaths);
-  };
+in {
+  nixosConfigurations = lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) dataWithoutPaths);
 }
