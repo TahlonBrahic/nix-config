@@ -13,10 +13,10 @@ let
 
   args = { inherit inputs lib self customArgs; };
 
-  systems = { x86_64-linux = import ./x86_64-linux (args // { system = "x86_64-linux"; }); };
-  systemValues = builtins.attrValues systems;
+  systems = builtins.trace "or can we not import" { x86_64-linux = import ./x86_64-linux (args // { system = "x86_64-linux"; }); };
+  systemValues = builtins.trace "is this failing" builtins.attrValues systems;
 
 in {
-  nixosConfigurations = lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) systemValues);
+  nixosConfigurations = builtins.trace "outputs" lib.attrsets.mergeAttrsList (map (it: builtins.trace "fuck me" it.nixosConfigurations or {}) systemValues);
   #devShells = {};
 }

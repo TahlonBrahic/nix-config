@@ -1,16 +1,14 @@
-{ lib, ... }@args:
+{ lib, inputs, ... }@args:
 
 let
-  configurations = builtins.readDir ./src;
-  data = builtins.listToAttrs 
+  configurations = builtins.trace "configurations" builtins.readDir ./src;
+  data = builtins.trace "data" builtins.listToAttrs 
     (map (fileName: {
     name = fileName;
-    value = import ./src + "/${fileName}" args;})
+    value = builtins.trace "Importing ${fileName}" import ./src + "/${fileName}" args;})
     (builtins.attrNames configurations));
-  dataWithoutPaths = builtins.attrValues data;
+  dataWithoutPaths = builtins.trace "datawithoutpaths" builtins.attrValues data;
 in {
-  outputs = {
-    nixosConfigurations = lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) dataWithoutPaths);
-    packages = lib.attrsets.mergeAttrsList (map (it: it.packages or {}) dataWithoutPaths);
-  };
+    nixosConfigurations = builtins.trace "linux 1" lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) dataWithoutPaths);
+    packages = builtins.trace "linux 2" lib.attrsets.mergeAttrsList (map (it: it.packages or {}) dataWithoutPaths);
 }  
