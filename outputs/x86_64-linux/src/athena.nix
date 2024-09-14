@@ -4,7 +4,6 @@ let
   inherit (inputs) inputs args;
 in
 {
-  builtins.trace "goodnight";
   nixosConfigurations = {
     athena = lib.nixosSystem {
       inherit system;
