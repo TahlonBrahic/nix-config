@@ -13,10 +13,9 @@ let
 
   args = { inherit inputs lib self customArgs; };
 
-  systems = builtins.trace "or can we not import" { x86_64-linux = import ./x86_64-linux (args // { system = "x86_64-linux"; }); };
-  systemValues = builtins.trace "is this failing" builtins.attrValues systems;
+  systems = { x86_64-linux = import ./x86_64-linux args; };
+  systemValues = builtins.attrValues systems;
 
 in {
-  nixosConfigurations = builtins.trace "outputs" lib.attrsets.mergeAttrsList (map (it: builtins.trace "fuck me" it.nixosConfigurations or {}) systemValues);
-  #devShells = {};
+  nixosConfigurations = lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) systemValues);
 }
