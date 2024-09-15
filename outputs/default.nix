@@ -1,9 +1,9 @@
 { ... }@inputs:
 
 let
+  _ = builtins.trace "Inputs: ${inputs}" {};
   inherit (inputs.nixpkgs) lib;
   inherit (inputs.self) self;
-  inherit (inputs.home-manager) home-manager;
 
   #bin = import ../bin { inherit lib; };
   #vars = import ../vars { inherit lib; };
@@ -12,7 +12,7 @@ let
     #inherit bin vars;
   };
 
-  args = { inherit customArgs lib self home-manager; };
+  args = { inherit customArgs lib self; };
 
   systems = { x86_64-linux = import ./x86_64-linux/athena.nix args; };
   systemValues = builtins.attrValues systems;

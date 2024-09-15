@@ -1,7 +1,7 @@
 { ... }@args:
 
 let
-  inherit (args) inputs lib home-manager;
+  inherit (args) inputs lib;
 in
 {
   nixosConfigurations = {
@@ -10,11 +10,11 @@ in
       specialArgs = { inherit inputs; };
       	modules = [
           /etc/nixos/hosts/athena/configuration.nix
-	  home-manager.nixosModules.home-manager {
-            home-manager.useGlobalPkgs = true;
-	    home-manager.useUserPackages = true;
-	    home-manager.users.tahlon.imports = /etc/nixos/users/i3t/home.nix;
-	  } 
+#	  home-manager.nixosModules.home-manager {
+#            home-manager.useGlobalPkgs = true;
+#	    home-manager.useUserPackages = true;
+#	    home-manager.users.tahlon.imports = /etc/nixos/users/i3t/home.nix;
+#	  } 
       	];
     };
   };
