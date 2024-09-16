@@ -16,7 +16,7 @@ in
             #inherit extraSpecialArgs;
             home-manager.useGlobalPkgs = true;
 	    home-manager.useUserPackages = true;
-            home-manager.users.tahlon.imports = [ ../../users/i3t/home.nix ];  }
+            home-manager.users.tahlon.imports = [ ../../hosts/athena/home.nix ];  }
       ];
     };
   };
