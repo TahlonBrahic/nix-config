@@ -1,12 +1,15 @@
 { args, ... }:
 
 let
-  systems = [
-    ./athena.nix
-    ./nani.nix
-  ];
-  modules = map(file: import file { inherit args; }) systems;
+  inherit (args.haumea) haumea;
+
+  data = haumea.lib.load {
+    src = ./src;
+    inputs = args;
+  };
+
+  dataWithoutPaths = builtins.attrValues data;
 in
-{
-  import = modules;
+outputs = {
+  nixosConfigurations = lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) dataWithoutPaths);
 }
