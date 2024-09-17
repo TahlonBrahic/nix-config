@@ -1,8 +1,7 @@
-{ args, ... }:
+{ lib, ... }@args:
 
 let
-  inherit (args.haumea) haumea;
-  inherit (args.lib) lib;
+  inherit (args.inputs) haumea;
 
   data = haumea.lib.load {
     src = ./src;
@@ -10,9 +9,9 @@ let
   };
 
   dataWithoutPaths = builtins.attrValues data;
-in
-{
+
   outputs = {
     nixosConfigurations = lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) dataWithoutPaths);
   };
-}
+in
+outputs // { inherit data; }

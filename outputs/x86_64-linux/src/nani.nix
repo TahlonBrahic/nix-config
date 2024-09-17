@@ -1,7 +1,6 @@
-{ ... }@args:
+{ lib, inputs, ... }@args:
 
 let
-  inherit (args) lib inputs;
   specialArgs = { inherit inputs; };
   extraSpecialArgs = { inherit inputs; };
   host = "nani"; 
@@ -14,7 +13,7 @@ in
       	modules = [
           ../../hosts/${host}/configuration.nix
 	  inputs.home-manager.nixosModules.home-manager {
-            #inherit extraSpecialArgs;
+            inherit extraSpecialArgs;
             home-manager.useGlobalPkgs = true;
 	    home-manager.useUserPackages = true;
             home-manager.users.tahlon.imports = [ ../../hosts/${host}/home.nix ];  }
