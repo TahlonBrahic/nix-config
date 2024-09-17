@@ -13,7 +13,10 @@ let
 
   args = { inherit inputs lib self; };
 
-  systems = { x86_64-linux = import ./x86_64-linux/athena.nix args; };
+  systems = { 
+    x86_64-linux = import (builtins.filter (file: builtins.match ".*\\.nix" file != null) (builtins.readDir ./x86_64-linux)) args;
+  };
+
   systemValues = builtins.attrValues systems;
 
 in {
