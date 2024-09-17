@@ -1,7 +1,6 @@
 { ... }@inputs:
 
 let
-  _ = builtins.trace "Inputs: ${inputs}" {};
   inherit (inputs.nixpkgs) lib;
   inherit (inputs.self) self;
 
@@ -13,11 +12,11 @@ let
 
   args = { inherit inputs lib self; };
 
-  systems = { 
-    x86_64-linux = import (builtins.filter (file: builtins.match ".*\\.nix" file != null) (builtins.readDir ./x86_64-linux)) args;
+  systemPaths = {
+    x86_64 = builtins.attrNames (builtins.readDir ./x86_64-linux);
   };
 
-  systemValues = builtins.attrValues systems;
+  systemValues = builtins.attrValues systemPaths;
 
 in {
   nixosConfigurations = lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) systemValues);
