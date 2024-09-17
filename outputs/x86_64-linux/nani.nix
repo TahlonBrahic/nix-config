@@ -1,0 +1,24 @@
+{ ... }@args:
+
+let
+  inherit (args) lib inputs;
+  specialArgs = { inherit inputs; };
+  extraSpecialArgs = { inherit inputs; };
+  host = "nani"; 
+in
+{
+  nixosConfigurations = {
+    ${host} = lib.nixosSystem {
+      system = "x86_64-linux";
+        inherit specialArgs;
+      	modules = [
+          ../../hosts/${host}/configuration.nix
+	  inputs.home-manager.nixosModules.home-manager {
+            #inherit extraSpecialArgs;
+            home-manager.useGlobalPkgs = true;
+	    home-manager.useUserPackages = true;
+            home-manager.users.tahlon.imports = [ ../../hosts/${host}/home.nix ];  }
+      ];
+    };
+  };
+}
