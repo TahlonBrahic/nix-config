@@ -8,11 +8,11 @@ in
   nixosConfigurations = {
     athena = lib.nixosSystem {
       system = "x86_64-linux";
-        inherit specialArgs;
+        #inherit specialArgs;
       	modules = [
           ../../../hosts/athena/configuration.nix
 	  inputs.home-manager.nixosModules.home-manager {
-            inherit extraSpecialArgs;
+            #inherit extraSpecialArgs;
             home-manager.useGlobalPkgs = true;
 	    home-manager.useUserPackages = true;
             home-manager.users.tahlon.imports = [ ../../../hosts/athena/home.nix ];  }
