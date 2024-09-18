@@ -2,7 +2,6 @@
 
 let
   inherit (inputs.nixpkgs) lib;
-  inherit (inputs.self) self;
 
   #bin = import ../bin { inherit lib; };
   #vars = import ../vars { inherit lib; };
@@ -10,10 +9,10 @@ let
 #  customArgs = system: inputs # be sure to add customArgs to args below
 #     // { inherit bin vars; };
 
-  args = { inherit inputs lib self; };
+  args = { inherit inputs lib; };
 
   systems = {
-    x86_64-linux = import ./x86_64-linux { inherit args; };
+    x86_64-linux = import ./x86_64-linux args;
   };
 
   systemValues = builtins.attrValues systems;
