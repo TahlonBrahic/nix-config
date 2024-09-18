@@ -31,6 +31,11 @@
       ];
       extraGroups = ["wheel"];
     };
+    root = {
+      openssh.authorizedKeys.keys = {
+
+      };
+    };
   };
 
   services.openssh = {
