@@ -12,11 +12,11 @@ let
 
   args = { inherit inputs lib self; };
 
-  systemPaths = {
-    x86_64 = builtins.attrNames (builtins.readDir ./x86_64-linux);
+  systems = {
+    x86_64-linux = import ./x86_64-linux { inherit args; };
   };
 
-  systemValues = builtins.attrValues systemPaths;
+  systemValues = builtins.attrValues systems;
 
 in {
   nixosConfigurations = lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) systemValues);
