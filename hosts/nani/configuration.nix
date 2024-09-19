@@ -2,6 +2,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./disk-config.nix
   ];
  
   nix.settings.experimental-features = ["nix-command" "flakes" ];
@@ -41,7 +42,6 @@
   };
 
   security.polkit.enable = true;
-
   boot.loader.efi.canTouchEfiVariables = true;
 
   services.qemuGuest.enable = true;
