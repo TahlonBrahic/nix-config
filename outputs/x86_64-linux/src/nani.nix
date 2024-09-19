@@ -1,4 +1,4 @@
-{ lib, inputs, ... }@args:
+{ lib, inputs, disko, ... }@args:
 
 let
   specialArgs = { inherit inputs; };
@@ -12,6 +12,7 @@ in
         #inherit specialArgs;
       	modules = [
           ../../../hosts/${host}/configuration.nix
+          inputs.disko.nixosModules.disko
 	  inputs.home-manager.nixosModules.home-manager {
             #inherit extraSpecialArgs;
             home-manager.useGlobalPkgs = true;
