@@ -30,6 +30,7 @@
       openssh.authorizedKeys.keys = [
       ];
       extraGroups = ["wheel"];
+      initialPassword = "password";
     };
     root = {
       openssh.authorizedKeys.keys = [
