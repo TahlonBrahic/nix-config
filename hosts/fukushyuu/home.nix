@@ -7,9 +7,8 @@
   home.packages = with pkgs; [
     zip
     neofetch
-    neovim
     discord
-    chrome
+    chromium
     bottles
     steam
     zoom

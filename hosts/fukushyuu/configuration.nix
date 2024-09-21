@@ -8,7 +8,8 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   networking.hostName = "fukushyuu"; 
-
+  networking.networkmanager.enable = true;
+  
   users.users = {
     amy = {
       initialPassword = "temppass";
@@ -17,30 +18,33 @@
     };
   };
 
+  i18n.defaultLocale = "en_US.UTF-8";  
+
   services.xserver = {
     enable = true;
     displayManager.gdm.enable = true;
-    deskstopManager.gnome.enable = true;
+    desktopManager.gnome.enable = true;
+    xkb.layout = "us";
   };
 
-  environment.gnome.excludePackages = (with pkgs; [
+  environment.gnome.excludePackages = with pkgs; [
     gnome-photos
     gnome-tour
-  ]) ++ (with pkgs.gnome; [
-    cheese # webcam tool
-    gnome-music
     gnome-terminal
-    gedit # text editor
-    epiphany # web browser
-    geary # email reader
-    evince # document viewer
+    gnome-music
+    xterm
+    cheese
+    gedit
+    epiphany 
+    geary 
+    evince 
     gnome-characters
-    totem # video player
-    tali # poker game
-    iagno # go game
-    hitori # sudoku game
-    atomix # puzzle game
-  ]);
+    totem 
+    tali 
+    iagno 
+    hitori 
+    atomix 
+  ];
 
   nixpkgs.config.allowUnfree = true;
 
@@ -48,6 +52,8 @@
     enable = true;
   };
 
-  environment.systemPackages = with pkgs; [ vim ];
+  environment.systemPackages = with pkgs; [ vim git ];
   programs.vim.defaultEditor = true;
+  
+  system.stateVersion = "23.11";  
 }
