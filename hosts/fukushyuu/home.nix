@@ -10,7 +10,6 @@
     discord
     chromium
     bottles
-    steam
     zoom
     lutris
   ];
@@ -24,6 +23,8 @@
   programs.kitty = {
     enable = true;
   };
+  
+  programs.steam.enable = true;
 
   home.stateVersion = "24.05";
 
