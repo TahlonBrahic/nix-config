@@ -10,8 +10,10 @@
     discord
     chromium
     bottles
-    zoom
+    zoom-us
     lutris
+    google-chrome
+    gnome.geary
   ];
 
   programs.git = {
@@ -23,8 +25,6 @@
   programs.kitty = {
     enable = true;
   };
-  
-  programs.steam.enable = true;
 
   home.stateVersion = "24.05";
 
