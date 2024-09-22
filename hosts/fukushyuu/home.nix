@@ -13,7 +13,7 @@
     zoom-us
     lutris
     google-chrome
-    gnome.geary
+    geary
   ];
 
   programs.git = {
