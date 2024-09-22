@@ -13,6 +13,7 @@ in
       	modules = [
           ../../../hosts/${host}/configuration.nix
           inputs.disko.nixosModules.disko
+          inputs.sops-nix.nixosModules.nix
 	  inputs.home-manager.nixosModules.home-manager {
             #inherit extraSpecialArgs;
             home-manager.useGlobalPkgs = true;

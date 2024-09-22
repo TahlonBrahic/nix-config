@@ -21,6 +21,8 @@
   just
   neofetch
   vim
+  age
+  gpg
   ];
 
   environment.variables.EDITOR = "vim";
