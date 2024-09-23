@@ -12,6 +12,7 @@
     vim
     wget
     curl
+    age
   ];
 
   environment.variables.EDITOR = "vim";
