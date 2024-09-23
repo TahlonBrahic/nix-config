@@ -6,7 +6,7 @@ let
   bin = import ../bin { inherit lib; };
   vars = import ../vars { inherit lib; };
 
-  args = { inherit inputs lib bin; };
+  args = { inherit inputs lib bin vars; };
 
   systems = {
     x86_64-linux = import ./x86_64-linux args;
