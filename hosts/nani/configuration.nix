@@ -1,9 +1,9 @@
-{ config, pkgs, lib, ... }: 
+{ config, pkgs, lib, customArgs, ... }: 
 {
   imports = [
     ./hardware-configuration.nix
     ./disk-config.nix
-    (map lib.relativeToRoot [
+    (map customArgs.relativeToRoot [
       "modules/nixos/common"
     ])
   ];
