@@ -1,8 +1,11 @@
-{ config, pkgs, ... }: 
+{ config, pkgs, lib, ... }: 
 {
   imports = [
     ./hardware-configuration.nix
     ./disk-config.nix
+    (map lib.relativeToRoot [
+      "modules/nixos/common"
+    ])
   ];
  
   nix.settings.experimental-features = ["nix-command" "flakes" ];
