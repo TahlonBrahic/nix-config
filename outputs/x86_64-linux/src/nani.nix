@@ -1,4 +1,4 @@
-{ inputs, lib, bin, ... }@args:
+{ inputs, bin, lib, ... }@args:
 
 let
   inherit (inputs) disko sops-nix;
@@ -29,6 +29,6 @@ let
 in
 {
   nixosConfigurations = {
-    "${hostName}" = bin.systemTemplate templateArgs;
+    "${hostName}" = bin.systemTemplate { inherit args modules tempVars; };
   };
 }
