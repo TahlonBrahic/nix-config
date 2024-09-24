@@ -1,4 +1,4 @@
-{ lib, bin, inputs, ... }@args:
+{ inputs, lib, bin, ... }@args:
 
 let
   inherit (inputs) disko sops-nix;
@@ -7,6 +7,7 @@ let
     "hosts/${hostName}/configuration.nix" 
   ];
 
+  # TODO: I would like to abstract how I pass users to systemTemplate.
   homeModules = map bin.relativeToRoot [
     "hosts/${hostName}/home.nix"
   ];
@@ -19,9 +20,15 @@ let
     ] ++ nixModules;
     home = [ ] ++ homeModules;
   };
+  
+  tempVars = {
+    username = "tahlon";
+  };
+
+  templateArgs = args // modules // tempVars;
 in
 {
   nixosConfigurations = {
-    "${hostName}" = bin.systemTemplate ( modules // args );
+    "${hostName}" = bin.systemTemplate templateArgs;
   };
 }

@@ -1,8 +1,8 @@
-{ inputs, lib, vars, args, modules, ... }:
+{ inputs, lib, bin, modules, tempVars, ... }:
 let
   inherit (inputs) nixpkgs home-manager;
+  specialArgs = { inherit inputs lib bin; };
   system = "x86_64-linux";
-  specialArgs = args;
 in
   lib.nixosSystem {
     inherit system specialArgs;
@@ -12,7 +12,7 @@ in
 	  home-manager.useGlobalPkgs = true;
 	  home-manager.useUserPackages = true;
 	  home-manager.extraSpecialArgs = specialArgs;
-	  home-manager.users."${vars.username}".imports = modules.home;
+	  home-manager.users."${tempVars.username}".imports = modules.home;
 	}
       ];
   }

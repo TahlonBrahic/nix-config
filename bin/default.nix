@@ -16,4 +16,6 @@
         ) (builtins.readDir path)
       )
     );
+
+    systemTemplate = import ./systemTemplate.nix;
 }
