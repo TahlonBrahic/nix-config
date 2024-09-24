@@ -1,5 +1,6 @@
-{ inputs, lib, bin, modules, tempVars, ... }:
+{ args, modules, tempVars, ... }:
 let
+  inherit (args) inputs lib bin;
   inherit (inputs) nixpkgs home-manager;
   specialArgs = { inherit inputs lib bin; };
   system = "x86_64-linux";
@@ -15,4 +16,4 @@ in
 	  home-manager.users."${tempVars.username}".imports = modules.home;
 	}
       ];
-  }
+  } 
