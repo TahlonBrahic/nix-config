@@ -1,24 +1,27 @@
-{ lib, inputs, system, customArgs, specialArgs ? (customArgs system), ... }:
+{ lib, bin, inputs, ... }@args:
 
 let
-  inherit (inputs) disko home-manager sops-nix;
-  host = "nani"; 
+  inherit (inputs) disko sops-nix;
+  # TODO: I would like to abstract how I import these as I do it for each host.
+  nixModules = map bin.relativeToRoot [
+    "hosts/${hostName}/configuration.nix" 
+  ];
+
+  homeModules = map bin.relativeToRoot [
+    "hosts/${hostName}/home.nix"
+  ];
+  
+  hostName = "nani";
+  modules = {
+    nixos = [
+      disko.nixosModules.disko
+      sops-nix.nixosModules.sops
+    ] ++ nixModules;
+    home = [ ] ++ homeModules;
+  };
 in
 {
   nixosConfigurations = {
-    ${host} = lib.nixosSystem {
-      inherit system specialArgs;
-      modules = [
-        ../../../hosts/${host}/configuration.nix
-        inputs.disko.nixosModules.disko
-        sops-nix.nixosModules.sops
-	home-manager.nixosModules.home-manager {
-          home-manager.useGlobalPkgs = true;
-	  home-manager.useUserPackages = true;
-	  home-manager.extraSpecialArgs = specialArgs;
-          home-manager.users.tahlon.imports = [ ../../../hosts/${host}/home.nix ]; 
-	}
-      ];
-    };
+    "${hostName}" = bin.systemTemplate ( modules // args );
   };
 }
