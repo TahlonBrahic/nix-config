@@ -3,6 +3,7 @@ let
   inherit (args) inputs lib bin;
   inherit (inputs) nixpkgs home-manager;
   specialArgs = { inherit inputs lib bin; };
+  extraSpecialArgs = { inherit inputs bin; };
   system = "x86_64-linux";
 in
   lib.nixosSystem {
@@ -12,7 +13,7 @@ in
         home-manager.nixosModules.home-manager {
 	  home-manager.useGlobalPkgs = true;
 	  home-manager.useUserPackages = true;
-	  home-manager.extraSpecialArgs = specialArgs;
+	  home-manager.extraSpecialArgs = extraSpecialArgs;
 	  home-manager.users."${tempVars.username}".imports = modules.home;
 	}
       ];
