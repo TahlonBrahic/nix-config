@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: 
+{ config, pkgs, lib, ... }: 
 {
   imports = [
     ./hardware-configuration.nix
@@ -12,6 +12,7 @@
     vim
     wget
     curl
+    age
   ];
 
   environment.variables.EDITOR = "vim";
