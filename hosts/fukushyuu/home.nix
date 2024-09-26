@@ -14,6 +14,7 @@
     lutris
     google-chrome
     geary
+    obs-studio
   ];
 
   programs.git = {
