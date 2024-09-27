@@ -8,8 +8,10 @@ let
   ];
 
   # TODO: I would like to abstract how I pass users to systemTemplate.
-  homeModules = map bin.relativeToRoot [
-    "hosts/${hostName}/home.nix"
+  homeModules = [
+    "modules/home/base"
+    "modules/home/gui"
+    "modules/home/tui" 
   ];
   
   hostName = "nani";
@@ -18,7 +20,7 @@ let
       disko.nixosModules.disko
       sops-nix.nixosModules.sops
     ] ++ nixModules;
-    home = [ ] ++ homeModules;
+    home = bin.mergeModules { inherit lib bin; modules = homeModules; };
   };
   
   tempVars = {

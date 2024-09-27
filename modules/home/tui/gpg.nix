@@ -22,7 +22,7 @@
       keyid-format = "0xlong";
       with-fingerprint = true;
       list-options = "show-uid-validity";
-      verify-options = "show-uid-validity show-keyserver-urls";p
+      verify-options = "show-uid-validity show-keyserver-urls";
       personal-cipher-preferences = "AES256";
       personal-digest-preferences = "SHA512";
       default-preference-list = "SHA512 SHA384 SHA256 RIPEMD160 AES256 TWOFISH BLOWFISH ZLIB BZIP2 ZIP Uncompressed";
