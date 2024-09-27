@@ -3,13 +3,10 @@
 let
   inherit (inputs.nixpkgs) lib;
 
-  #bin = import ../bin { inherit lib; };
-  #vars = import ../vars { inherit lib; };
+  bin = import ../bin { inherit lib; };
+  vars = import ../vars { inherit lib; };
 
-#  customArgs = system: inputs # be sure to add customArgs to args below
-#     // { inherit bin vars; };
-
-  args = { inherit inputs lib; };
+  args = { inherit inputs lib bin vars; };
 
   systems = {
     x86_64-linux = import ./x86_64-linux args;
