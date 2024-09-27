@@ -1,8 +1,14 @@
 { lib, bin, modules, ... }:
 
 let
-  relativeModulest = map (module: bin.relativeToRoot module) modules;
-  relativeModules = builtins.trace relativeModulest relativeModulest;
-  mergedAttrs = lib.attrsets.mergeAttrsList relativeModules;
+  # Modules are imported as a list of paths (strings)
+  # relateModules returns a list of paths relative to project root (strings)
+  relativeModules = map (module: bin.relativeToRoot module) modules;
+
+  # parsedModules takes the list of strings and extracts their attribute set
+  parsedModules = 
+
+  # mergedAttrs then takes the list of attribute sets and merges it into one set
+  mergedAttrs = lib.attrsets.mergeAttrsList parsedModules;
 in
   mergedAttrs
