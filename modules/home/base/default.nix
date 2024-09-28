@@ -1,5 +1,5 @@
-{ lib, ... }:
+{ bin, ... }:
 
 {
-  imports = lib.scanPaths./.;
+  imports = bin.scanPaths./.;
 }

@@ -1,5 +1,5 @@
-{ lib, ... }:
+{ nvim, ... }:
 
 {
-  imports = lib.scanPaths./.;
+  imports = bin.scanPaths./.;
 }
