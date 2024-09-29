@@ -1,9 +1,9 @@
-{ args, modules, tempVars, ... }:
+{ args, modules, vars, ... }:
 let
-  inherit (args) inputs lib bin;
+  inherit (args) inputs lib customLib;
   inherit (inputs) nixpkgs home-manager;
-  specialArgs = { inherit inputs lib bin; };
-  extraSpecialArgs = { inherit inputs bin; };
+  specialArgs = { inherit inputs lib customLib; };
+  extraSpecialArgs = { inherit inputs customLib; };
   system = "x86_64-linux";
 in
   lib.nixosSystem {
@@ -14,7 +14,7 @@ in
 	  home-manager.useGlobalPkgs = true;
 	  home-manager.useUserPackages = true;
 	  home-manager.extraSpecialArgs = extraSpecialArgs;
-	  home-manager.users."${tempVars.username}".modules = { imports = [modules.home]; };
+	  home-manager.users."${vars.username}".modules = { imports = with customLib.modulesRoot; [modules.home]; };
 	}
       ];
   } 

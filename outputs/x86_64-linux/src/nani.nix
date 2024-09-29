@@ -1,15 +1,15 @@
-{ inputs, bin, lib, ... }@args:
+{ inputs, lib, customLib, vars, ... }@args:
 
 let
   inherit (inputs) disko sops-nix;
-  inherit (bin) relativeToRoot modulesRoot;
+  inherit (customLib) relativeToRoot modulesRoot systemTemplate;
   # TODO: I would like to abstract how I import these as I do it for each host.
   nixModules = map relativeToRoot [
     "hosts/${hostName}/configuration.nix" 
   ];
 
   # TODO: I would like to abstract how I pass users to systemTemplate.
-  homeModules = with modulesRoot.modulesRoot.home; [
+  homeModules = with modulesRoot.home; [
     base
     tui
     gui
@@ -25,14 +25,9 @@ let
     ] ++ homeModules;
   };
   
-  tempVars = {
-    username = "tahlon";
-  };
-
-  templateArgs = args // modules // tempVars;
 in
 {
   nixosConfigurations = {
-    "${hostName}" = bin.systemTemplate { inherit args modules tempVars; };
+    "${hostName}" = systemTemplate { inherit args modules vars; };
   };
 }
