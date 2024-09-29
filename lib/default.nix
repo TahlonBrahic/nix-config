@@ -1,4 +1,4 @@
-{ lib, inputs, ... }:
+{ lib, inputs, ... }@args:
 # Credit to EmergentMind 
 {
   relativeToRoot = lib.path.append ../.;
@@ -19,5 +19,6 @@
 
     systemTemplate = import ./systemTemplate.nix;
     #mergeModules = import ./mergeModules.nix;
-    modulesRoot = import ./modulesRoot.nix { inherit (inputs) haumea; inherit (inputs) nixpkgs; inherit lib; };	
+    modulesRoot = import ./modulesRoot.nix args;	
+    varsRoot = import ./varsRoot.nix args; 
 }

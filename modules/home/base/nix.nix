@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  home.packages  = with pkgs; [
+  home.packages = with pkgs; [
     nix-output-monitor
     hydra-check
     nix-index

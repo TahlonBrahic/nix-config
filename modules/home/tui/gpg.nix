@@ -7,12 +7,12 @@
     mutableTrust = false;
     mutableKeys = false;
     
-    publicKeys = [
-      {
+   # publicKeys = [
+     # {
         #source = ""; Need to add gpg public key.
-	trust = 5;
-      }
-    ];
+#	trust = 5;
+     # }
+   # ];
 
     settings = {
       no-greeting = true;
