@@ -18,14 +18,13 @@ let
     base.nix
     base.home
         
-    gui.obsidian
-    gui.sway
-    gui.terminal.kitty
-
-    tui.encryption
-    tui.gpg
-    tui.password
-    tui.zellij
+    opt.obsidian
+    opt.sway
+    opt.kitty
+    opt.encryption
+    opt.gpg
+    opt.password
+    opt.zellij
   ];
   
   hostName = "nani";
