@@ -18,5 +18,5 @@
     );
 
     systemTemplate = import ./systemTemplate.nix;
-    mergeModules = import ./mergeModules.nix;
+    #mergeModules = import ./mergeModules.nix;
 }
