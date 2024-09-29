@@ -1,4 +1,4 @@
-{ pkgs, config, lib,... }: 
+{ pkgs, config ? {}, lib,... }: 
 let
   passwordStoreDir = "${config.xdg.dataHome}/password-store";
 in 
@@ -11,7 +11,7 @@ in
     ]);
     # See the “Environment variables” section of pass(1) and the extension man pages for more information about the available keys.
     settings = {
-      PASSWORD_STORE_DIR = passwordStoreDir;
+      #PASSWORD_STORE_DIR = passwordStoreDir;
       # Overrides the default gpg key identification set by init.
       # Hexadecimal key signature is recommended.
       # Multiple keys may be specified separated by spaces.

@@ -1,15 +1,21 @@
 { ... }@inputs:
 
 let
+  # Extract important utility functions from Nixpkgs e.g. mkIf, concatMap, ...
   inherit (inputs.nixpkgs) lib;
 
-  bin = import ../bin { inherit lib inputs; };
+  # Import library of custom functions used in this flake
+  customLib = import ../lib { inherit inputs lib vars; };
+
+  # Import variables such as users
   vars = import ../vars { inherit lib; };
 
-  args = { inherit inputs lib bin vars; };
+  # Wrap these together into an custom attribute set
+  customArgs = { inherit inputs lib customLib vars; };
 
   systems = {
-    x86_64-linux = import ./x86_64-linux args;
+    x86_64-linux = import ./x86_64-linux customArgs;
+    # aarch64-darwin = import ./aarch64-darwin customArgs;
   };
 
   systemValues = builtins.attrValues systems;

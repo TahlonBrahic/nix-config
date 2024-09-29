@@ -3,7 +3,7 @@
 {
   programs.gpg = {
     enable = true;
-    homedir = "${config.home.homeDirectory}/.gnupg";
+    #homedir = "${config.home.homeDirectory}/.gnupg";
     mutableTrust = false;
     mutableKeys = false;
     
