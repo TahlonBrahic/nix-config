@@ -1,14 +1,14 @@
-{ config, lib, pkgs, vars, ...}:
+{ config ? {}, pkgs, vars ? {}, ...}:
 
 {
-  home.activation.removeExistingGitconfig = lib.hm.dag.entryBefore ["checkLinkTargets"] ''rm -f ${config.home.homeDirectory}/.gitconfig'';
+  #home.activation.removeExistingGitconfig = lib.hm.dag.entryBefore ["checkLinkTargets"] ''rm -f ${config.home.homeDirectory}/.gitconfig'';
 
   programs.git = {
     enable = true;
     lfs.enable = true;
 
-    userName = vars.userfullname;
-    userEmail = vars.useremail;
+    userName = "tahlon";
+    userEmail = "tahlonbrahic@proton.me";
 
     extraConfig = {
       init.defaultBranch = "main";

@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  environment.systemPackages = [
-    pkgs.zip
+  home.packages = with pkgs; [
+    zip
   ];
 }
