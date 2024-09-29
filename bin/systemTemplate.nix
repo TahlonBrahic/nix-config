@@ -14,7 +14,7 @@ in
 	  home-manager.useGlobalPkgs = true;
 	  home-manager.useUserPackages = true;
 	  home-manager.extraSpecialArgs = extraSpecialArgs;
-	  home-manager.users."${tempVars.username}".imports = modules.home;
+	  home-manager.users."${tempVars.username}".modules = { imports = [modules.home]; };
 	}
       ];
   } 
