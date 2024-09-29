@@ -19,5 +19,5 @@
 
     systemTemplate = import ./systemTemplate.nix;
     #mergeModules = import ./mergeModules.nix;
-    modules = import ./modules.nix { inherit (inputs) haumea; };	
+    modulesRoot = import ./modulesRoot.nix { inherit (inputs) haumea; };	
 }
