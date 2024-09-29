@@ -3,7 +3,7 @@
 let
   inherit (inputs.nixpkgs) lib;
 
-  bin = import ../bin { inherit lib; };
+  bin = import ../bin { inherit lib inputs; };
   vars = import ../vars { inherit lib; };
 
   args = { inherit inputs lib bin vars; };

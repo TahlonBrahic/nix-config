@@ -2,16 +2,17 @@
 
 let
   inherit (inputs) disko sops-nix;
+  inherit (bin) relativeToRoot modules
   # TODO: I would like to abstract how I import these as I do it for each host.
-  nixModules = map bin.relativeToRoot [
+  nixModules = map relativeToRoot [
     "hosts/${hostName}/configuration.nix" 
   ];
 
   # TODO: I would like to abstract how I pass users to systemTemplate.
-  homeModules = map bin.relativeToRoot [
-    "modules/home/base/"
-    "modules/home/gui/"
-    "modules/home/tui/" 
+  homeModules = with modules.home; [
+    core
+    gui
+    tui
   ];
   
   hostName = "nani";
