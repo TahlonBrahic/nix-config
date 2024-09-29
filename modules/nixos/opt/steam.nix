@@ -1,7 +1,8 @@
-# https://github.com/fufexan/dotfiles/blob/483680e/system/programs/steam.nix
-{pkgs, ...}: {
+{ pkgs, ...}: 
+
+{
+  # REF: https://github.com/fufexan/dotfiles/blob/483680e/system/programs/steam.nix
   # https://wiki.archlinux.org/title/steam
-  # Games installed by Steam works fine on NixOS, no other configuration needed.
   programs.steam = {
     # Some location that should be persistent:
     #   ~/.local/share/Steam - The default Steam install location
@@ -10,7 +11,7 @@
     #   ~/.steam             - Some Symlinks & user info
     enable = true;
 
-    # fix gamescope inside steam
+    # NOTE: Fix Gamescope inside Steam
     package = pkgs.steam.override {
       extraPkgs = pkgs:
         with pkgs; [
