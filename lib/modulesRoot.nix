@@ -7,7 +7,7 @@ let
   pkgs = import inputs.nixpkgs { inherit system; };
   modulesRoot = inputs.haumea.lib.load {
     src = ../modules;
-    inputs = { inherit lib customLib vars pkgs; };
+    #inputs = { inherit lib customLib vars pkgs; };
     loader = inputs.haumea.lib.loaders.path;
   };
 in 

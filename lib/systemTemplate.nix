@@ -1,8 +1,9 @@
 { args, modules, vars, ... }:
+
 let
-  inherit (args) inputs lib system;
+  inherit (args) inputs lib customLib system;
   inherit (inputs) nixpkgs home-manager;
-  extraSpecialArgs = { inherit vars; };
+  extraSpecialArgs = { inherit inputs customLib vars; };
 in
   lib.nixosSystem {
     inherit system;
