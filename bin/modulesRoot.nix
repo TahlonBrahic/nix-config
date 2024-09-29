@@ -1,8 +1,8 @@
-{ haumea, ... }:
+{ haumea, nixpkgs, ... }:
 
 {
   modulesRoot = haumea.lib.load {
     src = ../modules;
-    loader = haumea.lib.loaders.path;
+    inputs = { pkgs = import nixpkgs { system = "x86_64-linux"; }; };
   };
 }

@@ -9,8 +9,8 @@ let
   ];
 
   # TODO: I would like to abstract how I pass users to systemTemplate.
-  homeModules = modulesRoot.home [
-    core
+  homeModules = with modulesRoot.modulesRoot.home; [
+    base
     tui
     gui
   ];
