@@ -1,5 +1,0 @@
-{ bin, ... }:
-
-{
-  imports = bin.scanPaths./.;
-}

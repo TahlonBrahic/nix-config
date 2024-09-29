@@ -5,7 +5,7 @@ let
 
   data = haumea.lib.load {
     src = ./src;
-    inputs = args;
+    inputs = args // {system = "x86_64-linux"; };
   };
 
   dataWithoutPaths = builtins.attrValues data;

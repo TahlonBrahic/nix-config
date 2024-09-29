@@ -2,7 +2,7 @@
  
 {
   home.packages = with pkgs; [
-    swaykdbb
+    swaykbdd
     wayland-utils
     wl-clipboard
     wlprop

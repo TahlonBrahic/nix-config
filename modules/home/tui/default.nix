@@ -1,5 +1,0 @@
-{ nvim, ... }:
-
-{
-  imports = bin.scanPaths./.;
-}

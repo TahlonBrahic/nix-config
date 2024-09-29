@@ -1,5 +1,5 @@
 { pkgs, ... }:
 
 {
-  environment.systemPackages = with pkgs; [ obsidian ];
+  home.packages = with pkgs; [ obsidian ];
 }
