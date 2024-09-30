@@ -1,4 +1,6 @@
-{pkgs, ...}: {
+{ pkgs, ...}: 
+
+{
   # FHS environment, flatpak, appImage, etc.
   environment.systemPackages = [
     # create a fhs environment by command `fhs`, so we can run non-nixos packages in nixos!
