@@ -1,7 +1,8 @@
 { lib, ... }: 
 
 {
-  boot.loader.grub = {
-    enable = true;
+  boot.loader = {
+    grub.enable = true;
+    efi.canTouchEfiVariables = true;
   };
 }
