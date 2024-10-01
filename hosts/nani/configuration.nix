@@ -15,7 +15,6 @@
     age
   ];
 
-  environment.variables.EDITOR = "vim";
 
   nixpkgs = {
    config = {
