@@ -56,7 +56,8 @@ let
       disko.nixosModules.disko
       sops-nix.nixosModules.sops
     ] ++ nixModules;
-    home = [
+    home = with relativeToRoot; [
+      "hosts/fukushyuu/hardware-configuration.nix"
     ] ++ homeModules;
   };
 
