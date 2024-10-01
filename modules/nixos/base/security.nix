@@ -3,6 +3,8 @@
 {
   services.dbus.apparmor = "enabled";
 
+  security.polkit.enable = true;
+
   security.apparmor = {
     enable = true;
   };

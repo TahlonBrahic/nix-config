@@ -1,8 +1,12 @@
 { vars, ...}: 
 
+let
+  username = inherit (vars) username;
+in
 {
   home = {
-    inherit (vars) username;
+    inherit username;
+    homeDirectory = "/home/${username}";   
 
     stateVersion = "24.05";
   };
