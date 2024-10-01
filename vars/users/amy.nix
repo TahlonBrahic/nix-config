@@ -2,7 +2,7 @@
 
 {
   username = "amy";
-  name = "amy Brahic";
+  name = "Amy Brahic";
   email = "anbrahic@gmail.com";
   # initialHashedPassword = ?
   # sshAuthorizedKeys = [ ? ];

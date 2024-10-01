@@ -1,24 +1,69 @@
-{ lib, inputs, disko, ... }@args:
+{ inputs, lib, customLib, system, vars, ... }@args:
 
 let
-  specialArgs = { inherit inputs; };
-  extraSpecialArgs = { inherit inputs; };
-  host = "fukushyuu"; 
+  inherit (inputs) disko sops-nix;
+  inherit (customLib) relativeToRoot modulesRoot varsRoot systemTemplate;
+
+  # TODO: I would like to abstract how I import these as I do it for each host.
+  nixModules = with modulesRoot.nixos; [
+    base.boot
+    base.clamav
+    base.env
+    base.fail2ban
+    base.il8n
+    base.network
+    base.nftables
+    base.nix
+    base.secrets
+    base.security
+    base.services
+    base.sound
+    base.users
+    base.utils
+    base.virt
+    base.yubikey
+    base.zram
+    base.zsh
+
+    opt.fhs
+    opt.gamemode
+    opt.steam
+  ];
+
+  # TODO: I would like to abstract how I pass users to systemTemplate.
+  homeModules = with modulesRoot.home; [
+    base.archive
+    base.git
+    base.xdg
+    base.container
+    base.nix
+    base.home
+        
+    opt.chrome
+    opt.discord
+    opt.encryption
+    opt.fetch
+    opt.gnome
+    opt.obsidian
+    opt.password
+    opt.streaming
+    opt.zellij
+  ];
+  
+  hostName = "fukushyuu";
+  modules = {
+    nixos = [
+      disko.nixosModules.disko
+      sops-nix.nixosModules.sops
+    ] ++ nixModules;
+    home = [
+    ] ++ homeModules;
+  };
+
+  inherit (vars.vars.users.amy) vars;
 in
 {
   nixosConfigurations = {
-    ${host} = lib.nixosSystem {
-      system = "x86_64-linux";
-        #inherit specialArgs;
-      	modules = [
-          ../../../hosts/${host}/configuration.nix
-          inputs.disko.nixosModules.disko
-	  inputs.home-manager.nixosModules.home-manager {
-            #inherit extraSpecialArgs;
-            home-manager.useGlobalPkgs = true;
-	    home-manager.useUserPackages = true;
-            home-manager.users.amy.imports = [ ../../../hosts/${host}/home.nix ];  }
-      ];
-    };
+    "${hostName}" = systemTemplate { inherit args modules vars;};
   };
 }
