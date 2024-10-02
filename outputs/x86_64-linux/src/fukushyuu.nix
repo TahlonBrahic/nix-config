@@ -10,7 +10,7 @@ let
     base.clamav
     base.env
     base.fail2ban
-    base.il8n
+    base.i18n
     base.network
     base.nftables
     base.nix

@@ -6,12 +6,12 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    jack.enable;
-    wireplumber.enable;
+    jack.enable = true;
+    wireplumber.enable = true;
   };
 
   # This block seems to contradict itself but it is meant to grab pactl
-  environment.systemPackges = with pkgs; [
+  environment.systemPackages = with pkgs; [
     pulseaudio
   ];
   

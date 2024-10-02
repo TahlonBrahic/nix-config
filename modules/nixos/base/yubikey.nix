@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, vars, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -20,7 +20,7 @@
     u2f = {
       enable = true;
       cue = false; # Tells user they need to press the button
-      authFile = "${homeDirectory}/.config/Yubico/u2f_keys";
+      authFile = "/home/${vars.vars.username}/.config/Yubico/u2f_keys";
       #debug = true;
     };
     services = {

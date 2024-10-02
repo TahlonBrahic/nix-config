@@ -22,7 +22,7 @@
   neofetch
   vim
   age
-  gpg
+  #gpg
   ];
 
   environment.variables.EDITOR = "vim";

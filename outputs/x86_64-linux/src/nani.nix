@@ -1,12 +1,31 @@
-{ inputs, lib, customLib, system, ... }@args:
+{ inputs, lib, customLib, system, vars, ... }@args:
 
 let
   inherit (inputs) disko sops-nix;
-  inherit (customLib) relativeToRoot modulesRoot varsRoot systemTemplate;
+  inherit (customLib) relativeToRoot modulesRoot systemTemplate;
 
-  # TODO: I would like to abstract how I import these as I do it for each host.
-  nixModules = map relativeToRoot [
-    "hosts/${hostName}/configuration.nix" 
+    # TODO: I would like to abstract how I import these as I do it for each host.
+  nixModules = with modulesRoot.nixos; [
+    ../../../hosts/nani/hardware-configuration.nix
+    base.boot
+    base.clamav
+    base.env
+    base.fail2ban
+    base.i18n
+    base.network
+    base.nftables
+    base.nix
+    #base.secrets
+    base.security
+    base.services
+    base.sound
+    base.users
+    base.utils
+    base.virt
+    base.zram
+    base.zsh
+
+    opt.fhs
   ];
 
   # TODO: I would like to abstract how I pass users to systemTemplate.
@@ -17,13 +36,14 @@ let
     base.container
     base.nix
     base.home
-        
-    opt.obsidian
-    opt.sway
-    opt.kitty
+
+    opt.chrome
+    opt.discord
     opt.encryption
-    opt.gpg
+    opt.fetch
+    opt.obsidian
     opt.password
+    opt.streaming
     opt.zellij
   ];
   
@@ -36,12 +56,10 @@ let
     home = [
     ] ++ homeModules;
   };
-  
-  tempVars = varsRoot.varsRoot.users.tahlon;
-
+  userVars = vars.users.tahlon;
 in
 {
   nixosConfigurations = {
-    "${hostName}" = systemTemplate { inherit args modules; vars = tempVars; };
+    "${hostName}" = systemTemplate { inherit args modules; vars = userVars; };
   };
 }

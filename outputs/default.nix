@@ -8,7 +8,7 @@ let
   customLib = import ../lib { inherit inputs lib vars; };
 
   # Import variables such as users
-  vars = import ../vars { inherit lib; };
+  vars = customLib.varsRoot.varsRoot;
 
   # Wrap these together into an custom attribute set
   customArgs = { inherit inputs lib customLib vars; };
