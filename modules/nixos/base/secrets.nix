@@ -1,21 +1,26 @@
-{ pkgs, inputs, ...}:
+{ config, pkgs, inputs, vars, lib,... }:
 
-{
-  imports = 
-    [
-      inputs.sops-nix.nixosModules.sops
-    ];
-
-  sops =
+let
+  hostname = config.networking.hostName;
+in
   {
-    age = 
-    {
-      keyfile = "/home/user/{$}/.config/sops/age/keys.txt"; #edit this line later
+    sops = {
+      age = {
+        keyfile = "/home/${vars.username}/.config/sops/age/keys.txt";  
+      };
+      defaultSopsFile = ./secrets/secrets.yaml;
+      defaultSopsFormat = "yaml";
+      
+      # Define SSH key storage per user and per hostname
+      secrets = {
+        "${vars.username}" = {
+          owner = config.users.users.${vars.username};
+        };
+
+        # Storing root SSH keys dynamically based on hostname for remote deployment
+        #keys."${hostname}".ssh."${username}" = {
+        #  owner = config.users.users.${username};
+        #};
+      };
     };
-    defaultSopsFile = ; # to be determined
-    defaultSopsFormat = "yaml";
-    secrets.${} = { # I need to edit this variable with wherever I am going to put the file
-      owner = config.users.users. # edit this line later 
-    }
-  };
-}
+  }

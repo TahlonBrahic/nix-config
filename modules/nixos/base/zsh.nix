@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   programs.zsh = {
@@ -7,16 +7,16 @@
     ohMyZsh = {
       enable = true;
       plugins = [
-        git
-	kubectl
-	history
-	emoji
-	encode64
-	sudo
-	copydir
-	copyfile
-	copybuffer
-        history
+        "git"
+	"kubectl"
+	"history"
+	"emoji"
+	"encode64"
+	"sudo"
+	"copydir"
+	"copyfile"
+	"copybuffer"
+        "history"
       ];
       theme = "jonathan";
     };

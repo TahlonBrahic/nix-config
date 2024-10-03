@@ -26,4 +26,4 @@
     hitori
     atomix
   ];
-};
+}
