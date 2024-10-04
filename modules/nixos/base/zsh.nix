@@ -13,7 +13,6 @@
 	"emoji"
 	"encode64"
 	"sudo"
-	"copydir"
 	"copyfile"
 	"copybuffer"
         "history"
