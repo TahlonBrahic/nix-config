@@ -4,12 +4,12 @@
   boot.loader = {
     grub = {
       enable = true;
-      devices = [ "nodev" ];
+      device = "nodev" ;
       efiSupport = true;
       useOSProber = true;
     };
-    efi = {
-      canTouchEfiVariables = true;
-    };
+    #efi = {
+    #  canTouchEfiVariables = true;
+    #};
   };
 }
