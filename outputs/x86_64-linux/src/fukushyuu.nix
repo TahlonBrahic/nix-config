@@ -22,7 +22,7 @@ let
     base.users
     base.utils
     base.virt
-    base.yubikey
+    #base.yubikey
     base.zram
     base.zsh
 
