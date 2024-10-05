@@ -5,7 +5,7 @@
     lutris
     protonup-qt
     steamcontroller
-    steamtinkerlauncher
+    steamtinkerlaunch
     steam-rom-manager
     cartridges
   ];
