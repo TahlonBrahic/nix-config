@@ -14,6 +14,7 @@ in
 	  home-manager.useGlobalPkgs = true;
 	  home-manager.useUserPackages = true;
 	  home-manager.extraSpecialArgs = extraSpecialArgs;
+          home-manager.backupFileExtension = "backup";
 	  home-manager.users."${vars.username}".imports = modules.home;
 	}
     ];
