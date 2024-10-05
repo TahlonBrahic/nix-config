@@ -26,7 +26,7 @@ let
     base.zsh
 
     opt.fhs
-    opt.gamemode
+    #opt.gamemode
     opt.steam
   ];
 
