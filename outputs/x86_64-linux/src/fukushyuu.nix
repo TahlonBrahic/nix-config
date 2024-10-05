@@ -65,6 +65,6 @@ let
 in
 {
   nixosConfigurations = {
-    "${hostName}" = systemTemplate { inherit args modules; userVars =  vars;};
+    "${hostName}" = systemTemplate { inherit args modules; vars = userVars;};
   };
 }
