@@ -6,6 +6,9 @@ let
     user = "greeter";
   };
 in {
+   environment.systemPackages = [
+    pkgs.greetd.tuigreet
+  ];
   # Configuration for the greetd service
   services.greetd = {
     enable = true;  # Enable greetd service
