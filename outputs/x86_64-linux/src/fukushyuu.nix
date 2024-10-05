@@ -14,7 +14,7 @@ let
     base.network
     base.nftables
     base.nix
-    base.secrets
+    #base.secrets
     base.security
     base.services
     base.sound
