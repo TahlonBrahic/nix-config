@@ -25,6 +25,7 @@ let
     base.zram
     base.zsh
 
+    opt.greetd 
     opt.fhs
   ];
 
@@ -56,6 +57,7 @@ let
     home = [
     ] ++ homeModules;
   };
+
   userVars = vars.users.tahlon;
 in
 {

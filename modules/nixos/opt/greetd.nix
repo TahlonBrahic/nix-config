@@ -1,27 +1,15 @@
-{ pkgs, lib, config, ... }:
+{ lib, config, pkgs, ... }:
 
-with lib;
 let
-  cfg = config.services.greetd;
-in {
-  # Define options
-  options.services.greetd = {
-    minimal = mkOption {
-      command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
-      user = "greeter";
-    };
-    tui = mkOption {
-      command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
-      user = "greeter";
-    };  
+  greetdSettings = {
+    command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
+    user = "greeter";
   };
-
-config = {
+in {
+  # Configuration for the greetd service
   services.greetd = {
-    enable = true;
-    settings = {
-      default_sessions = cfg.options;
-      };
-    };
+    enable = true;  # Enable greetd service
+    settings = greetdSettings;  # Use defined greetd settings
   };
 }
+
