@@ -61,10 +61,10 @@ let
     ] ++ homeModules;
   };
 
-  inherit (vars.vars.users.amy) vars;
+  userVars = vars.users.amy;
 in
 {
   nixosConfigurations = {
-    "${hostName}" = systemTemplate { inherit args modules vars;};
+    "${hostName}" = systemTemplate { inherit args modules; userVars =  vars;};
   };
 }
