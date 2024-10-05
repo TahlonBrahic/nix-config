@@ -28,6 +28,7 @@ let
 
     opt.fhs
     #opt.gamemode
+    opt.gnome
     opt.steam
   ];
 
@@ -44,7 +45,6 @@ let
     opt.discord
     opt.encryption
     opt.fetch
-    opt.gnome
     opt.obsidian
     opt.password
     opt.streaming
