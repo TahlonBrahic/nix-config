@@ -45,6 +45,7 @@ let
     opt.discord
     opt.encryption
     opt.fetch
+    opt.gaming
     opt.obsidian
     opt.password
     opt.protonGTK
