@@ -6,6 +6,7 @@ let
 
   # TODO: I would like to abstract how I import these as I do it for each host.
   nixModules = with modulesRoot.nixos; [
+    ../../../hosts/fukushyuu/hardware-configuration.nix
     base.boot
     base.clamav
     base.env
@@ -56,8 +57,7 @@ let
       disko.nixosModules.disko
       sops-nix.nixosModules.sops
     ] ++ nixModules;
-    home = with relativeToRoot; [
-      "hosts/fukushyuu/hardware-configuration.nix"
+    home = [
     ] ++ homeModules;
   };
 
