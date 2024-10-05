@@ -38,6 +38,7 @@ let
     base.nix
     base.home
 
+    opt.sway
     opt.chrome
     opt.discord
     opt.encryption
