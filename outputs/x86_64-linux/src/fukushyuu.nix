@@ -4,13 +4,12 @@ let
   inherit (inputs) disko sops-nix;
   inherit (customLib) relativeToRoot modulesRoot systemTemplate;
 
-  # TODO: I would like to abstract how I import these as I do it for each host.
   nixModules = with modulesRoot.nixos; [
-    ../../../hosts/fukushyuu/hardware-configuration.nix
     base.boot
     base.clamav
     base.env
     base.fail2ban
+    base.hardware
     base.i18n
     base.network
     base.nftables
@@ -32,7 +31,6 @@ let
     opt.steam
   ];
 
-  # TODO: I would like to abstract how I pass users to systemTemplate.
   homeModules = with modulesRoot.home; [
     base.archive
     base.git
@@ -52,8 +50,7 @@ let
     opt.streaming
     opt.zellij
   ];
-  
-  hostName = "fukushyuu";
+
   modules = {
     nixos = [
       disko.nixosModules.disko
@@ -63,10 +60,24 @@ let
     ] ++ homeModules;
   };
 
-  userVars = vars.users.amy // { inherit hostName; };
+  hardwareVars = {
+    hostName = "fukushyuu";
+    rootUUID = "/dev/disk/by-uuid/f1e944d4-d1d1-4c73-8d52-6ba8cd3fc54a";
+    rootFT = "ext4";
+    bootUUID = "/dev/disk/by-uuid/4041-F578";
+    bootFT = "vfat";
+    swapDevices = [ { device = "/dev/disk/by-uuid/56eaaae0-5b35-42dd-8f70-35583866df62";  ];
+    imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+    initrdKernelModules = [ ];
+    kernelModules = [ "kvm-amd" ];
+    extraModulePackages = [ ];
+  };
+
+  outputVars = vars.users.amy // hardwareVars;
+
 in
 {
   nixosConfigurations = {
-    "${hostName}" = systemTemplate { inherit args modules; vars = userVars;};
+    "${hostName}" = systemTemplate { inherit args modules; vars = outputVars;};
   };
 }

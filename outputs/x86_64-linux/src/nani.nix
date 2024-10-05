@@ -4,13 +4,13 @@ let
   inherit (inputs) disko sops-nix;
   inherit (customLib) relativeToRoot modulesRoot systemTemplate;
 
-    # TODO: I would like to abstract how I import these as I do it for each host.
   nixModules = with modulesRoot.nixos; [
-    ../../../hosts/nani/hardware-configuration.nix
     base.boot
     base.clamav
     base.env
     base.fail2ban
+    base.hardware
+    base.hardware
     base.i18n
     base.network
     base.nftables
@@ -29,7 +29,6 @@ let
     opt.fhs
   ];
 
-  # TODO: I would like to abstract how I pass users to systemTemplate.
   homeModules = with modulesRoot.home; [
     base.archive
     base.git
@@ -48,8 +47,7 @@ let
     opt.streaming
     opt.zellij
   ];
-  
-  hostName = "nani";
+
   modules = {
     nixos = [
       disko.nixosModules.disko
@@ -58,11 +56,18 @@ let
     home = [
     ] ++ homeModules;
   };
+ 
+  hardwareVars = { 
+    hostName = "nani";
+    rootUUID = "/dev/disk/by-uuid/29e0b67d-95c0-4090-9ff3-6f779bb3684d";
+    root
+  };
+  
+  outputVars = vars.users.tahlon // hardwareVars;
 
-  userVars = vars.users.tahlon;
 in
 {
   nixosConfigurations = {
-    "${hostName}" = systemTemplate { inherit args modules; vars = userVars; };
+    "${hostName}" = systemTemplate { inherit args modules; vars = tempVars; };
   };
 }

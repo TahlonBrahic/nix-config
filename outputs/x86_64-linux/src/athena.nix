@@ -1,23 +1,15 @@
-{ inputs, lib, customLib, system, ... }@args:
+{ inputs, lib, customLib, system, vars, ... }@args:
 
 let
   inherit (inputs) disko sops-nix;
-  inherit (customLib) relativeToRoot modulesRoot varsRoot systemTemplate;
+  inherit (customLib) relativeToRoot modulesRoot systemTemplate;
 
-  # TODO: I would like to abstract how I import these as I do it for each host.
-  nixModules = map relativeToRoot [
-    "hosts/${hostName}/configuration.nix" 
+  nixModules = with modulesRoot.nixos [
+    opt.greetd
+    opt.fhs
   ];
 
-  # TODO: I would like to abstract how I pass users to systemTemplate.
   homeModules = with modulesRoot.home; [
-    base.archive
-    base.git
-    base.xdg
-    base.container
-    base.nix
-    base.home
-        
     opt.obsidian
     opt.sway
     opt.kitty
@@ -26,8 +18,7 @@ let
     opt.password
     opt.zellij
   ];
-  
-  hostName = "nani";
+
   modules = {
     nixos = [
       disko.nixosModules.disko
@@ -36,12 +27,27 @@ let
     home = [
     ] ++ homeModules;
   };
+
   
-  tempVars = varsRoot.varsRoot.users.tahlon;
+  # Hardware Variables
+  hardwareVars = {
+    hostName = "nani";
+    rootUUID = "/dev/disk/by-uuid/bfbb2b4f-d7d4-4a26-bfa2-55148077754d";
+    rootFT = "ext4";
+    bootUUID = "/dev/disk/by-uuid/80D3-F09A";
+    bootFT = "vfat";
+    swapDevices = [  ];
+    imports =  [ (modulesPath + "/profiles/qemu-guest.nix") ];
+    initrdKernelModules = [ "dm-snapshot" ];
+    kernelModules = [ "kvm_intel" ];
+    extraModulePackages = [ ];
+  };
+
+  outputVars = vars.users.tahlon // hardwareVars;
 
 in
 {
   nixosConfigurations = {
-    "${hostName}" = systemTemplate { inherit args modules; vars = tempVars; };
+    "${hostName}" = systemTemplate { inherit args modules; vars = outputVars; };
   };
 }
