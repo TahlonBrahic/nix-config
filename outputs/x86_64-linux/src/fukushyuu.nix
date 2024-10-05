@@ -47,6 +47,7 @@ let
     opt.fetch
     opt.obsidian
     opt.password
+    opt.protonGTK
     opt.streaming
     opt.zellij
   ];
