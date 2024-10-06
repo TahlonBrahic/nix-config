@@ -2,7 +2,9 @@
 
 with vars;
 {
-  inherit imports;
+  imports = if builtins.isList modulesPath then 
+    map (systemImport: modulesPath + systemImport) systemImports 
+    else [  ];
 
   boot = {
     initrd = {
@@ -22,13 +24,13 @@ with vars;
     { device = bootUUID;
       fsType = bootFT;
       options = [ "fmask=0022" "dmask=0022" ];
-    }dd
+    };
 
-  inherit swapDevices hardwareImports ;
+  inherit swapDevices;
 
   # Defaults
   hardware.enableAllFirmware = true;
-  boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "virtio_scsi", "sr_mod"  "virtio_blk" "nvme" "usb_storage" "sd_mod" "usbhid" ];
+  boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "virtio_scsi" "sr_mod"  "virtio_blk" "nvme" "usb_storage" "sd_mod" "usbhid" ];
 
   system.stateVersion = "24.11";
 }

@@ -7,11 +7,7 @@ let
     loader = inputs.haumea.lib.loaders.path;
   };
 
-  baseNixosModuleNames = builtins.attrNames baseNixosModulesSet;
+  baseNixosModules = builtins.attrValues baseNixosModulesSet;
   
-  fromRoot = "modules/nixos/base";
-
-  baseNixosModules = map (module: fromRoot + module);
-   
 in
-  baseNixosModules    
+  baseNixosModules 

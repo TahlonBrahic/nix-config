@@ -19,9 +19,10 @@
     sshAgentAuth.enable = true;
     u2f = {
       enable = true;
-      cue = false; # Tells user they need to press the button
-      authFile = "/home/${vars.vars.username}/.config/Yubico/u2f_keys";
-      #debug = true;
+      settings = {
+        cue = false; # Tells user they need to press the button
+        authFile = "/home/${vars.username}/.config/Yubico/u2f_keys";
+      };
     };
     services = {
       login.u2fAuth = true;

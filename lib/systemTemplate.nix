@@ -3,7 +3,7 @@
 let
   inherit (args) inputs lib customLib system;
   inherit (inputs) nixpkgs home-manager;
-  inherit (customLib); baseNixosModules;
+  inherit (customLib) baseNixosModules baseHomeModules;
   specialArgs = { inherit inputs lib customLib vars; };
   extraSpecialArgs = { inherit inputs customLib vars; };
 in
@@ -16,7 +16,7 @@ in
 	  home-manager.useUserPackages = true;
 	  home-manager.extraSpecialArgs = extraSpecialArgs;
           home-manager.backupFileExtension = "backup";
-	  home-manager.users."${vars.username}".imports = modules.home;
+	  home-manager.users."${vars.username}".imports = modules.home ++ baseHomeModules;
 	}
     ];
   } 
