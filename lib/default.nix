@@ -18,7 +18,8 @@
     );
 
     systemTemplate = import ./systemTemplate.nix;
-    #mergeModules = import ./mergeModules.nix;
     modulesRoot = import ./modulesRoot.nix args;	
     varsRoot = import ./varsRoot.nix args; 
+    baseNixosModules = import ./baseNixosModules.nix args;
+    baseHomeModules = import ./baseHomeModules.nix args;
 }
