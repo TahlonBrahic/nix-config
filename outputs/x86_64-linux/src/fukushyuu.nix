@@ -2,7 +2,7 @@
 
 let
   inherit (inputs) disko sops-nix;
-  inherit (customLib) relativeToRoot modulesRoot varsRoot systemTemplate;
+  inherit (customLib) relativeToRoot modulesRoot systemTemplate;
 
   # TODO: I would like to abstract how I import these as I do it for each host.
   nixModules = with modulesRoot.nixos; [
@@ -63,7 +63,7 @@ let
     ] ++ homeModules;
   };
 
-  userVars = vars.users.amy;
+  userVars = vars.users.amy // { inherit hostName; };
 in
 {
   nixosConfigurations = {
