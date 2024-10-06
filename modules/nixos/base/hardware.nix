@@ -32,6 +32,12 @@ with vars;
   hardware.enableAllFirmware = true;
   boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "virtio_scsi" "sr_mod"  "virtio_blk" "nvme" "usb_storage" "sd_mod" "usbhid" ];
 
-  system.stateVersion = "24.11";
+  system = {
+    stateVersion = "24.11";
+    autoUpgrade = {
+      enable = true;
+      allowReboot = true;
+    };
+  };
 }
  
