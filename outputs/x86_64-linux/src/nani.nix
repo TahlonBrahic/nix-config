@@ -1,7 +1,7 @@
 { inputs, lib, customLib, system, vars, ... }@args:
 
 let
-  inherit (inputs) disko sops-nix;
+  inherit (inputs) disko sops-nix stylix;
   inherit (customLib) relativeToRoot modulesRoot systemTemplate;
 
   nixModules = with modulesRoot.nixos; [
@@ -25,6 +25,7 @@ let
     nixos = [
       disko.nixosModules.disko
       sops-nix.nixosModules.sops
+      stylix.nixosModules.stylix
     ] ++ nixModules;
     home = [
     ] ++ homeModules;
