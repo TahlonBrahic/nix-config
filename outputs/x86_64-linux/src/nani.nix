@@ -10,7 +10,6 @@ let
     base.env
     base.fail2ban
     base.hardware
-    base.hardware
     base.i18n
     base.network
     base.nftables
@@ -22,6 +21,7 @@ let
     base.users
     base.utils
     base.virt
+    #base.yubikey
     base.zram
     base.zsh
 
@@ -60,7 +60,14 @@ let
   hardwareVars = { 
     hostName = "nani";
     rootUUID = "/dev/disk/by-uuid/29e0b67d-95c0-4090-9ff3-6f779bb3684d";
-    root
+    rootFT = "ext4";
+    bootUUID = "/dev/disk/by-uuid/80D3-F09A";
+    bootFT = "vfat";
+    swapDevices = [  ];
+    imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
+    initrdKernelModules = [ "kvm_intel" ];
+    kernelModules = [ "kvm_intel" ];
+    extraModulePackages = [  ];
   };
   
   outputVars = vars.users.tahlon // hardwareVars;
