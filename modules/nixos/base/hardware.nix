@@ -1,29 +1,30 @@
 { config, lib, pkgs, vars, modulesPath, ... }:
 
+with vars;
 {
-  inherit (vars) imports;
+  inherit imports;
 
   boot = {
     initrd = {
-      inherit (vars.initrdKernelModules) kernelModules;
+      kernelModules = initrdKernelModules;
     };
-    inherit (vars) kernelModules;
-    inherit (vars) extraModulePackages;
+    inherit kernelModules;
+    inherit extraModulePackages;
   };
 
   # Root 
   fileSystems."/" =
-    { device = vars.rootUUID;
-      fsType = vars.rootFT;
+    { device = rootUUID;
+      fsType = rootFT;
     };
 
   fileSystems."/boot" =
-    { device = vars.bootUUID;
-      fsType = vars.bootFT;
+    { device = bootUUID;
+      fsType = bootFT;
       options = [ "fmask=0022" "dmask=0022" ];
     }dd
 
-  inherit (vars) swapDevices hardwareImports ;
+  inherit swapDevices hardwareImports ;
 
   # Defaults
   hardware.enableAllFirmware = true;
