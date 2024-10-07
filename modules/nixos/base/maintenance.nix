@@ -3,7 +3,7 @@
 {
   system = {
     stateVersion = "24.11";
-    autoupgrade = {
+    autoUpgrade = {
       enable = true;
       flake = inputs.self.outPath;
       flags = [
