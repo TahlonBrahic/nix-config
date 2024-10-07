@@ -1,1 +1,0 @@
-import ./kitty.nix
