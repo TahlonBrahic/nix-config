@@ -7,6 +7,7 @@ let
   nixModules = with modulesRoot.nixos; [
     opt.greetd 
     opt.fhs
+    opt.stylix
   ];
 
   homeModules = with modulesRoot.home; [
@@ -26,8 +27,7 @@ let
       sops-nix.nixosModules.sops
       stylix.nixosModules.stylix
     ] ++ nixModules;
-    home = [
-    ] ++ homeModules;
+    home = homeModules;
   };
  
   outputVars = vars.users.tahlon // vars.hardware.nani;
