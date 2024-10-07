@@ -4,21 +4,21 @@ let
   inherit (inputs) disko sops-nix stylix;
   inherit (customLib) relativeToRoot modulesRoot systemTemplate;
 
-  nixModules = with modulesRoot.nixos; [
-    opt.greetd 
-    opt.fhs
-    opt.stylix
+  nixModules = with modulesRoot.nixos.opt; [
+    greetd 
+    fhs
+    style
   ];
 
-  homeModules = with modulesRoot.home; [
-    opt.chrome
-    opt.discord
-    opt.encryption
-    opt.fetch
-    opt.kitty
-    opt.password
-    opt.sway
-    opt.zellij
+  homeModules = with modulesRoot.home.opt; [
+    librewolf
+    encryption
+    fetch
+    kitty
+    password
+    sway
+    waybar
+    zellij
   ];
 
   modules = {

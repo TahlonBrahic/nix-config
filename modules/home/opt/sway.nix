@@ -24,7 +24,7 @@
   wayland.windowManager.sway = {
     enable = true;
 
-    config = {
+    config = rec {
       menu = "wofi";
       modifier = "Mod4";
       terminal = "kitty";
