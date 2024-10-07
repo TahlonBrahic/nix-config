@@ -49,11 +49,16 @@
 
       keybindings = let
         mod = config.wayland.windowManager.sway.config.modifier;
+        cfg = config.wayland.windowManager.sway.config;
       in
+        # Window Management
         lib.mkOptionDefault {
-          "${mod}+t" = "exec config.wayland.windowManager.sway.config.terminal";
+          "${mod}+t" = "exec ${cfg.terminal}";
           "${mod}+q" = "kill";
-          "${mod}+a" = "exec wofi";
+          "${mod}+a" = "exec ${cfg.menu}";
+
+        # Screenshots
+          "Print" = "grim -g \"$(slurp)\" - | wl-copy -t image/png";
         };
     };
     wrapperFeatures.gtk = true;
