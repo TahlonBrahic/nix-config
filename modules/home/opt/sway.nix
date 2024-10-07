@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, vars, ... }:
 
 {
   home.packages = with pkgs; [
@@ -9,7 +9,7 @@
     wlr-randr # wayland output utility
     mako # notification system developed by swaywm maintainer
     wofi # gtk-based app launcher
-    
+    kitty # backup terminal
   ];
 
   # Enable the gnome-keyring secrets vault. 
@@ -23,8 +23,38 @@
   # enable sway window manager
   wayland.windowManager.sway = {
     enable = true;
+
     config = {
       menu = "wofi";
+      modifier = "Mod4";
+      terminal = "kitty";
+
+      gaps = {
+        smartBorders = "on";
+        outer = 5;
+        inner = 5;
+      };
+
+      input = {
+        "type:pointer" = {
+          accel_profile = "flat";
+          pointer_accel = "0";
+        };
+        "type:touchpad" = {
+          middle_emulation = "enabled";
+          natural_scroll = "enabled";
+          tap = "enabled";
+        };
+      };
+
+      keybindings = let
+        mod = config.wayland.windowManager.sway.config.modifier;
+      in
+        lib.mkOptionDefault {
+          "${mod}+t" = "exec config.wayland.windowManager.sway.config.terminal";
+          "${mod}+q" = "kill";
+          "${mod}+a" = "exec wofi";
+        };
     };
     wrapperFeatures.gtk = true;
   };
