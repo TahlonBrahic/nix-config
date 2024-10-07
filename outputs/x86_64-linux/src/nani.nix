@@ -10,14 +10,13 @@ let
   ];
 
   homeModules = with modulesRoot.home; [
-    opt.sway
     opt.chrome
     opt.discord
     opt.encryption
     opt.fetch
-    opt.obsidian
+    opt.kitty
     opt.password
-    opt.streaming
+    opt.sway
     opt.zellij
   ];
 

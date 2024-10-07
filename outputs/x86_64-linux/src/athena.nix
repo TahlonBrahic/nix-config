@@ -10,7 +10,6 @@ let
   ];
 
   homeModules = with modulesRoot.home; [
-    opt.obsidian
     opt.sway
     opt.kitty
     opt.encryption
