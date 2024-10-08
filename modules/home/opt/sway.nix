@@ -10,6 +10,7 @@
     mako # notification system developed by swaywm maintainer
     wofi # gtk-based app launcher
     kitty # backup terminal
+    rot8 # screen rotation daemon
   ];
 
   # Enable the gnome-keyring secrets vault. 
@@ -28,11 +29,18 @@
       menu = "wofi";
       modifier = "Mod4";
       terminal = "kitty";
+      bars = [{
+        command = "${pkgs.waybar}/bin/way";
+      }];
 
       gaps = {
         smartBorders = "on";
         outer = 5;
         inner = 5;
+      };
+
+      window = {
+        titlebar = false;
       };
 
       input = {
@@ -54,8 +62,11 @@
         # Window Management
         lib.mkOptionDefault {
           "${mod}+t" = "exec ${cfg.terminal}";
+          "${mod}+a" = "exec ${pkgs.wofi}";
           "${mod}+q" = "kill";
-          "${mod}+a" = "exec ${cfg.menu}";
+
+          # Modes 
+          "${mod}+i" = "mode randr";     
 
         # Screenshots
           "Print" = "grim -g \"$(slurp)\" - | wl-copy -t image/png";
