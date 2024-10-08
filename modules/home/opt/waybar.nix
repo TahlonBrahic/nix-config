@@ -4,22 +4,22 @@
   programs = {
     waybar = {
       enable = true;
+      systemd.enable = true;
       settings = {
         mainBair = {
-   	  layer = "bottom";
+   	  layer = "top";
 	  position = "top";
-	  height = 24;
-	  spacing = 0;
-	  #modules-left = [];
-	  #modules-center = [];
-	  #modules-right = [];
+	  height = 30;
+ 
+          # Modules
+          modules-left = [ "cpu" ];        
+
 	  "sway/mode" = {
 	    format = "<span style=\"italic\">{}</span>";
 	  };
 	  "sway/workspaces" = {
 	    on-click = "activate";
 	    sort-by-number = true;
-	   # format = "{value}";
 	  };
         };
       };
