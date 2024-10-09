@@ -10,6 +10,11 @@
    	  layer = "top";
 	  position = "top";
 	  height = 30;
+
+          window = {
+            border = 3;
+            titlebar = false;
+          };
  
           # Modules
           modules-left = [ "cpu" ];        
