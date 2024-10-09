@@ -7,7 +7,8 @@
     wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
     wlogout # wayland logout menu
     wlr-randr # wayland output utility
-    mako # notification system developed by swaywm maintainer
+    wlr-which-key # keymap manager
+    mako # notification system 
     wofi # gtk-based app launcher
     kitty # backup terminal
     rot8 # screen rotation daemon
@@ -37,8 +38,9 @@
 
       gaps = {
         smartBorders = "on";
-        outer = 5;
-        inner = 5;
+        smartGaps = false;
+        outer = -8;
+        inner = 28;
       };
 
       window = {
@@ -66,6 +68,7 @@
           "${mod}+t" = "exec ${cfg.terminal}";
           "${mod}+a" = "exec ${pkgs.wofi}";
           "${mod}+q" = "kill";
+
 
           # Modes 
           "${mod}+i" = "mode randr";     
