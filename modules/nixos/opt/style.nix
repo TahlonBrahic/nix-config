@@ -31,11 +31,17 @@ in
         name = "DejaVu Serif";
       };
     };
+
+    opacity = {
+      applications = 5.0;
+      popups = 5.0;
+      terminal = 5.0;
+    };
+
+    targets = {
+      grub.enable = false;
+    };
+
+    polarity = "dark";
   };
-
-  # polarity = "dark" "light" "either"
-
-  # fonts.sizes
-
-  # opacity
 }

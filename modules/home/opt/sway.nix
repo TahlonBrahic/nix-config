@@ -21,6 +21,8 @@
     XDG_SESSION_TYPE = "wayland";
   };
 
+  programs.wofi.enable = true;
+
   # enable sway window manager
   wayland.windowManager.sway = {
     enable = true;
@@ -30,7 +32,7 @@
       modifier = "Mod4";
       terminal = "kitty";
       bars = [{
-        command = "${pkgs.waybar}/bin/way";
+        command = "${pkgs.waybar}/bin/waybar";
       }];
 
       gaps = {
