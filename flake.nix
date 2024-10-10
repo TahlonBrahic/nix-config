@@ -33,7 +33,6 @@
     };
     impermanence = {
       url = "github:nix-community/impermanence";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     stylix = {
       url = "github:danth/stylix";
