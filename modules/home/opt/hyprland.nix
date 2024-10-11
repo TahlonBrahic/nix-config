@@ -37,18 +37,19 @@
 	  "SUPER,q,killactive"
 	  "SUPER,s,togglespecialworkspace"
 	  "SUPER,g,togglegroup"
-	]
+	];
       };
     # monitor = [
       # TODO: add a lib.MkIf here for each host to use
       # "DP-1, resolutions, 0x0, 1" 
     # ];
-    general = {
-      gaps_in = 6;
-      gaps_out = 6;
-      border_size = 3;
-      resize_on_border = true;
-      hover_icon_on_border = true;
+      general = {
+        gaps_in = 6;
+        gaps_out = 6;
+        border_size = 3;
+        resize_on_border = true;
+        hover_icon_on_border = true;
+      };
     };
   };
 }
