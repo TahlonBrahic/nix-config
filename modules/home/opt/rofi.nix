@@ -7,7 +7,7 @@
 
 let
   inherit (lib) mkForce;
-  inherit (config.lib.stylix.colors.withHashtag) base00 base05;
+  inherit (config.lib.formats.rasi) mkLiteral;
 in
 {
   programs.rofi = {
@@ -40,8 +40,6 @@ in
       "*" = {
         font = "Noto Sans CJK JP Bold 12";
         background-color = mkLiteral "transparent";
-        foreground = mkLiteral "${base05}";
-        text-color = mkLiteral "${base05}";
         padding = mkLiteral "0px";
         margin = mkLiteral "0px";
       };
@@ -49,7 +47,6 @@ in
       window = {
         fullscreen = true;
         padding = mkLiteral "1em";
-        background-color = mkLiteral "${base00}dd";
       };
 
       mainbox = {
@@ -57,7 +54,6 @@ in
       };
 
       inputbar = {
-        background-color = mkLiteral "${base05}20";
 
         margin = mkLiteral "0px calc( 50% - 230px )";
         padding = mkLiteral "4px 8px";
@@ -65,7 +61,6 @@ in
 
         border = mkLiteral "1px";
         border-radius = mkLiteral "2px";
-        border-color = mkLiteral "${base05}40";
 
         children = map mkLiteral [
           "icon-search"
@@ -85,7 +80,6 @@ in
 
       entry = {
         placeholder = "Search";
-        placeholder-color = mkLiteral "${base05}20";
       };
 
       listview = {
@@ -106,10 +100,6 @@ in
 
         orientation = mkLiteral "vertical";
         border-radius = mkLiteral "12px";
-      };
-
-      "element selected" = {
-        background-color = mkLiteral "${base05}33";
       };
 
       element-icon = {
