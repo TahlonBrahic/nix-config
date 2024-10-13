@@ -7,16 +7,16 @@ let
   nixModules = with modulesRoot.nixos.opt; [
     greetd
     fhs
-    greetd
   ];
 
-  homeModules = with modulesRoot.home; [
+  homeModules = with modulesRoot.home.opt; [
     librewolf
     encryption
     fetch
     hyprland
     kitty
     password
+    rofi
     waybar
     zellij
   ];

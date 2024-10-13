@@ -4,11 +4,11 @@
   users.mutableUsers = false;
 
   users.users."${vars.username}" = {
-    initialPassword = "p";
     home = "/home/${vars.username}";
+    inherit (vars) initialHashedPassword;
     isNormalUser = true;
     extraGroups = [
-      vars.username
+      "${vars.username}"
       "users"
       "networkmanager"
       "wheel"
@@ -16,9 +16,4 @@
       "libvirtd"
     ];
   };
-
-  # Used for remote deployment, needs to be sent to another module
-  #users.users.root = {
-  #  initialHashedPassword = config.users.users."${vars.username}".initialHashedPassword;
-  #};
 }

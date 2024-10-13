@@ -3,6 +3,12 @@ let
   passwordStoreDir = "${config.xdg.dataHome}/password-store";
 in 
 {
+  home.packages = with pkgs; [
+    keepassxc
+    keepassxc-go
+    keepass-diff
+  ];
+
   programs.password-store = {
     enable = true;
     package = pkgs.pass.withExtensions (exts: [

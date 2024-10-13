@@ -35,6 +35,7 @@
 	  "SUPER,t,exec,kitty"
 	  "SUPER,f,exec,librewolf"
 	  "SUPER,q,killactive"
+          "SUPER,a,exec,killall rofi || rofi -show"
 	  "SUPER,s,togglespecialworkspace"
 	  "SUPER,g,togglegroup"
 	];
