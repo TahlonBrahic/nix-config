@@ -1,7 +1,7 @@
 { inputs, lib, customLib, system, vars, ... }@args:
 
 let
-  inherit (inputs) disko sops-nix impermanence stylix;
+  inherit (inputs) disko sops-nix impermanence stylix chaotic;
   inherit (customLib) relativeToRoot modulesRoot systemTemplate;
 
   nixModules = with modulesRoot.nixos.opt; [
@@ -27,6 +27,7 @@ let
       sops-nix.nixosModules.sops
       stylix.nixosModules.stylix
       impermanence.nixosModules.impermanence
+      chaotic.nixosModules.default
     ] ++ nixModules;
     home = [
     ] ++ homeModules;
