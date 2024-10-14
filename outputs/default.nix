@@ -22,6 +22,6 @@
 
   systemValues = builtins.attrValues systems;
 in {
-  # formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64.alejandra;
+  formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64.alejandra;
 
   nixosConfigurations = lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) systemValues);

@@ -3,14 +3,11 @@
   vars,
   lib,
   ...
-}: let
-  zsh = lib.mkIf (vars.shell == "zsh");
-  fsh = lib.mkIf (vars.shell == "fsh");
-in {
-  # ZSH
+}:
+{
   programs = {
-    nix-index.enableZshIntegration = zsh true;
-    zsh = lib.mkIf zsh {
+    nix-index.enableZshIntegration = true;
+    zsh = {
       enable = true;
       enableCompletion = true;
       ohMyZsh = {
@@ -32,14 +29,14 @@ in {
   };
 
   # FSH
-  programs.fish.enable = fsh true;
-  environment = {
-    pathsToLink = fsh ["/share/fish"];
-    enableAllTerminfo = fsh true;
-  };
+  #programs.fish.enable = fsh true;
+  #environment = {
+  #  pathsToLink = fsh ["/share/fish"];
+  #  enableAllTerminfo = fsh true;
+  #};
 
   # SHARED
 
-  environment.shells = zsh [pkgs.zsh] || fsh [pkgs.fish];
-  users.defaultUserShell = zsh pkgs.zsh || fsh [pkgs.fish];
+  environment.shells = [pkgs.zsh];
+  users.defaultUserShell = pkgs.zsh; 
 }
