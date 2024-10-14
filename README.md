@@ -14,33 +14,36 @@ This repository contains a modular NixOS configuration designed to support multi
 - **`LICENSE`**: A standard MIT License for ease of distribution and modification.
 - **`README.md`**: This file, which provides an overview of the repository.
 
-## Getting Started 
+## Getting Started
 
 1. Clone the repository:
 
-  ```bash
-  git clone https://github.com/TahlonBrahic/nix-config.git .
-  ```
+```bash
+git clone https://github.com/TahlonBrahic/nix-config.git .
+```
+
 2. Define your own configuration in outputs or choose a pre-defined configuration:
 
-  If you choose to use an already established configuration it is important to define your hardware specifications as either or a module or vars.
+If you choose to use an already established configuration it is important to define your hardware specifications as either or a module or vars.
 
-3. Rebuild your system:    
+3. Rebuild your system:
 
-  ```bash
-  sudo nixos-rebuild switch --flake .#hostname
-  ```
+```bash
+sudo nixos-rebuild switch --flake .#hostname
+```
 
-  Replace `hostname` with the appropriate hostname configured in ./outputs/architecture/src/hostname.nix
+Replace `hostname` with the appropriate hostname configured in ./outputs/architecture/src/hostname.nix
 
 ## References
 
 The following websites and/or content creators were the most influential in the help of the developement of this NixOS repository and my understanding of both NixOS and its language:
 
 ### Websites:
+
 [nix.dev](https://nix.dev/tutorials/nix-language)
 
 ### Repositories
+
 [librephoenix](https://github.com/librephoenix/nixos-config)
 [Misterio77](https://github.com/Misterio77/nix-config)
 [ryan4yin](https://github.com/ryan4yin/nix-config)

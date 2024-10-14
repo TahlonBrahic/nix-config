@@ -1,4 +1,8 @@
-{vars, pkgs, ...}: {
+{
+  vars,
+  pkgs,
+  ...
+}: {
   users.mutableUsers = false;
 
   users.users."${vars.username}" = {

@@ -22,7 +22,7 @@
     u2f = {
       enable = true;
       settings = {
-        cue = false; 
+        cue = false;
         authFile = "/home/${vars.username}/.config/Yubico/u2f_keys";
       };
     };
@@ -30,7 +30,7 @@
       login.u2fAuth = true;
       sudo = {
         u2fAuth = true;
-        sshAgentAuth = true; 
+        sshAgentAuth = true;
       };
     };
   };

@@ -1,4 +1,8 @@
-{lib, haumea, ...} @ args:
+{
+  lib,
+  haumea,
+  ...
+}:
 # Credit to EmergentMind
 {
   relativeToRoot = lib.path.append ../.;
