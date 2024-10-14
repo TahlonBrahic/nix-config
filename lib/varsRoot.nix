@@ -1,6 +1,5 @@
-{args}: {
-  varsRoot = args.inputs.haumea.lib.load {
+{haumea}: {
+  varsRoot = haumea.lib.load {
     src = ../vars;
-    inputs = args;
   };
 }

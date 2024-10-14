@@ -35,7 +35,6 @@ in {
   programs.fish.enable = fsh true;
   environment = {
     pathsToLink = fsh ["/share/fish"];
-    defaultUserShell = fsh pkgs.fsh;
     enableAllTerminfo = fsh true;
   };
 

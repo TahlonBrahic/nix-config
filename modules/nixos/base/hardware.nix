@@ -1,23 +1,3 @@
-<<<<<<< HEAD
-{
-  vars,
-  modulesPath,
-  ...
-}:
-with vars; {
-  imports =
-    if builtins.isList modulesPath
-    then map (systemImport: modulesPath + systemImport) systemImports
-    else [];
-||||||| bf526fc
-{ config, lib, pkgs, vars, modulesPath, ... }:
-
-with vars;
-{
-  imports = if builtins.isList modulesPath then 
-    map (systemImport: modulesPath + systemImport) systemImports 
-    else [  ];
-=======
 { config, lib, pkgs, vars, modulesPath, ... }:
 
 if vars.hostName == "yoru" then with vars; {
@@ -78,7 +58,6 @@ else with vars; {
   imports = if builtins.isList modulesPath then 
     map (systemImport: modulesPath + systemImport) systemImports 
     else [  ];
->>>>>>> origin/main
 
   boot = {
     initrd = {
@@ -88,19 +67,6 @@ else with vars; {
     inherit extraModulePackages;
   };
 
-<<<<<<< HEAD
-  # Root
-  fileSystems."/" = {
-    device = rootUUID;
-    fsType = rootFT;
-  };
-||||||| bf526fc
-  # Root 
-  fileSystems."/" =
-    { device = rootUUID;
-      fsType = rootFT;
-    };
-=======
   # Root
   fileSystems."/" = 
     {
@@ -108,21 +74,7 @@ else with vars; {
       fsType = "btrfs";
       options = [ "subvol=root" ];
     };
->>>>>>> origin/main
 
-<<<<<<< HEAD
-  fileSystems."/boot" = {
-    device = bootUUID;
-    fsType = bootFT;
-    options = ["fmask=0022" "dmask=0022"];
-  };
-||||||| bf526fc
-  fileSystems."/boot" =
-    { device = bootUUID;
-      fsType = bootFT;
-      options = [ "fmask=0022" "dmask=0022" ];
-    };
-=======
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   fileSystems."/boot" = 
@@ -131,21 +83,11 @@ else with vars; {
       fsType = bootFT;
       options = [ "fmask=0022" "dmask=0022" ];
     };
->>>>>>> origin/main
 
   inherit swapDevices;
 
   # Defaults
   hardware.enableAllFirmware = true;
-<<<<<<< HEAD
-  boot.initrd.availableKernelModules = ["ahci" "xhci_pci" "virtio_pci" "virtio_scsi" "sr_mod" "virtio_blk" "nvme" "usb_storage" "sd_mod" "usbhid"];
-}
-||||||| bf526fc
-  boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "virtio_scsi" "sr_mod"  "virtio_blk" "nvme" "usb_storage" "sd_mod" "usbhid" ];
-}
- 
-=======
   boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "virtio_scsi" "thunderbolt" "sd_mod" "sr_mod" "virtio_blk" "nvme" "usb_storage" "sd_mod" "usbhid" ];
 } 
 
->>>>>>> origin/main

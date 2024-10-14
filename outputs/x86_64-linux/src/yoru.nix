@@ -1,10 +1,12 @@
 {
   inputs,
+  lib,
   customLib,
   vars,
+  system,
   ...
-} @ args: let
-  inherit (inputs) disko sops-nix impermanence stylix chaotic;
+} @ customArgs: let
+  inherit (inputs) disko sops-nix impermanence stylix chaotic nvchad4nix nur nix-index-database;
   inherit (customLib) modulesRoot systemTemplate;
 
   nixModules = with modulesRoot.nixos.opt; [
@@ -33,6 +35,8 @@
         stylix.nixosModules.stylix
         impermanence.nixosModules.impermanence
         chaotic.nixosModules.default
+        nur.nixosModules.nur
+        nix-index-database.nixosModules.nix-index
       ]
       ++ nixModules;
     home = homeModules;
@@ -42,8 +46,7 @@
 in {
   nixosConfigurations = {
     "yoru" = systemTemplate {
-      inherit args modules;
-      vars = outputVars;
+      inherit customArgs modules outputVars;
     };
   };
 }
