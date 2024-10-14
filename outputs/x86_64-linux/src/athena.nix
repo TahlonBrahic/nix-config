@@ -1,15 +1,17 @@
 {
   inputs,
+  lib,
   customLib,
   vars,
+  system,
   ...
-} @ args: let
-  inherit (inputs) disko sops-nix stylix;
+} @ customArgs: let
+  inherit (inputs) disko sops-nix stylix chaotic nur nix-index-database;
   inherit (customLib) modulesRoot systemTemplate;
 
   nixModules = with modulesRoot.nixos.opt; [
-    greetd
     fhs
+    greetd
   ];
 
   homeModules = with modulesRoot.home.opt; [
@@ -27,6 +29,9 @@
         disko.nixosModules.disko
         sops-nix.nixosModules.sops
         stylix.nixosModules.stylix
+        chaotic.nixosModules.default
+        nur.nixosModules.nur
+        nix-index-database.nixosModules.nix-index
       ]
       ++ nixModules;
     home = homeModules;
@@ -36,8 +41,7 @@
 in {
   nixosConfigurations = {
     "athena" = systemTemplate {
-      inherit args modules;
-      vars = outputVars;
+      inherit customArgs modules outputVars;
     };
   };
 }

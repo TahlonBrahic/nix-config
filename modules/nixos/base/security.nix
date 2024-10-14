@@ -2,7 +2,7 @@
   security = {
     sudo.wheelNeedsPassword = false;
     apparmor = {
-      enablle = true;
+      enable = true;
     };
     polkit = {
       enable = true;

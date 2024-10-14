@@ -1,9 +1,11 @@
 {
   inputs,
+  lib,
   customLib,
   vars,
+  system,
   ...
-} @ args: let
+} @ customArgs: let
   inherit (inputs) disko sops-nix stylix;
   inherit (customLib) modulesRoot systemTemplate;
 
@@ -38,8 +40,7 @@
 in {
   nixosConfigurations = {
     "nani" = systemTemplate {
-      inherit args modules;
-      vars = outputVars;
+      inherit customArgs modules outputVars;
     };
   };
 }

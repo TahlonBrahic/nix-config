@@ -1,8 +1,7 @@
-{args}: let
-  inherit (args) inputs;
-  modulesRoot = inputs.haumea.lib.load {
+{haumea}: let
+  modulesRoot = haumea.lib.load {
     src = ../modules;
-    loader = inputs.haumea.lib.loaders.path;
+    loader = haumea.lib.loaders.path;
   };
 in
   modulesRoot
