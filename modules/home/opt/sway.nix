@@ -1,6 +1,9 @@
-{ config, pkgs, lib, vars, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   home.packages = with pkgs; [
     grim # screenshot functionality
     slurp # screenshot functionality
@@ -8,13 +11,13 @@
     wlogout # wayland logout menu
     wlr-randr # wayland output utility
     wlr-which-key # keymap manager
-    mako # notification system 
+    mako # notification system
     wofi # gtk-based app launcher
     kitty # backup terminal
     rot8 # screen rotation daemon
   ];
 
-  # Enable the gnome-keyring secrets vault. 
+  # Enable the gnome-keyring secrets vault.
   # Will be exposed through DBus to programs willing to store secrets.
   services.gnome-keyring.enable = true;
 
@@ -32,9 +35,11 @@
       menu = "wofi";
       modifier = "Mod4";
       terminal = "kitty";
-      bars = [{
-        command = "${pkgs.waybar}/bin/waybar";
-      }];
+      bars = [
+        {
+          command = "${pkgs.waybar}/bin/waybar";
+        }
+      ];
 
       gaps = {
         smartBorders = "on";
@@ -69,11 +74,10 @@
           "${mod}+a" = "exec ${pkgs.wofi}";
           "${mod}+q" = "kill";
 
+          # Modes
+          "${mod}+i" = "mode randr";
 
-          # Modes 
-          "${mod}+i" = "mode randr";     
-
-        # Screenshots
+          # Screenshots
           "Print" = "grim -g \"$(slurp)\" - | wl-copy -t image/png";
         };
     };

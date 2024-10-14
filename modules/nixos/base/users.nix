@@ -1,12 +1,11 @@
-{ config, vars, ... }:
-
-{
+{vars, ...}: {
   users.mutableUsers = false;
 
   users.users."${vars.username}" = {
     initialPassword = "p";
     home = "/home/${vars.username}";
     isNormalUser = true;
+    inherit (vars) shell;
     extraGroups = [
       vars.username
       "users"
@@ -16,9 +15,4 @@
       "libvirtd"
     ];
   };
-
-  # Used for remote deployment, needs to be sent to another module
-  #users.users.root = {
-  #  initialHashedPassword = config.users.users."${vars.username}".initialHashedPassword;
-  #};
 }

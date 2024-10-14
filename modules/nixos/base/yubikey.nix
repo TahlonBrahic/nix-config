@@ -1,6 +1,9 @@
-{ pkgs, lib, vars, ... }:
-
 {
+  pkgs,
+  lib,
+  vars,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
     pam_u2f
     yubikey-manager
@@ -10,7 +13,7 @@
     pcscd.enable = true;
     yubikey-agent.enable = true;
     udev = {
-      packages = with pkgs; [ yubikey-personalization ];
+      packages = with pkgs; [yubikey-personalization];
     };
   };
 

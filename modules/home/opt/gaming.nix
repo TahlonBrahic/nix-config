@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   home.packages = with pkgs; [
     lutris
     protonup-qt
@@ -9,4 +7,4 @@
     steam-rom-manager
     cartridges
   ];
-}    
+}

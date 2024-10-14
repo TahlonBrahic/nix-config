@@ -1,13 +1,10 @@
-{ vars, inputs,  ...}: 
-
-let
+{vars, ...}: let
   inherit (vars) username;
-in
-{
+in {
   home = {
     inherit username;
-    homeDirectory = "/home/${username}";   
-    
+    homeDirectory = "/home/${username}";
+
     stateVersion = "24.05";
   };
 
@@ -15,11 +12,10 @@ in
   systemd.user.targets.tray = {
     Unit = {
       Description = "Home Manager System Tray";
-      Requires = [ "graphical-session-pre.target" ];
+      Requires = ["graphical-session-pre.target"];
     };
   };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  
 }

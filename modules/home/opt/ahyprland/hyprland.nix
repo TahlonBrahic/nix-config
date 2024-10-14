@@ -1,5 +1,4 @@
-{ config, pkgs, ...}:
-{
+{pkgs, ...}: {
   wayland.windowManager.hyprland = {
     # Whether to enable Hyprland wayland compositor
     enable = true;

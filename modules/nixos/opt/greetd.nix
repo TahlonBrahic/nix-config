@@ -1,12 +1,10 @@
-{ pkgs, lib, ... }:
-
-{
-   environment.systemPackages = [
+{pkgs, ...}: {
+  environment.systemPackages = [
     pkgs.greetd.tuigreet
   ];
 
   services.greetd = {
-    enable = true;  
+    enable = true;
     vt = 2;
     settings = {
       default_session = {
