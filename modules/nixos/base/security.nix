@@ -1,13 +1,15 @@
-{ config, pkgs, ... }:
-
-{
-  services.dbus.apparmor = "enabled";
-
-  security.polkit.enable = true;
-
-  security.apparmor = {
-    enable = true;
+{pkgs, ...}: {
+  security = {
+    sudo.wheelNeedsPassword = false;
+    apparmor = {
+      enablle = true;
+    };
+    polkit = {
+      enable = true;
+    };
   };
+
+  services.dbus.apparmor = "enabled";
 
   environment.systemPackages = with pkgs; [
     apparmor-bin-utils

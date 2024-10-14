@@ -1,17 +1,15 @@
-{ ... }@inputs:
-
-let
+{inputs, ...}: let
   # Extract important utility functions from Nixpkgs e.g. mkIf, concatMap, ...
   inherit (inputs.nixpkgs) lib;
 
   # Import library of custom functions used in this flake
-  customLib = import ../lib { inherit inputs lib vars; };
+  customLib = import ../lib {inherit inputs lib vars;};
 
   # Import variables such as users
   vars = customLib.varsRoot.varsRoot;
 
   # Wrap these together into an custom attribute set
-  customArgs = { inherit inputs lib customLib vars; };
+  customArgs = {inherit inputs lib customLib vars;};
 
   systems = {
     x86_64-linux = import ./x86_64-linux customArgs;
@@ -19,7 +17,8 @@ let
   };
 
   systemValues = builtins.attrValues systems;
-
 in {
+  formatter.x86_64-linux = inputs.nixpkgs.legacyPackages.x86_64.alejandra;
+
   nixosConfigurations = lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) systemValues);
 }

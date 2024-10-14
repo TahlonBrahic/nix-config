@@ -1,8 +1,11 @@
-{ pkgs, config ? {}, lib,... }: 
-let
-  passwordStoreDir = "${config.xdg.dataHome}/password-store";
-in 
 {
+  pkgs,
+  config ? {},
+  lib,
+  ...
+}: let
+  passwordStoreDir = "${config.xdg.dataHome}/password-store";
+in {
   programs.password-store = {
     enable = true;
     package = pkgs.pass.withExtensions (exts: [
@@ -16,13 +19,15 @@ in
       # Hexadecimal key signature is recommended.
       # Multiple keys may be specified separated by spaces.
       PASSWORD_STORE_KEY = lib.strings.concatStringsSep " " [
-        "" ];
+        ""
+      ];
       # all .gpg-id files and non-system extension files must be signed using a detached signature using the GPG key specified by
       #   the full 40 character upper-case fingerprint in this variable.
       # If multiple fingerprints are specified, each separated by a whitespace character, then signatures must match at least one.
       # The init command will keep signatures of .gpg-id files up to date.
       PASSWORD_STORE_SIGNING_KEY = lib.strings.concatStringsSep " " [
-        "" ];
+        ""
+      ];
       PASSWORD_STORE_CLIP_TIME = "60";
       PASSWORD_STORE_GENERATED_LENGTH = "20";
       PASSWORD_STORE_ENABLE_EXTENSIONS = "true";

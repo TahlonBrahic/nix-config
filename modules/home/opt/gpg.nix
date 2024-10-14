@@ -1,18 +1,16 @@
-{ config ? {}, vars ? {}, ... }:
-
 {
   programs.gpg = {
     enable = true;
     #homedir = "${config.home.homeDirectory}/.gnupg";
     mutableTrust = false;
     mutableKeys = false;
-    
-   # publicKeys = [
-     # {
-        #source = ""; Need to add gpg public key.
-#	trust = 5;
-     # }
-   # ];
+
+    # publicKeys = [
+    # {
+    #source = ""; Need to add gpg public key.
+    #	trust = 5;
+    # }
+    # ];
 
     settings = {
       no-greeting = true;

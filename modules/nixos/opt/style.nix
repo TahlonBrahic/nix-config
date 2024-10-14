@@ -1,10 +1,5 @@
-{ pkgs, inputs, ... }:
-
-let
-  inherit (inputs) stylix;
-in
-{
-  stylix = { 
+{pkgs, ...}: {
+  stylix = {
     enable = true;
 
     image = pkgs.fetchurl {
@@ -12,14 +7,14 @@ in
       hash = "sha256-GfmqcwkEygLmsg/OSmdyfgBW1gPGZPHnsuAd6IX/XoM=";
     };
 
-    cursor = { 
+    cursor = {
       package = pkgs.bibata-cursors;
       name = "Bibata-Modern-Ice";
     };
-  
+
     fonts = {
       monospace = {
-        package = pkgs.nerdfonts.override { fonts = ["JetBrainsMono"]; };
+        package = pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];};
         name = "JetBrainsMono Nerd Font Mono";
       };
       sansSerif = {
