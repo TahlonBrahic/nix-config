@@ -23,7 +23,7 @@
     zellij
   ];
 
-  modules = {
+  customModules = {
     nixos =
       [
         disko.nixosModules.disko
@@ -37,11 +37,11 @@
     home = homeModules;
   };
 
-  outputVars = vars.users.tahlon // vars.hardware.athena;
+  customVars = vars.users.tahlon // vars.hardware.athena;
 in {
   nixosConfigurations = {
     "athena" = systemTemplate {
-      inherit customArgs modules outputVars;
+      inherit customArgs customModules customVars;
     };
   };
 }
