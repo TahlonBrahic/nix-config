@@ -1,7 +1,7 @@
 {
-  description = "Tahlon's configuration";
+  description = "NixOS configuration that supports multiple users, systems, and architectures.";
 
-  outputs = inputs: import ./outputs inputs;
+  outputs = inputs: import ./outputs {inherit inputs;};
 
   inputs = {
     nixpkgs = {
