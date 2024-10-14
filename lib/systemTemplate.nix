@@ -1,21 +1,20 @@
 {
-  args,
-  modules,
-  vars,
+  customArgs,
+  customModules,
+  customVars,
 }: let
-  inherit (args) inputs lib customLib system;
+  inherit (customArgs) inputs lib customLib system;
   inherit (inputs) home-manager;
   inherit (customLib) baseNixosModules baseHomeModules;
-  specialArgs = {inherit inputs lib customLib vars;};
+  specialArgs = extraSpecialArgs // {inherit lib;};
   extraSpecialArgs = {inherit inputs customLib vars;};
 in
   lib.nixosSystem {
     inherit system specialArgs;
     modules =
       baseNixosModules
-      ++ modules.nixos
+      ++ customModules.nixos
       ++ [
-        # TODO: create a function to allow different users with different modules
         home-manager.nixosModules.home-manager
         {
           home-manager = {
@@ -23,7 +22,7 @@ in
             useUserPackages = true;
             inherit extraSpecialArgs;
             backupFileExtension = "backup";
-            users."${vars.username}".imports = modules.home ++ baseHomeModules;
+            users."${vars.username}".imports = baseHomeModules ++ customModules.home;
           };
         }
       ];
