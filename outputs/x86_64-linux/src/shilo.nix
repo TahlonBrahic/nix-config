@@ -1,14 +1,17 @@
 {
   inputs,
+  lib,
   customLib,
   vars,
+  system,
   ...
 } @ customArgs: let
-  inherit (inputs) sops-nix nix-index-database;
+  inherit (inputs) sops-nix nix-index-database nixos-wsl;
   inherit (customLib) modulesRoot systemTemplate;
 
   nixModules = with modulesRoot.nixos.opt; [
     wsl
+    fhs
   ];
 
   homeModules = with modulesRoot.home.opt; [
@@ -17,23 +20,22 @@
     zellij
   ];
 
-  modules = {
+  customModules = {
     nixos =
       [
         sops-nix.nixosModules.sops
         nix-index-database.nixosModules.nix-index
+        nixos-wsl.nixoModules.default
       ]
       ++ nixModules;
     home = homeModules;
   };
 
-  outputVars = vars.users.tbrahic;
+  customVars = args.lib.seqTrace args vars.users.tbrahic;
 in {
   nixosConfigurations = {
     "shilo" = systemTemplate {
-      args = customArgs;
-      inherit modules;
-      vars = outputVars;
+      inherit customArgs customModules customVars;
     };
   };
 }

@@ -1,24 +1,19 @@
-{inputs}: let
-  # Extract important utility functions from Nixpkgs e.g. mkIf, concatMap, ...
-  inherit (inputs.nixpkgs) lib;
+{nixpkgs, haumea, ...}@inputs: let
 
-  # Import library of custom functions used in this flake
+  inherit (nixpkgs) lib;
+
   customLib = import ../lib {inherit lib;};
 
-  # Import variables such as users
   vars = customLib.varsRoot.varsRoot;
 
-  # Wrap these together into an custom attribute set
   customArgs = {inherit inputs lib customLib vars;};
 
   systems = {
     x86_64-linux = import ./x86_64-linux customArgs;
-    # aarch64-darwin = import ./aarch64-darwin customArgs;
   };
 
   systemValues = builtins.attrValues systems;
 in {
-  formatter.x86_64-linux = inputs.nixpkgs.legacyPackages.x86_64.alejandra;
+  formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64.alejandra;
 
   nixosConfigurations = lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) systemValues);
-}
