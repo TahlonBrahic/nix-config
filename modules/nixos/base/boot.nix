@@ -1,5 +1,6 @@
+{ lib, ... }:
 {
-  boot.loader = {
+  boot.loader = lib.mkOptionDefault {
     grub = {
       enable = true;
       device = "nodev";

@@ -23,11 +23,11 @@
   };
 
   # FSH
-  #programs.fish.enable = fsh true;
-  #environment = {
-  #  pathsToLink = fsh ["/share/fish"];
-  #  enableAllTerminfo = fsh true;
-  #};
+  programs.fish.enable = true;
+  environment = {
+    pathsToLink = ["/share/fish"];
+    enableAllTerminfo = true;
+  };
 
   # SHARED
 

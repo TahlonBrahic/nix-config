@@ -1,7 +1,7 @@
 {vars, ...}: {
   wsl = {
     enable = true;
-    defualtUser = vars.username;
+    defaultUser = vars.username;
     startMenuLaunchers = true;
 
     wslConf = {
