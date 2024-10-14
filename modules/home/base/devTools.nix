@@ -17,7 +17,7 @@
     alejandra
     deadnix
     nodePackages.prettier
-    spellcheck
+    # spellcheck
     shfmt
     statix
   ];
