@@ -2,7 +2,6 @@
   args,
   modules,
   vars,
-  ...
 }: let
   inherit (args) inputs lib customLib system;
   inherit (inputs) home-manager;

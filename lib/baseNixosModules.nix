@@ -1,4 +1,4 @@
-{args}: let
+{...} @ args: let
   inherit (args) inputs;
   baseNixosModulesSet = inputs.haumea.lib.load {
     src = ../modules/nixos/base;

@@ -1,9 +1,9 @@
-{inputs, ...}: let
+{inputs}: let
   # Extract important utility functions from Nixpkgs e.g. mkIf, concatMap, ...
   inherit (inputs.nixpkgs) lib;
 
   # Import library of custom functions used in this flake
-  customLib = import ../lib {inherit inputs lib vars;};
+  customLib = import ../lib {inherit lib;};
 
   # Import variables such as users
   vars = customLib.varsRoot.varsRoot;

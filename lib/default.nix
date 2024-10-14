@@ -16,7 +16,11 @@
       )
     );
 
-  systemTemplate = import ./systemTemplate.nix;
+  systemTemplate = import ./systemTemplate.nix {
+    inherit args;
+    inherit (args) vars;
+    inherit (args) modules;
+  };
   modulesRoot = import ./modulesRoot.nix args;
   varsRoot = import ./varsRoot.nix args;
   baseNixosModules = import ./baseNixosModules.nix args;

@@ -3,12 +3,12 @@
   customLib,
   vars,
   ...
-} @ args: let
+} @ customArgs: let
   inherit (inputs) sops-nix nix-index-database;
   inherit (customLib) modulesRoot systemTemplate;
 
   nixModules = with modulesRoot.nixos.opt; [
-    greetd
+    wsl
   ];
 
   homeModules = with modulesRoot.home.opt; [
@@ -31,7 +31,8 @@
 in {
   nixosConfigurations = {
     "shilo" = systemTemplate {
-      inherit args modules;
+      args = customArgs;
+      inherit modules;
       vars = outputVars;
     };
   };
