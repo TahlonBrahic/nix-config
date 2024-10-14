@@ -4,22 +4,23 @@
   vars,
   ...
 } @ args: let
-  inherit (inputs) disko sops-nix impermanence stylix;
+  inherit (inputs) disko sops-nix impermanence stylix chaotic;
   inherit (customLib) modulesRoot systemTemplate;
 
   nixModules = with modulesRoot.nixos.opt; [
-    greetd
     fhs
     greetd
+    style
   ];
 
-  homeModules = with modulesRoot.home; [
-    librewolf
+  homeModules = with modulesRoot.home.opt; [
     encryption
     fetch
     hyprland
     kitty
+    librewolf
     password
+    rofi
     waybar
     zellij
   ];
@@ -31,12 +32,10 @@
         sops-nix.nixosModules.sops
         stylix.nixosModules.stylix
         impermanence.nixosModules.impermanence
+        chaotic.nixosModules.default
       ]
       ++ nixModules;
-    home =
-      [
-      ]
-      ++ homeModules;
+    home = homeModules;
   };
 
   outputVars = vars.users.tahlon // vars.hardware.yoru;

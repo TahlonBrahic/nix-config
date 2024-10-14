@@ -2,12 +2,12 @@
   users.mutableUsers = false;
 
   users.users."${vars.username}" = {
-    initialPassword = "p";
     home = "/home/${vars.username}";
+    inherit (vars) initialHashedPassword;
     isNormalUser = true;
     inherit (vars) shell;
     extraGroups = [
-      vars.username
+      "${vars.username}"
       "users"
       "networkmanager"
       "wheel"
