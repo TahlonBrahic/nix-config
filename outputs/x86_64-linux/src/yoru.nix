@@ -5,16 +5,17 @@ let
   inherit (customLib) relativeToRoot modulesRoot systemTemplate;
 
   nixModules = with modulesRoot.nixos.opt; [
-    greetd
     fhs
+    greetd
+    style
   ];
 
   homeModules = with modulesRoot.home.opt; [
-    librewolf
     encryption
     fetch
     hyprland
     kitty
+    librewolf
     password
     rofi
     waybar
