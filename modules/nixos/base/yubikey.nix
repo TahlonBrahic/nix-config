@@ -14,13 +14,12 @@
     };
   };
 
-  # yubikey login / sudo
   security.pam = lib.optionalAttrs pkgs.stdenv.isLinux {
     sshAgentAuth.enable = true;
     u2f = {
       enable = true;
       settings = {
-        cue = false; # Tells user they need to press the button
+        cue = false; 
         authFile = "/home/${vars.username}/.config/Yubico/u2f_keys";
       };
     };
@@ -28,7 +27,7 @@
       login.u2fAuth = true;
       sudo = {
         u2fAuth = true;
-        sshAgentAuth = true; # Use SSH_AUTH_SOCK for sudo
+        sshAgentAuth = true; 
       };
     };
   };
