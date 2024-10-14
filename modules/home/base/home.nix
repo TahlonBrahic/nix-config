@@ -16,6 +16,10 @@ in {
     };
   };
 
+  home.sessionVariables = {
+    XDG_RUNTIME_VARIABLES = "/run/user/$UID";
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }

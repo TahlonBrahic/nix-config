@@ -20,34 +20,34 @@
             luks = {
               size = "100%";
               content = {
-                type = "lvm_pv";
-                vg = "pool";
-              };
-            };
-          };
-        };
-      };
-    };
-    lvm_vg = {
-      pool = {
-        type = "lvm_vg";
-        lvs = {
-          root = {
-            size = "953G";
-            content = {
-              type = "btrfs";
-              extraArgs = ["-f"];
-              subvolumes = {
-                "/root" = {
-                  mountpoint = "/";
+                type = "luks";
+                name = "crypted";
+                passwordFile = "/tmp/secret.key"; # Interactive login for security
+                settings = {
+                  allowDiscards = true;
                 };
-                "/home" = {
-                  mountOptions = ["compress=zstd" "noatime"];
-                  mountpoint = "/home";
-                };
-                "/nix" = {
-                  mountOptions = ["compress=zstd" "noatime"];
-                  mountpoint = "/nix";
+                content = {
+                  type = "btrfs";
+                  extraArgs = ["-f"];
+                  subvolumes = {
+                    "/root" = {
+                      mountpoint = "/";
+                      mountOptions = ["compress=zstd" "noatime"];
+                    };
+                    "/home" = {
+                      mountpoint = "/home";
+                      mountOptions = ["compress=zstd" "noatime"];
+                    };
+                    "/nix" = {
+                      mountpoint = "/nix";
+                      mountOptions = ["compress=zstd" "noatime"];
+                    };
+                    # In order to facilitate suspend and hibernate
+                    "/swap" = {
+                      mountpoint = "/.swapvol";
+                      swap.swapfile.size = "4G";
+                    };
+                  };
                 };
               };
             };
