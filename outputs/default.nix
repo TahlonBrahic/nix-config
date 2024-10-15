@@ -2,10 +2,12 @@
   nixpkgs,
   haumea,
   ...
-} @ inputs: let
-  inherit (nixpkgs) lib;
+} @inputs: let
+  inherit (nixpkgs) lib overlays;
 
   customLib = import ../lib {inherit lib haumea;};
+
+  customOverlays = customLib.overlaysRoot; 
 
   vars = customLib.varsRoot.varsRoot;
 

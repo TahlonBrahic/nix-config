@@ -7,7 +7,7 @@
   ...
 } @ customArgs: let
   inherit (inputs) chaotic sops-nix nvchad4nix nur nix-index-database nixos-wsl;
-  inherit (customLib) modulesRoot systemTemplate;
+  inherit (customLib) modulesRoot overlaysRoot systemTemplate;
 
   nixModules = with modulesRoot.nixos.opt; [
     wsl
