@@ -476,51 +476,6 @@
         "type": "github"
       }
     },
-<<<<<<< HEAD
-    "nix-index-database": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1728790083,
-        "narHash": "sha256-grMdAd4KSU6uPqsfLzA1B/3pb9GtGI9o8qb0qFzEU/Y=",
-        "owner": "Mic92",
-        "repo": "nix-index-database",
-        "rev": "5c54c33aa04df5dd4b0984b7eb861d1981009b22",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Mic92",
-        "repo": "nix-index-database",
-        "type": "github"
-      }
-    },
-    "nixos-wsl": {
-      "inputs": {
-        "flake-compat": "flake-compat_2",
-        "flake-utils": "flake-utils",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1728860000,
-        "narHash": "sha256-Ql5wSa6mnCT+1NfJYPk0gP6MQrTaP5u2raR8J6YQXxI=",
-        "owner": "nix-community",
-        "repo": "NixOS-WSL",
-        "rev": "b8ebac4acc72aa17e0fb8d893d0050d68843154a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "NixOS-WSL",
-        "type": "github"
-      }
-    },
-||||||| parent of 40c0a0f (Testing)
-=======
     "nix-index-database": {
       "inputs": {
         "nixpkgs": [
@@ -563,7 +518,6 @@
         "type": "github"
       }
     },
->>>>>>> 40c0a0f (Testing)
     "nixpkgs": {
       "locked": {
         "lastModified": 1728492678,
@@ -628,14 +582,13 @@
         "type": "github"
       }
     },
-<<<<<<< HEAD
     "nur": {
       "locked": {
-        "lastModified": 1728900738,
-        "narHash": "sha256-H59U6GVQmKe1NYKSqN1yb/n8ne41vCgmp+LeonWqVog=",
+        "lastModified": 1728945987,
+        "narHash": "sha256-pqLFOQVWdH+CufQZsNay5I9hf1nUQXONMSAFyBb5M64=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "c2a458683d9cc5d6535d7e65c8fc73db9f1caf6c",
+        "rev": "95bfc76150c171d0a73d0e4437904c844259ecce",
         "type": "github"
       },
       "original": {
@@ -644,24 +597,6 @@
         "type": "github"
       }
     },
-||||||| parent of 40c0a0f (Testing)
-=======
-    "nur": {
-      "locked": {
-        "lastModified": 1728930569,
-        "narHash": "sha256-OvKCDKpI8sHA07Ct+f5uotGr9ATrIJ/fUfwZZnD8Tmk=",
-        "owner": "nix-community",
-        "repo": "NUR",
-        "rev": "96670f5e62fc211ff06be5ed7654c44318ddf7e2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "NUR",
-        "type": "github"
-      }
-    },
->>>>>>> 40c0a0f (Testing)
     "nvchad-starter": {
       "flake": false,
       "locked": {
