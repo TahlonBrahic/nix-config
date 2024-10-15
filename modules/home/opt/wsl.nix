@@ -7,12 +7,11 @@
     sessionVariables.EDITOR = "nvim";
     sessionVariables.SHELL = "/etc/profiles/per-user/${vars.username}/bin/fish";
   };
-
   programs = {
     home-manager.enable = true;
-    nix-index.enable = true;
-    nix-index.enableFishIntegration = true;
-    nix-index-database.comma.enable = true;
+    #nix-index.enable = true;
+    #nix-index.enableFishIntegration = true;
+    #nix-index-database.comma.enable = true;
     zellij.enable = true;
 
     starship.enable = true;

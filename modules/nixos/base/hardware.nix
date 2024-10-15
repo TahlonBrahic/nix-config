@@ -5,6 +5,8 @@
   modulesPath,
   ...
 }:
+if vars.hostName == "shilo" then {} else
+
 if vars.hostName == "yoru"
 then {
   imports = [
@@ -58,7 +60,7 @@ then {
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
-else
+else 
   with vars; {
     imports =
       if builtins.isList modulesPath
