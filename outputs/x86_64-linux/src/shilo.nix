@@ -26,7 +26,7 @@
       [
         sops-nix.nixosModules.sops
         nix-index-database.nixosModules.nix-index
-        nixos-wsl.nixosModules.default
+        nixos-wsl.nixosModules.wsl
         nur.nixosModules.nur
         chaotic.nixosModules.default
       ]

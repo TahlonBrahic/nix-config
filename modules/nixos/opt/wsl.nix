@@ -10,4 +10,5 @@
       network.generateHosts = false;
     };
   };
+  environment.etc."resolv.conf".source = /etc/resolv.conf;
 }
