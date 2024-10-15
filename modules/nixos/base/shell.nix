@@ -1,10 +1,4 @@
-{
-  pkgs,
-  vars,
-  lib,
-  ...
-}:
-{
+{pkgs, ...}: {
   programs = {
     nix-index.enableZshIntegration = true;
     zsh = {
@@ -38,5 +32,5 @@
   # SHARED
 
   environment.shells = [pkgs.zsh];
-  users.defaultUserShell = pkgs.zsh; 
+  users.defaultUserShell = pkgs.zsh;
 }

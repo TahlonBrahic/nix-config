@@ -1,8 +1,11 @@
-{nixpkgs, haumea, ...}@inputs: let
-
+{
+  nixpkgs,
+  haumea,
+  ...
+} @ inputs: let
   inherit (nixpkgs) lib;
 
-  customLib = import ../lib {inherit lib; inherit (inputs) haumea;};
+  customLib = import ../lib {inherit lib haumea;};
 
   vars = customLib.varsRoot.varsRoot;
 
@@ -17,3 +20,4 @@ in {
   formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64.alejandra;
 
   nixosConfigurations = lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) systemValues);
+}

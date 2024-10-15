@@ -1,8 +1,7 @@
 {pkgs, ...}: {
   services.pipewire = {
     enable = true;
- 
-    alsa = { 
+    alsa = {
       enable = true;
       support32Bit = true;
     };

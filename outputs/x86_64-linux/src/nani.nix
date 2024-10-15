@@ -26,7 +26,7 @@
     zellij
   ];
 
-  modules = {
+  customModules = {
     nixos =
       [
         disko.nixosModules.disko
@@ -36,11 +36,11 @@
       ++ nixModules;
     home = homeModules;
   };
-  outputVars = vars.users.tahlon // vars.hardware.nani;
+  customVars = vars.users.tahlon // vars.hardware.nani;
 in {
   nixosConfigurations = {
     "nani" = systemTemplate {
-      inherit customArgs modules outputVars;
+      inherit customArgs customModules customVars;
     };
   };
 }

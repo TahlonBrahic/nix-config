@@ -28,7 +28,7 @@
     zellij
   ];
 
-  modules = {
+  customModules = {
     nixos =
       [
         disko.nixosModules.disko
@@ -41,11 +41,11 @@
     home = homeModules;
   };
 
-  outputVars = vars.users.amy // vars.hardware.fukushyuu;
+  customVars = vars.users.amy // vars.hardware.fukushyuu;
 in {
   nixosConfigurations = {
     "fukushyuu" = systemTemplate {
-      inherit customArgs modules outputVars;
+      inherit customArgs customModules customVars;
     };
   };
 }
