@@ -1,9 +1,12 @@
 {
   lib,
-  config,
+  vars,
   ...
-}: {
-  boot.loader = lib.mkOptionDefault {
+}:
+if vars.name == "tbrahic"
+then {}
+else {
+  boot.loader = {
     grub = {
       enable = true;
       device = "nodev";
