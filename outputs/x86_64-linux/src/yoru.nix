@@ -21,6 +21,7 @@
     hyprland
     kitty
     librewolf
+    nvchad
     password
     rofi
     waybar
@@ -39,7 +40,9 @@
         nix-index-database.nixosModules.nix-index
       ]
       ++ nixModules;
-    home = homeModules;
+    home = [
+      ]
+      ++ homeModules;
   };
 
   customVars = vars.users.tahlon // vars.hardware.yoru;
