@@ -3,11 +3,17 @@
   haumea,
   ...
 } @inputs: let
-  inherit (nixpkgs) lib overlays;
+
+  # Generate an attribute set by mapping a function over a list of attribute names.
+  # genAttrs [ "foo" "bar" ] (name: "x_" + name) => { foo = "x_foo"; bar = "x_bar"; }
+  forAllSystems = nixpkgs.lib.genAttrs [
+    "x86_64-linux"
+    "aarch64-linux"
+  ];
+
+  inherit (nixpkgs) lib;
 
   customLib = import ../lib {inherit lib haumea;};
-
-  customOverlays = customLib.overlaysRoot; 
 
   vars = customLib.varsRoot.varsRoot;
 
