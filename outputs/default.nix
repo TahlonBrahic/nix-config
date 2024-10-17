@@ -3,10 +3,10 @@
   haumea,
   ...
 } @ inputs: let
-  forAllSystems = nixpkgs.lib.genAttrs [
-    "x86_64-linux"
-    "aarch64-linux"
-  ];
+
+  supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
+
+  forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
 
   inherit (nixpkgs) lib;
 

@@ -3,7 +3,7 @@
   vars,
   ...
 }:
-if vars.name == "tbrahic"
+if vars.hostName == "shilo"
 then {}
 else {
   boot.loader = {

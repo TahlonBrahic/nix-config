@@ -17,6 +17,7 @@
   homeModules = with modulesRoot.home.opt; [
     encryption
     fetch
+    nvchad
     zellij
     wsl
   ];
@@ -31,7 +32,7 @@
         chaotic.nixosModules.default
       ]
       ++ nixModules;
-    home = [nvchad4nix.homeManagerModule] ++ homeModules;
+    home = [] ++ homeModules;
   };
 
   customVars = vars.users.tbrahic;
