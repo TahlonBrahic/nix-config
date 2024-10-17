@@ -26,7 +26,7 @@
 in {
   packages = forAllSystems (system: systems.${system}.packages or {});
 
-  overlays = forAllSystems (system: import overlayPaths {inherit inputs system};);
+  overlays = forAllSystems (system: import overlayPaths {inherit inputs system;});
 
   formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 

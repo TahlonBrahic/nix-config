@@ -1,8 +1,8 @@
-{nvchad4nix, pkgs}:
+{inputs, system}:
 {
   (final: 
     prev: {
-      nvchad = nvchad4nix.packages."${pkgs.system}".nvchad;
+      nvchad = inputs.nvchad4nix.packages."${system}".nvchad;
      }
   )
 }
