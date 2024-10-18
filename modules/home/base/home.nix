@@ -18,6 +18,7 @@ in {
 
   home.sessionVariables = {
     XDG_RUNTIME_VARIABLES = "/run/user/$UID";
+    EDITOR = "nvim";
   };
 
   # Let Home Manager install and manage itself.

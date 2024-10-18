@@ -6,7 +6,7 @@
   system,
   ...
 } @ customArgs: let
-  inherit (inputs) chaotic sops-nix nvchad4nix nur nix-index-database nixos-wsl;
+  inherit (inputs) chaotic sops-nix nvchad4nix nur nix-index-database;
   inherit (customLib) modulesRoot overlaysRoot systemTemplate;
 
   nixModules = with modulesRoot.nixos.opt; [
@@ -15,11 +15,17 @@
   ];
 
   homeModules = with modulesRoot.home.opt; [
+    broot
     encryption
     fetch
+    fish
+    fzf
+    lsd
     nvchad
+    nix-index
+    starship
     zellij
-    wsl
+    zoxide
   ];
 
   customModules = {
@@ -27,7 +33,6 @@
       [
         sops-nix.nixosModules.sops
         nix-index-database.nixosModules.nix-index
-        nixos-wsl.nixosModules.wsl
         nur.nixosModules.nur
         chaotic.nixosModules.default
       ]
