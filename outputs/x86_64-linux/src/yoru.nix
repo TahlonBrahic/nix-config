@@ -6,12 +6,13 @@
   system,
   ...
 } @ customArgs: let
-  inherit (inputs) disko sops-nix impermanence stylix chaotic nvchad4nix nur nix-index-database;
+  inherit (inputs) disko sops-nix stylix chaotic nvchad4nix nur nix-index-database;
   inherit (customLib) modulesRoot systemTemplate;
 
   nixModules = with modulesRoot.nixos.opt; [
     fhs
     greetd
+    laptop
     style
   ];
 
@@ -34,7 +35,6 @@
         disko.nixosModules.disko
         sops-nix.nixosModules.sops
         stylix.nixosModules.stylix
-        impermanence.nixosModules.impermanence
         chaotic.nixosModules.default
         nur.nixosModules.nur
         nix-index-database.nixosModules.nix-index

@@ -21,7 +21,6 @@
     vim
     age
     gnupg
-    direnv
     broot
     tmux
     curl
@@ -37,6 +36,4 @@
     sd
     procs
   ];
-
-  environment.variables.EDITOR = "vim";
 }
