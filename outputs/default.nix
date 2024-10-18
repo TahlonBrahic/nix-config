@@ -29,6 +29,8 @@ in {
   overlays = forAllSystems (system: import overlayPaths {inherit inputs system;});
 
   formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
-
+  
   nixosConfigurations = lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) systemValues);
+
+  nixOnDroidConfigurations = lib.attrsets.mergeAttrsList (map (it: it.nixOnDroidConfigurations or {}) systemValues)
 }

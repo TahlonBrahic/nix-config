@@ -1,46 +1,5 @@
 {
-  pkgs,
-  vars,
-  ...
-}: {
-  home = {
-    sessionVariables.EDITOR = "nvim";
-    sessionVariables.SHELL = "/etc/profiles/per-user/${vars.username}/bin/fish";
-  };
   programs = {
-    home-manager.enable = true;
-    #nix-index.enable = true;
-    #nix-index.enableFishIntegration = true;
-    #nix-index-database.comma.enable = true;
-    zellij.enable = true;
-
-    starship.enable = true;
-    starship.settings = {
-      aws.disabled = true;
-      gcloud.disabled = true;
-      kubernetes.disabled = false;
-      git_branch.style = "242";
-      directory.style = "blue";
-      directory.truncate_to_repo = false;
-      directory.truncation_length = 8;
-      python.disabled = true;
-      ruby.disabled = true;
-      hostname.ssh_only = false;
-      hostname.style = "bold green";
-    };
-
-    fzf.enable = true;
-    fzf.enableFishIntegration = true;
-    lsd.enable = true;
-    lsd.enableAliases = true;
-    zoxide.enable = true;
-    zoxide.enableFishIntegration = true;
-    zoxide.options = ["--cmd cd"];
-    broot.enable = true;
-    broot.enableFishIntegration = true;
-    direnv.enable = true;
-    direnv.nix-direnv.enable = true;
-
     fish = {
       enable = true;
       interactiveShellInit = ''
@@ -119,4 +78,8 @@
       ];
     };
   };
+  home = {
+    sessionVariables.SHELL = "/etc/profiles/per-user/${vars.username}/bin/fish";
+  };
 }
+
