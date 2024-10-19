@@ -2,6 +2,7 @@
   config,
   lib,
   vars,
+  pkgs,
   modulesPath,
   ...
 }:
@@ -17,8 +18,7 @@ then {
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
-  #boot.kernelPackages = pkgs.linuxPackages_cachyos;
-  #chaotic.scx.enable = true;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   hardware.enableAllFirmware = true;
 
   fileSystems."/" = {
