@@ -1,6 +1,10 @@
 {
   programs = {
-    fzf.enable = true; 
-    fzf.enableFishIntegration = true;
+    fzf = {
+      enable = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+      enableZshIntegration = true;
+    };
   };
 }

@@ -19,4 +19,6 @@
       "libvirtd"
     ];
   };
+  
+  programs.${vars.shell}.enable = true;
 }

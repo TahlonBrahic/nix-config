@@ -1,4 +1,8 @@
 {
+  vars,
+  pkgs,
+  ...
+}: {
   programs = {
     fish = {
       enable = true;
@@ -82,4 +86,3 @@
     sessionVariables.SHELL = "/etc/profiles/per-user/${vars.username}/bin/fish";
   };
 }
-
