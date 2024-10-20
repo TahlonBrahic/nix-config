@@ -1,5 +1,4 @@
 {
-  outputs,
   config,
   lib,
   pkgs,
@@ -47,10 +46,13 @@
   swayCfg = config.wayland.windowManager.sway;
   hyprlandCfg = config.wayland.windowManager.hyprland;
 in {
-  # Let it try to start a few more times
-  systemd.user.services.waybar = {
-    Unit.StartLimitBurst = 30;
-  };
+  home.packages = with pkgs; [
+    wlogout
+    wlr-randr
+    brightnessctl
+    wev
+  ];
+
   programs.waybar = {
     enable = true;
     package = pkgs.waybar.overrideAttrs (oa: {
@@ -58,9 +60,7 @@ in {
     });
     systemd.enable = true;
     settings = {
-      primary = {
-        exclusive = false;
-        passthrough = false;
+      mainbar = {
         height = 40;
         margin = "6";
         position = "top";
@@ -81,10 +81,8 @@ in {
 
         modules-center = [
           "cpu"
-          "custom/gpu"
           "memory"
           "clock"
-          "custom/unread-mail"
         ];
 
         modules-right = [
@@ -108,11 +106,6 @@ in {
 
         cpu = {
           format = "  {usage}%";
-        };
-        "custom/gpu" = {
-          interval = 5;
-          exec = mkScript {script = "cat /sys/class/drm/card*/device/gpu_busy_percent | head -1";};
-          format = "󰒋  {}%";
         };
         memory = {
           format = "  {}%";
@@ -141,7 +134,7 @@ in {
           };
         };
         battery = {
-          bat = "BAT0";
+          #bat = "BAT0";
           interval = 10;
           format-icons = [
             "󰁺"
@@ -189,38 +182,15 @@ in {
           };
         };
         "custom/hostname" = {
-          exec = mkScript {script = ''
-            echo "$USER@$HOSTNAME"
-          '';};
-          on-click = mkScript {script = ''
-            systemctl --user restart waybar
-          '';};
-        };
-        "custom/unread-mail" = {
-          interval = 5;
-          return-type = "json";
-          exec = mkScriptJson {
-            deps = [pkgs.findutils pkgs.procps];
+          exec = mkScript {
             script = ''
-              count=$(find ~/Mail/*/Inbox/new -type f | wc -l)
-              if pgrep mbsync &>/dev/null; then
-                status="syncing"
-              else
-                if [ "$count" == "0" ]; then
-                  status="read"
-                else
-                  status="unread"
-                fi
-              fi
+              echo "$USER@$HOSTNAME"
             '';
-            text = "$count";
-            alt = "$status";
           };
-          format = "{icon}  ({})";
-          format-icons = {
-            "read" = "󰇯";
-            "unread" = "󰇮";
-            "syncing" = "󰁪";
+          on-click = mkScript {
+            script = ''
+              systemctl --user restart waybar
+            '';
           };
         };
         "custom/currentplayer" = {
@@ -238,16 +208,9 @@ in {
           };
           format = "{icon}{}";
           format-icons = {
-            "" = " ";
-            "Celluloid" = "󰎁 ";
             "spotify" = "󰓇 ";
-            "ncspot" = "󰓇 ";
-            "qutebrowser" = "󰖟 ";
-            "firefox" = " ";
             "discord" = " 󰙯 ";
-            "sublimemusic" = " ";
             "kdeconnect" = "󰄡 ";
-            "chromium" = " ";
           };
         };
         "custom/player" = {
@@ -289,61 +252,55 @@ in {
         };
       };
     };
-    # Cheatsheet:
-    # x -> all sides
-    # x y -> vertical, horizontal
-    # x y z -> top, horizontal, bottom
-    # w x y z -> top, right, bottom, left
-    style = 
-      ''
-        * {
-          font-size: 12pt;
-          padding: 0;
-          margin: 0 0.4em;
-        }
+    style = ''
+      * {
+        font-size: 12pt;
+        padding: 0;
+        margin: 0 0.4em;
+      }
 
-        window#waybar {
-          padding: 0;
-          border-radius: 0.5em;
-        }
-        .modules-left {
-          margin-left: -0.65em;
-        }
-        .modules-right {
-          margin-right: -0.65em;
-        }
+      window#waybar {
+        padding: 0;
+        border-radius: 0.5em;
+      }
+      .modules-left {
+        margin-left: -0.65em;
+      }
+      .modules-right {
+        margin-right: -0.65em;
+      }
 
-        #workspaces button {
-          padding-left: 0.4em;
-          padding-right: 0.4em;
-          margin-top: 0.15em;
-          margin-bottom: 0.15em;
-        }
-        #clock {
-          padding-right: 1em;
-          padding-left: 1em;
-          border-radius: 0.5em;
-        }
+      #workspaces button {
+        padding-left: 0.4em;
+        padding-right: 0.4em;
+        margin-top: 0.15em;
+        margin-bottom: 0.15em;
+      }
+      #clock {
+        padding-right: 1em;
+        padding-left: 1em;
+        border-radius: 0.5em;
+      }
 
-        #custom-menu {
-          padding-right: 1.5em;
-          padding-left: 1em;
-          margin-right: 0;
-          border-radius: 0.5em;
-        }
-        #custom-hostname {
-          padding-right: 1em;
-          padding-left: 1em;
-          margin-left: 0;
-          border-radius: 0.5em;
-        }
-        #custom-currentplayer {
-          padding-right: 0;
-        }
-        #custom-gpu, #cpu, #memory {
-          margin-left: 0.05em;
-          margin-right: 0.55em;
-        }
-      '';
+      #custom-menu {
+        padding-right: 1.5em;
+        padding-left: 1em;
+        margin-right: 0;
+        border-radius: 0.5em;
+      }
+      #custom-hostname {
+        padding-right: 1em;
+        padding-left: 1em;
+        margin-left: 0;
+        border-radius: 0.5em;
+      }
+      #custom-currentplayer {
+        padding-right: 0;
+      }
+      #custom-gpu, #cpu, #memory {
+        margin-left: 0.05em;
+        margin-right: 0.55em;
+      }
+    '';
   };
 }
