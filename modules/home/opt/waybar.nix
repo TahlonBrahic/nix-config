@@ -16,16 +16,17 @@ in {
     wlr-randr
     brightnessctl
     wev
+    playerctl
+    pavucontrol
   ];
 
   programs.waybar = {
     enable = true;
+    systemd.enable = true;
 
     package = pkgs.waybar.overrideAttrs (oa: {
       mesonFlags = (oa.mesonFlags or []) ++ ["-Dexperimental=true"];
     });
-
-    systemd.enable = true;
 
     settings = {
       mainbar = {
@@ -57,7 +58,6 @@ in {
 
         modules-right = [
           "tray"
-          "custom/rfkill"
           "network"
           "pulseaudio"
           "battery"
@@ -66,8 +66,8 @@ in {
 
         clock = {
           interval = 1;
-          format = "{:%d/%m %H:%M:%S}";
-          format-alt = "{:%Y-%m-%d %H:%M:%S %z}";
+          format = "{:%H:%M:%S}";
+          format-alt = "{:%Y-%m-%d %H:%M:%S}";
           on-click-left = "mode";
           tooltip-format = ''
             <big>{:%Y %B}</big>
@@ -77,6 +77,7 @@ in {
         cpu = {
           format = "  {usage}%";
         };
+
         memory = {
           format = "  {}%";
           interval = 5;
@@ -95,7 +96,11 @@ in {
             ];
           };
           on-click = lib.getExe pkgs.pavucontrol;
+          on-click-right = writeCustomShellApplication {
+            script = "pkill pavucontrol";
+          };
         };
+
         idle_inhibitor = {
           format = "{icon}";
           format-icons = {
@@ -103,6 +108,7 @@ in {
             deactivated = "󰒲";
           };
         };
+
         battery = {
           interval = 10;
           format-icons = [
@@ -121,9 +127,11 @@ in {
           format-charging = "󰂄 {capacity}%";
           onclick = "";
         };
+
         "sway/window" = {
           max-length = 20;
         };
+
         network = {
           interval = 3;
           format-wifi = "   {essid}";
@@ -135,6 +143,7 @@ in {
             Up: {bandwidthUpBits}
             Down: {bandwidthDownBits}'';
         };
+
         "custom/menu" = {
           interval = 1;
           return-type = "json";
@@ -150,11 +159,11 @@ in {
             in "$(if ${isFullScreen}; then echo fullscreen; fi)";
           };
         };
+
         "custom/currentplayer" = {
-          interval = 1;
+          interval = 2;
           return-type = "json";
           exec = writeWaybarModule {
-            name = "Custom current sound output";
             dependencies = [pkgs.playerctl];
             script = ''
               all_players=$(playerctl -l 2>/dev/null)
@@ -166,11 +175,14 @@ in {
           };
           format = "{icon}{}";
           format-icons = {
+            "librewolf" = " ";
             "spotify" = "󰓇 ";
             "discord" = " 󰙯 ";
             "kdeconnect" = "󰄡 ";
+            "steam" = " ";
           };
         };
+
         "custom/player" = {
           exec-if = writeCustomShellApplication {
             dependencies = [pkgs.playerctl];
@@ -201,25 +213,15 @@ in {
             script = "playerctl play-pause";
           };
         };
+
         "custom/hostname" = {
           exec = writeCustomShellApplication {
             script = ''
               echo "$USER@$HOSTNAME"
             '';
           };
-          on-click = writeCustomShellApplication {
-            script = ''
-              systemctl --user restart waybar
-            '';
-          };
         };
-        "custom/rfkill" = {
-          interval = 1;
-          exec-if = writeCustomShellApplication {
-            dependencies = [pkgs.util-linux];
-            script = "rfkill | grep '\<blocked\>'";
-          };
-        };
+
       };
     };
     style = ''
@@ -267,7 +269,7 @@ in {
       #custom-currentplayer {
         padding-right: 0;
       }
-      #custom-gpu, #cpu, #memory {
+      #cpu, #memory {
         margin-left: 0.05em;
         margin-right: 0.55em;
       }

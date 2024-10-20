@@ -4,12 +4,12 @@
   ...
 }:
   {
-    name ? "User-made script",
+    name ? "custom-script",
     script ? "",
     dependencies ? []
   }:
   # Function that writes a shell application to the Nix store then returns its path 
     lib.getExe (pkgs.writeShellApplication {
-    inherit name; 
+    inherit name;
     text = script;
     runtimeInputs = with pkgs; [coreutils gnugrep systemd] ++ dependencies; })
