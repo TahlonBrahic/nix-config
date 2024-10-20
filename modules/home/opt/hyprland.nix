@@ -36,7 +36,7 @@
         "SUPER,a,exec,killall rofi || rofi -show"
         "SUPER,s,togglespecialworkspace"
         "SUPER,g,togglegroup"
-        "SUPER,f,fullscreen"
+        "SUPER,w,fullscreen"
       ];
 
       general = {
