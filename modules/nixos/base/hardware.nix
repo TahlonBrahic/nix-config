@@ -20,6 +20,7 @@ then {
   boot.extraModulePackages = [];
   boot.kernelPackages = pkgs.linuxPackages_latest;
   hardware.enableAllFirmware = true;
+  boot.kernelParams = [ "acpi_backlight=vendor" "acpi_osi=Linux" "snd-hda-intel" "model=laptop-dmic" ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/f479ea2a-00ea-4cc2-83ee-c9d458b67193";
