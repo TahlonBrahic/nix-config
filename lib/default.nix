@@ -1,7 +1,7 @@
 {haumea, ...}: {
   # Reusable functions
   systemTemplate = import ./systemTemplate.nix;
-  writeShellApplication = import ./writeShellApplication.nix;
+  writeCustomShellApplication = import ./writeCustomShellApplication.nix;
   writeWaybarModule = import ./writeWaybarModule.nix;
 
   # Haumea-derived Attribute Sets
