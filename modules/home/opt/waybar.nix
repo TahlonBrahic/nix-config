@@ -1,48 +1,13 @@
 {
   config,
   lib,
+  customLib,
   pkgs,
   inputs,
   ...
 }: let
-  commonDeps = with pkgs; [coreutils gnugrep systemd];
-  # Function to simplify making waybar outputs
-  mkScript = {
-    name ? "script",
-    deps ? [],
-    script ? "",
-  }:
-    lib.getExe (pkgs.writeShellApplication {
-      inherit name;
-      text = script;
-      runtimeInputs = commonDeps ++ deps;
-    });
-  # Specialized for JSON outputs
-  mkScriptJson = {
-    name ? "script",
-    deps ? [],
-    script ? "",
-    text ? "",
-    tooltip ? "",
-    alt ? "",
-    class ? "",
-    percentage ? "",
-  }:
-    mkScript {
-      inherit name;
-      deps = [pkgs.jq] ++ deps;
-      script = ''
-        ${script}
-        jq -cn \
-          --arg text "${text}" \
-          --arg tooltip "${tooltip}" \
-          --arg alt "${alt}" \
-          --arg class "${class}" \
-          --arg percentage "${percentage}" \
-          '{text:$text,tooltip:$tooltip,alt:$alt,class:$class,percentage:$percentage}'
-      '';
-    };
-
+  writeShellApplication = import customLib.writeShellApplication {inherit pkgs lib;};
+  writeWaybarModule = import customLib.writeWaybarModule {inherit pkgs customLib;};
   swayCfg = config.wayland.windowManager.sway;
   hyprlandCfg = config.wayland.windowManager.hyprland;
 in {
@@ -55,15 +20,20 @@ in {
 
   programs.waybar = {
     enable = true;
+
     package = pkgs.waybar.overrideAttrs (oa: {
       mesonFlags = (oa.mesonFlags or []) ++ ["-Dexperimental=true"];
     });
+
     systemd.enable = true;
+
     settings = {
       mainbar = {
         height = 40;
         margin = "6";
         position = "top";
+        font-family = "JetBrainsMono Nerd Font Mono";
+
         modules-left =
           ["custom/menu"]
           ++ (lib.optionals swayCfg.enable [
@@ -81,8 +51,8 @@ in {
 
         modules-center = [
           "cpu"
-          "memory"
           "clock"
+          "memory"
         ];
 
         modules-right = [
@@ -134,7 +104,6 @@ in {
           };
         };
         battery = {
-          #bat = "BAT0";
           interval = 10;
           format-icons = [
             "󰁺"
@@ -169,7 +138,8 @@ in {
         "custom/menu" = {
           interval = 1;
           return-type = "json";
-          exec = mkScriptJson {
+          exec = writeWaybarModule {
+            name = "Custom menu";
             deps = lib.optional hyprlandCfg.enable hyprlandCfg.package;
             text = "";
             tooltip = ''$(grep PRETTY_NAME /etc/os-release | cut -d '"' -f2)'';
@@ -182,12 +152,12 @@ in {
           };
         };
         "custom/hostname" = {
-          exec = mkScript {
+          exec = writeShellApplication {
             script = ''
               echo "$USER@$HOSTNAME"
             '';
           };
-          on-click = mkScript {
+          on-click = writeShellApplication {
             script = ''
               systemctl --user restart waybar
             '';
@@ -196,7 +166,8 @@ in {
         "custom/currentplayer" = {
           interval = 2;
           return-type = "json";
-          exec = mkScriptJson {
+          exec = writeWaybarModule {
+            name = "Custom current sound output";
             deps = [pkgs.playerctl];
             script = ''
               all_players=$(playerctl -l 2>/dev/null)
@@ -214,14 +185,14 @@ in {
           };
         };
         "custom/player" = {
-          exec-if = mkScript {
+          exec-if = writeShellApplication {
             deps = [pkgs.playerctl];
             script = ''
               selected_player="$(playerctl status -f "{{playerName}}" 2>/dev/null || true)"
               playerctl status -p "$selected_player" 2>/dev/null
             '';
           };
-          exec = mkScript {
+          exec = writeShellApplication {
             deps = [pkgs.playerctl];
             script = ''
               selected_player="$(playerctl status -f "{{playerName}}" 2>/dev/null || true)"
@@ -238,14 +209,14 @@ in {
             "Paused" = "󰏤 ";
             "Stopped" = "󰓛";
           };
-          on-click = mkScript {
+          on-click = writeShellApplication {
             deps = [pkgs.playerctl];
             script = "playerctl play-pause";
           };
         };
         "custom/rfkill" = {
           interval = 1;
-          exec-if = mkScript {
+          exec-if = writeShellApplication {
             deps = [pkgs.util-linux];
             script = "rfkill | grep '\<blocked\>'";
           };

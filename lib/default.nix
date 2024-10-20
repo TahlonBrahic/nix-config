@@ -1,26 +1,11 @@
-{
-  lib,
-  haumea,
-  ...
-}:
-# Credit to EmergentMind
-{
-  relativeToRoot = lib.path.append ../.;
-  scanPaths = path:
-    builtins.map (f: (path + "/${f}")) (
-      builtins.attrNames (
-        lib.attrsets.filterAttrs (
-          path: _type:
-            (_type == "directory")
-            || (
-              (path != "default.nix")
-              && (lib.strings.hasSuffix ".nix" path)
-            )
-        ) (builtins.readDir path)
-      )
-    );
-
+{haumea, ...}: {
+  # Reusable functions
   systemTemplate = import ./systemTemplate.nix;
+  writeShellApplication = import ./writeShellApplication.nix;
+  writeWaybarModule = import ./writeWaybarModule.nix;
+
+  # Haumea-derived Attribute Sets
+  libRoot = import ./libRoot.nix {inherit haumea;};
   modulesRoot = import ./modulesRoot.nix {inherit haumea;};
   varsRoot = import ./varsRoot.nix {inherit haumea;};
   overlaysRoot = import ./overlaysRoot.nix {inherit haumea;};

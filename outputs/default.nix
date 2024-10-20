@@ -8,6 +8,10 @@
 
   forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
 
+  systems = forAllSystems (system: import ./${system} customArgs);
+
+  systemValues = builtins.attrValues systems;
+
   inherit (nixpkgs) lib;
 
   customLib = import ../lib {inherit lib haumea;};
@@ -18,11 +22,6 @@
 
   customArgs = {inherit inputs lib customLib vars;};
 
-  systems = {
-    x86_64-linux = import ./x86_64-linux customArgs;
-  };
-
-  systemValues = builtins.attrValues systems;
 in {
   packages = forAllSystems (system: systems.${system}.packages or {});
 
