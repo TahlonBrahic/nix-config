@@ -1,6 +1,10 @@
 {
   programs = {
-    broot.enable = true;
-    broot.enableFishIntegration = true;
+    broot = {
+      enable = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+      enableZshIntegration = true;
+    };
   };
 }

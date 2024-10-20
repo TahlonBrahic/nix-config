@@ -6,7 +6,7 @@
   system,
   ...
 } @ customArgs: let
-  inherit (inputs) disko sops-nix stylix chaotic nvchad4nix nur nix-index-database;
+  inherit (inputs) disko sops-nix stylix chaotic nur nix-index-database;
   inherit (customLib) modulesRoot systemTemplate;
 
   nixModules = with modulesRoot.nixos.opt; [
@@ -19,14 +19,19 @@
   homeModules = with modulesRoot.home.opt; [
     encryption
     fetch
+    fish
+    fzf
+    gpg
     hyprland
     kitty
     librewolf
     nvchad
     password
     rofi
+    starship
     waybar
     zellij
+    zoxide
   ];
 
   customModules = {

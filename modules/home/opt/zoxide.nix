@@ -1,7 +1,9 @@
 {
   programs = {
-    zoxide.enable = true;
-    zoxide.enableFishIntegration = true;
-    zoxide.options = ["--cmd cd"];
-  }
+    zoxide = {
+      enable = true;
+      enableFishIntegration = true;
+      options = ["--cmd cd"];
+    };
+  };
 }

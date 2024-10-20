@@ -5,9 +5,9 @@
   modulesPath,
   ...
 }:
-if vars.hostName == "shilo" then {} else
-
-if vars.hostName == "yoru"
+if vars.hostName == "shilo"
+then {}
+else if vars.hostName == "yoru"
 then {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -60,7 +60,8 @@ then {
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
-else 
+# TODO: Standardize to this layout
+else
   with vars; {
     imports =
       if builtins.isList modulesPath
