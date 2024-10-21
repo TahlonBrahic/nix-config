@@ -6,8 +6,8 @@
   inputs,
   ...
 }: let
-  writeShellApplication = import customLib.writeShellApplication {inherit pkgs lib;};
-  writeWaybarModule = import customLib.writeWaybarModule {inherit pkgs customLib;};
+  writeCustomShellApplication = customLib.writeCustomShellApplication {inherit pkgs lib;};
+  writeWaybarModule = customLib.writeWaybarModule {inherit pkgs writeCustomShellApplication;};
   swayCfg = config.wayland.windowManager.sway;
   hyprlandCfg = config.wayland.windowManager.hyprland;
 in {
@@ -139,8 +139,7 @@ in {
           interval = 1;
           return-type = "json";
           exec = writeWaybarModule {
-            name = "Custom menu";
-            deps = lib.optional hyprlandCfg.enable hyprlandCfg.package;
+            dependencies = lib.optional hyprlandCfg.enable hyprlandCfg.package;
             text = "";
             tooltip = ''$(grep PRETTY_NAME /etc/os-release | cut -d '"' -f2)'';
             class = let
@@ -151,24 +150,12 @@ in {
             in "$(if ${isFullScreen}; then echo fullscreen; fi)";
           };
         };
-        "custom/hostname" = {
-          exec = writeShellApplication {
-            script = ''
-              echo "$USER@$HOSTNAME"
-            '';
-          };
-          on-click = writeShellApplication {
-            script = ''
-              systemctl --user restart waybar
-            '';
-          };
-        };
         "custom/currentplayer" = {
-          interval = 2;
+          interval = 1;
           return-type = "json";
           exec = writeWaybarModule {
             name = "Custom current sound output";
-            deps = [pkgs.playerctl];
+            dependencies = [pkgs.playerctl];
             script = ''
               all_players=$(playerctl -l 2>/dev/null)
               selected_player="$(playerctl status -f "{{playerName}}" 2>/dev/null || true)"
@@ -185,15 +172,15 @@ in {
           };
         };
         "custom/player" = {
-          exec-if = writeShellApplication {
-            deps = [pkgs.playerctl];
+          exec-if = writeCustomShellApplication {
+            dependencies = [pkgs.playerctl];
             script = ''
               selected_player="$(playerctl status -f "{{playerName}}" 2>/dev/null || true)"
               playerctl status -p "$selected_player" 2>/dev/null
             '';
           };
-          exec = writeShellApplication {
-            deps = [pkgs.playerctl];
+          exec = writeCustomShellApplication {
+            dependencies = [pkgs.playerctl];
             script = ''
               selected_player="$(playerctl status -f "{{playerName}}" 2>/dev/null || true)"
               playerctl metadata -p "$selected_player" \
@@ -209,15 +196,27 @@ in {
             "Paused" = "󰏤 ";
             "Stopped" = "󰓛";
           };
-          on-click = writeShellApplication {
-            deps = [pkgs.playerctl];
+          on-click = writeCustomShellApplication {
+            dependencies = [pkgs.playerctl];
             script = "playerctl play-pause";
+          };
+        };
+        "custom/hostname" = {
+          exec = writeCustomShellApplication {
+            script = ''
+              echo "$USER@$HOSTNAME"
+            '';
+          };
+          on-click = writeCustomShellApplication {
+            script = ''
+              systemctl --user restart waybar
+            '';
           };
         };
         "custom/rfkill" = {
           interval = 1;
-          exec-if = writeShellApplication {
-            deps = [pkgs.util-linux];
+          exec-if = writeCustomShellApplication {
+            dependencies = [pkgs.util-linux];
             script = "rfkill | grep '\<blocked\>'";
           };
         };
