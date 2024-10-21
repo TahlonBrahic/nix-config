@@ -5,7 +5,7 @@
 }: 
 {  
   # NOTE: the home-manager module still needs to be imported manually in outputs/${system}src/${hostname}
-  imports = [inputs.nixos-wsl.nixosModules.wsl]
+  imports = [inputs.nixos-wsl.nixosModules.wsl];
 
   wsl = {
     enable = true;

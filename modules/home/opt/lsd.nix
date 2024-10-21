@@ -1,6 +1,8 @@
 {
   programs = {
-    lsd.enable = true;
-    lsd.enableAliases = true;
+    lsd = {
+      enable = true;
+      enableAliases = true;
+    };
   };
 }
