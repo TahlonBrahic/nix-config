@@ -6,7 +6,7 @@
   system,
   ...
 } @ customArgs: let
-  inherit (inputs) disko sops-nix stylix;
+  inherit (inputs) disko sops-nix;
   inherit (customLib) modulesRoot systemTemplate;
 
   nixModules = with modulesRoot.nixos.opt; [
@@ -31,7 +31,6 @@
       [
         disko.nixosModules.disko
         sops-nix.nixosModules.sops
-        stylix.nixosModules.stylix
       ]
       ++ nixModules;
     home = homeModules;

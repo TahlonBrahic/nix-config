@@ -1,11 +1,16 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  vars,
+  ...
+}: 
+{
+  imports = [inputs.stylix.nixosModules.stylix];
+
   stylix = {
     enable = true;
 
-    image = pkgs.fetchurl {
-      url = "https://4kwallpapers.com/images/walls/thumbs_3t/15221.png";
-      hash = "sha256-GfmqcwkEygLmsg/OSmdyfgBW1gPGZPHnsuAd6IX/XoM=";
-    };
+    base16scheme = vars.themes.everforest-dark-hard; 
 
     cursor = {
       package = pkgs.bibata-cursors;
@@ -28,9 +33,9 @@
     };
 
     opacity = {
-      applications = 5.0;
+      applications = 4.0;
       popups = 5.0;
-      terminal = 5.0;
+      terminal = 2.0;
     };
 
     targets = {

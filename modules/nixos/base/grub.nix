@@ -1,9 +1,9 @@
 {
   lib,
-  vars,
+  customVars,
   ...
 }:
-if vars.hostName == "shilo"
+if customVars.hostName == "shilo"
 then {}
 else {
   boot.loader = {
