@@ -3,7 +3,6 @@
   writeCustomShellApplication,
   ...
 }: {
-  name ? "User-made Waybar Module",
   dependencies ? [],
   script ? "",
   text ? "",
@@ -14,7 +13,7 @@
 }:
 # Function that creates a custom Waybar Module
 writeCustomShellApplication {
-  inherit name;
+  name = "custom-waybar-module";
   dependencies = [pkgs.jq] ++ dependencies;
   script = ''
     ${script}
