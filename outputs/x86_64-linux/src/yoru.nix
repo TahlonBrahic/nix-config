@@ -23,6 +23,7 @@
     fzf
     gpg
     hyprland
+    kdeconnect
     kitty
     librewolf
     nvchad
