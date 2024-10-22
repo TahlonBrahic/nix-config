@@ -4,7 +4,10 @@
   ...
 }: let
   hostname = config.networking.hostName;
-in {
+in
+imports = [inputs.sops-nix.nixosModules.sops];
+
+config = {
   sops = {
     age = {
       keyfile = "/home/${vars.username}/.config/sops/age/keys.txt";
