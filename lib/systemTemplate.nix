@@ -12,8 +12,8 @@ in
     inherit system specialArgs;
     modules =
       baseNixosModules
-      ++ nur.nixosModules.nur
-      ++ chaotic.nixosModules.default
+      ++ [ nur.nixosModules.nur ]
+      ++ [ chaotic.nixosModules.default ]
       ++ customModules.nixos
       ++ [
         home-manager.nixosModules.home-manager

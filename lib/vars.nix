@@ -1,10 +1,9 @@
-{haumea}: 
+{haumea}@inputs: 
+  #lib = import ./lib.nix {inherit haumea;};
 let
-  varsSet = haumea.lib.load {
-    src = ../var;
-    loader = haumea.lib.loaders.path;
+  vars = haumea.lib.load {
+    src = ../vars;
+    inputs = {inherit inputs;};
   };
-
-  vars = builtins.attrValues varsSet;
 in
   vars

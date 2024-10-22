@@ -5,15 +5,15 @@
   system,
   ...
 } @ customArgs: let
-  inherit (lib) modules systemTemplate;
+  inherit (lib) optionalModules systemTemplate;
 
   customModules = {
-    nixos = with modules.nixos.opt; [
+    nixos = with optionalModules.nixos; [
       fhs
       greetd
     ];
 
-    homeManager = with modules.home.opt; [
+    homeManager = with optionalModules.nixos; [
       sway
       kitty
       encryption

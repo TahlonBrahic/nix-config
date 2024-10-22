@@ -1,6 +1,7 @@
 {
   config,
   vars,
+  customVars,
   ...
 }: let
   hostname = config.networking.hostName;
@@ -10,7 +11,7 @@ imports = [inputs.sops-nix.nixosModules.sops];
 config = {
   sops = {
     age = {
-      keyfile = "/home/${vars.username}/.config/sops/age/keys.txt";
+      keyfile = "/home/${customVars.username}/.config/sops/age/keys.txt";
     };
     defaultSopsFile = ./secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
@@ -18,7 +19,7 @@ config = {
     # Define SSH key storage per user and per hostname
     secrets = {
       "${vars.username}" = {
-        owner = config.users.users.${vars.username};
+        owner = config.users.users.${customVars.username};
       };
 
       # Storing root SSH keys dynamically based on hostname for remote deployment

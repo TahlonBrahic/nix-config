@@ -5,7 +5,7 @@ let
     src = "base16/everforest-dark-hard.yaml";  
   };
 
-  base16theme = builtins.readFile (repo + "/base16/everforest-dark-hard.yaml")
+  base16theme = builtins.readFile (repo + "/base16/everforest-dark-hard.yaml");
 
   wallpaperRepo = pkgs.fetchFromGitHub {
     owner = "TahlonBrahic";  
