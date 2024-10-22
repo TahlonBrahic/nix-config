@@ -3,7 +3,7 @@
   haumea,
   ...
 } @ inputs: let
-  inherit (nixpkgs) lib;
+  lib = nixpkgs.lib // import ../lib {inherit lib haumea;};
 
   supportedSystems = ["x86_64-linux" "aarch64-linux"];
 
@@ -13,17 +13,15 @@
 
   systemValues = builtins.attrValues systems;
 
-  customLib = import ../lib {inherit lib haumea;};
+  overrides = lib.overlays;
 
-  overlayPaths = customLib.overlaysRoot.overlays;
+  vars = lib.vars;
 
-  vars = customLib.varsRoot.varsRoot;
-
-  customArgs = {inherit inputs lib customLib vars;};
+  customArgs = {inherit inputs lib vars;};
 in {
   packages = forAllSystems (system: systems.${system}.packages or {});
 
-  overlays = forAllSystems (system: import overlayPaths {inherit inputs system;});
+  overlays = forAllSystems (system: import overrides {inherit inputs system;});
 
   formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 

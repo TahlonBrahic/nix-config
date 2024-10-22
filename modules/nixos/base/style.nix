@@ -10,7 +10,7 @@
   stylix = {
     enable = true;
 
-    base16scheme = vars.themes.everforest-dark-hard; 
+    inherit (vars.themes.everforest-dark-hard) base16scheme; 
 
     cursor = {
       package = pkgs.bibata-cursors;

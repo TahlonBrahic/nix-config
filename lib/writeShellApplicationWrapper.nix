@@ -1,5 +1,5 @@
 {
-  name ? "custom-script",
+  name ? "customScript",
   text, # script
   dependencies ? []
 }:

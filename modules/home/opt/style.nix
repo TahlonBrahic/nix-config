@@ -13,7 +13,7 @@ in
   stylix = {
     enable = true;
 
-    inherit (themes.fushiguro) image;
+    inherit (themes.everforest-dark-hard) image;
 
     cursor = {
       package = pkgs.bibata-cursors;
