@@ -8,7 +8,6 @@
       };
     in 
     import nixpkgs,
-  checks,
   ...
 }:
 {

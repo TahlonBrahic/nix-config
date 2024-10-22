@@ -6,7 +6,7 @@
   system,
   ...
 } @ customArgs: let
-  inherit (inputs) disko sops-nix stylix chaotic nur nix-index-database;
+  inherit (inputs) disko sops-nix stylix chaotic nur;
   inherit (customLib) modulesRoot systemTemplate;
 
   nixModules = with modulesRoot.nixos.opt; [
@@ -31,7 +31,6 @@
         stylix.nixosModules.stylix
         chaotic.nixosModules.default
         nur.nixosModules.nur
-        nix-index-database.nixosModules.nix-index
       ]
       ++ nixModules;
     home = homeModules;

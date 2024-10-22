@@ -1,4 +1,5 @@
 {
+  config,
   vars,
   pkgs,
   ...
@@ -85,4 +86,7 @@
   home = {
     sessionVariables.SHELL = "/etc/profiles/per-user/${vars.username}/bin/fish";
   };
+  # These are not homemanager?
+  #environment.pathsToLink = ["/share/fish"];
+  #environment.shells = [pkgs.fish]; 
 }
