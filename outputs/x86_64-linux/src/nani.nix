@@ -6,35 +6,27 @@
   system,
   ...
 } @ customArgs: let
-  inherit (inputs) disko sops-nix;
   inherit (customLib) modulesRoot systemTemplate;
 
-  nixModules = with modulesRoot.nixos.opt; [
-    greetd
-    fhs
-    style
-  ];
-
-  homeModules = with modulesRoot.home.opt; [
-    librewolf
-    encryption
-    fetch
-    kitty
-    password
-    sway
-    waybar
-    zellij
-  ];
-
   customModules = {
-    nixos =
-      [
-        disko.nixosModules.disko
-        sops-nix.nixosModules.sops
-      ]
-      ++ nixModules;
-    home = homeModules;
+    nixos = with modulesRoot.nixos.opt; [
+      greetd
+      fhs
+      style
+    ];
+
+    homeManager = with modulesRoot.home.opt; [
+      librewolf
+      encryption
+      fetch
+      kitty
+      password
+      sway
+      waybar
+      zellij
+    ];
   };
+
   customVars = vars.users.tahlon // vars.hardware.nani;
 in {
   nixosConfigurations = {
