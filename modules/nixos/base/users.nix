@@ -1,17 +1,17 @@
 {
-  vars,
+  customVars,
   pkgs,
   ...
 }: {
   users.mutableUsers = false;
 
-  users.users."${vars.username}" = {
-    home = "/home/${vars.username}";
-    inherit (vars) initialHashedPassword;
+  users.users."${customVars.username}" = {
+    home = "/home/${customVars.username}";
+    inherit (customVars) initialHashedPassword;
     isNormalUser = true;
-    shell = pkgs."${vars.shell}";
+    shell = pkgs."${customVars.shell}";
     extraGroups = [
-      "${vars.username}"
+      "${customVars.username}"
       "users"
       "networkmanager"
       "wheel"
@@ -20,5 +20,5 @@
     ];
   };
   
-  programs.${vars.shell}.enable = true;
+  programs.${customVars.shell}.enable = true;
 }

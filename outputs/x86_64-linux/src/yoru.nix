@@ -6,14 +6,13 @@
   system,
   ...
 } @ customArgs: let
-  inherit (inputs) disko sops-nix stylix chaotic nur;
+  inherit (inputs) disko sops-nix chaotic nur;
   inherit (customLib) modulesRoot systemTemplate;
 
   nixModules = with modulesRoot.nixos.opt; [
     fhs
     greetd
     laptop
-    style
   ];
 
   homeModules = with modulesRoot.home.opt; [
@@ -31,6 +30,7 @@
     password
     rofi
     starship
+    style
     waybar
     zellij
     zoxide
@@ -41,7 +41,6 @@
       [
         disko.nixosModules.disko
         sops-nix.nixosModules.sops
-        stylix.nixosModules.stylix
         chaotic.nixosModules.default
         nur.nixosModules.nur
       ]

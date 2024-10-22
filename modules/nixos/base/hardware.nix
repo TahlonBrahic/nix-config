@@ -2,13 +2,14 @@
   config,
   lib,
   vars,
+  customVars,
   pkgs,
   modulesPath,
   ...
 }:
-if vars.hostName == "shilo"
+if customVars.hostName == "shilo"
 then {}
-else if vars.hostName == "yoru"
+else if customVars.hostName == "yoru"
 then {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -63,7 +64,7 @@ then {
 }
 # TODO: Standardize to this layout
 else
-  with vars; {
+  with customVars; {
     imports =
       if builtins.isList modulesPath
       then map (systemImport: modulesPath + systemImport) systemImports
