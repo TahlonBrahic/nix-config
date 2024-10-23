@@ -1,21 +1,20 @@
 {
   inputs,
   lib,
-  customLib,
   vars,
   system,
   ...
 } @ customArgs: let
-  inherit (customLib) modulesRoot systemTemplate;
+  inherit (lib) modules systemTemplate;
 
   customModules = {
-    nixos = with modulesRoot.nixos.opt; [
+    nixos = with modules.nixos.opt; [
       greetd
       fhs
       style
     ];
 
-    homeManager = with modulesRoot.home.opt; [
+    homeManager = with modules.home.opt; [
       librewolf
       encryption
       fetch

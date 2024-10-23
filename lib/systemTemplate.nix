@@ -3,11 +3,10 @@
   customModules,
   customVars,
 }: let
-  inherit (customArgs) inputs lib customLib system vars;
+  inherit (customArgs) inputs lib system vars;
   inherit (inputs) home-manager nur chaotic;
-  inherit (customLib) baseNixosModules baseHomeModules;
-  specialArgs = extraSpecialArgs // {inherit lib;};
-  extraSpecialArgs = {inherit inputs customLib vars customVars;};
+  inherit (lib) baseNixosModules baseHomeModules;
+  specialArgs = {inherit inputs lib vars customVars;};
 in
   lib.nixosSystem {
     inherit system specialArgs;
@@ -22,8 +21,8 @@ in
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            inherit extraSpecialArgs;
-            backupFileExtension = "backup";
+            extraSpecialArgs = specialArgs;
+            backupFileExtension = "backup_delete";
             users."${customVars.username}".imports = baseHomeModules ++ customModules.homeManager;
           };
         }

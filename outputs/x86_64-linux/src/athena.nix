@@ -1,20 +1,19 @@
 {
   inputs,
   lib,
-  customLib,
   vars,
   system,
   ...
 } @ customArgs: let
-  inherit (customLib) modulesRoot systemTemplate;
+  inherit (lib) modules systemTemplate;
 
   customModules = {
-    nixos = with modulesRoot.nixos.opt; [
+    nixos = with modules.nixos.opt; [
       fhs
       greetd
     ];
 
-    homeManager = with modulesRoot.home.opt; [
+    homeManager = with modules.home.opt; [
       sway
       kitty
       encryption
