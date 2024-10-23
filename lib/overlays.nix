@@ -5,7 +5,6 @@ let
     loader = haumea.lib.loaders.path;
   };
 
-  overlays = builtins.attrValues overlaysSet;
 in
   overlays
 

@@ -5,14 +5,14 @@
   system,
   ...
 } @ customArgs: let
-  inherit (lib) modules systemTemplate;
+  inherit (lib) optionalModules systemTemplate;
 
   customModules = {
-    nixos = with modules.nixos.opt; [
+    nixos = with optionalModules.nixos; [
       wsl
     ];
 
-    homeManager = with modules.home.opt; [
+    homeManager = with optionalModules.home; [
       broot
       encryption
       fetch

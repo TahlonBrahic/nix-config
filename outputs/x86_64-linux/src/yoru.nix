@@ -5,16 +5,16 @@
   system,
   ...
 } @ customArgs: let
-  inherit (lib) modules systemTemplate;
+  inherit (lib) optionalModules systemTemplate;
 
   customModules = {
-    nixos = with modules.nixos.opt; [
+    nixos = with optionalModules.nixos; [
       fhs
       greetd
       laptop
     ];
 
-    homeManager = with modules.home.opt; [
+    homeManager = with optionalModules.home; [
       encryption
       fetch
       fish
