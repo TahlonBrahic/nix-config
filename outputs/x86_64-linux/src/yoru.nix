@@ -1,13 +1,18 @@
 {
   inputs,
+  system, 
   lib,
+  localLib,
+  pkgs,
   vars,
-  system,
-  ...
-} @ customArgs: let
-  inherit (lib) optionalModules systemTemplate;
+  overlays
+}: let
+  #inherit (localLib) optionalModules systemTemplate;
+  systemTemplate = localLib.systemTemplate;
+  optionalModules = builtins.trace localLib.optionalModules localLib.optionalModules;
+  # systemTemplate = lib.debug.traceSeqN 2 localLib {};
 
-  customModules = {
+  modules = {
     nixos = with optionalModules.nixos; [
       fhs
       greetd
@@ -36,11 +41,11 @@
     ];
   };
 
-  customVars = vars.users.tahlon // vars.hardware.yoru;
+  specialVars = vars.users.tahlon // vars.hardware.yoru;
 in {
   nixosConfigurations = {
     "yoru" = systemTemplate {
-      inherit customArgs customModules customVars;
+      inherit inputs system lib localLib pkgs vars overlays modules specialVars;
     };
   };
 }

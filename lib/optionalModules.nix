@@ -1,4 +1,5 @@
-{haumea, ...} @ inputs: let
+{inputs, ...}: let
+  inherit (inputs) haumea;
   optionalModules = {
     home = haumea.lib.load {
       src = ../modules/home/opt;

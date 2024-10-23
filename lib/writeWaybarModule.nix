@@ -1,4 +1,8 @@
-{pkgs, ...} @ inputs: {
+{
+  inputs,
+  system,
+  pkgs,
+}: {
   dependencies ? [],
   script ? "",
   text ? "",
@@ -8,7 +12,7 @@
   percentage ? "",
 }:
 # Function that creates a custom Waybar Module
-writeCustomShellApplication {
+inputs.nixpkgs.lib.writeShellApplication {
   name = "customWaybarModule";
   dependencies = [pkgs.jq] ++ dependencies;
   script = ''
