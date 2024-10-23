@@ -7,12 +7,16 @@
 
   forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
 
-  systems = forAllSystems (system: let 
-    customArgs = { 
-      inherit inputs vars system; 
-      inherit (lib.${system}) lib;
-    }; 
-  in 
+  systems = forAllSystems (system: let
+    lib = let
+      localLib = import ../lib {inherit inputs haumea pkgs;};
+      nixpkgsLib = nixpkgs.lib;
+    in {lib = localLib // nixpkgs;};
+    vars = lib.vars;
+    customArgs = {
+      inherit inputs vars system lib;
+    };
+  in
     import ./${system} customArgs);
 
   systemValues = builtins.attrValues systems;
@@ -21,21 +25,15 @@
 
   pkgs = forAllSystems (system: systems.${system}.packages or {});
 
-  overrides = lib.overlays;
-
-  vars = lib.vars;
-
-  lib = forAllSystems (system: import ../lib {inherit inputs haumea pkgs;}) // nixpkgs.lib;
-
-  overlays = forAllSystems (system: import overrides {inherit inputs system;});
+  #overlays = forAllSystems (system: import overrides {inherit inputs system;});
 
   formatter = forAllSystems (system: pkgs.alejandra);
 
   devShells = forAllSystems (system: import ../shell.nix {inherit pkgs;});
 
-  nixosConfigurations = lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) systemValues);
+  nixosConfigurations = nixpkgs.lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) systemValues);
 
-  nixOnDroidConfigurations = lib.attrsets.mergeAttrsList (map (it: it.nixOnDroidConfigurations or {}) systemValues);
+  nixOnDroidConfigurations = nixpkgs.lib.attrsets.mergeAttrsList (map (it: it.nixOnDroidConfigurations or {}) systemValues);
 in {
-  inherit packages overlays formatter devShells nixosConfigurations nixOnDroidConfigurations;
+  inherit packages formatter devShells nixosConfigurations nixOnDroidConfigurations;
 }
