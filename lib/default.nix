@@ -1,4 +1,8 @@
-{haumea, ...}@inputs: {
+{
+  inputs,
+  haumea,
+  pkgs,
+}: {
   # Reusable functions
   systemTemplate = import ./systemTemplate.nix;
   droidTemplate = import ./droidTemplate.nix;
