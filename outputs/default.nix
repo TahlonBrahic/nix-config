@@ -1,35 +1,31 @@
-{
-  nixpkgs,
-  haumea,
-  ...
-} @ inputs: let
+{nixpkgs, haumea, ...} @ inputs: let
+
   supportedSystems = ["x86_64-linux" "aarch64-linux"];
 
   forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
 
-  systems = forAllSystems (system: let
-    lib = let
-      localLib = import ../lib {inherit inputs haumea pkgs;};
-      nixpkgsLib = nixpkgs.lib;
-    in {lib = localLib // nixpkgs;};
-    vars = lib.vars;
-    customArgs = {
-      inherit inputs vars system lib;
-    };
-  in
-    import ./${system} customArgs);
+  arguments = forAllSystems (system: { 
+    inherit inputs system;
+    inherit (lib.${system}) pkgs vars overlays
+  });
+  
+  systems = forAllSystems (system: import ./${system} (arguments.${system}));
 
   systemValues = builtins.attrValues systems;
 
-  packages = forAllSystems (system: let pkgs = nixpkgs.legacyPackages.${system}; in pkgs);
+  local = forAllSystems (system: import ../lib {inherit inputs haumea pkgs system;});
 
-  pkgs = forAllSystems (system: systems.${system}.packages or {});
+  lib = forAllSystems (system: nixpkgs.lib.attrsets.mergeAttrsList [nixpkgs.lib local.${system}]);
 
-  #overlays = forAllSystems (system: import overrides {inherit inputs system;});
+  ##TODO: FIX PACKAGES PKGS
 
-  formatter = forAllSystems (system: pkgs.alejandra);
+  packages = forAllSystems (system: nixpkgs.legacyPackages.${system} or {});
 
-  devShells = forAllSystems (system: import ../shell.nix {inherit pkgs;});
+  pkgs = forAllSystems (system: systems.${system}.packages);
+
+  formatter = forAllSystems (system: pkgs.${system}.alejandra);
+
+  devShells = forAllSystems (system: import ../shell.nix (pkgs.${system});
 
   nixosConfigurations = nixpkgs.lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) systemValues);
 

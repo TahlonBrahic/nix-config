@@ -1,4 +1,4 @@
-{haumea}: let
+{haumea, ...} @ inputs: let
   optionalModules = {
     home = haumea.lib.load {
       src = ../modules/home/opt;

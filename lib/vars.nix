@@ -1,6 +1,4 @@
-{haumea}@inputs: 
-  #lib = import ./lib.nix {inherit haumea;};
-let
+{haumea, ...} @ inputs: let
   vars = haumea.lib.load {
     src = ../vars;
     inputs = {inherit inputs;};

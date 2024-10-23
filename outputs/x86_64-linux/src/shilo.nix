@@ -28,7 +28,7 @@
     ];
   };
 
-  customVars = vars.users.tbrahic;
+  customVars = builtins.trace customArgs.system vars.users.tbrahic;
 in {
   nixosConfigurations = {
     "shilo" = systemTemplate {

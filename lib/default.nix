@@ -1,19 +1,16 @@
 {
-  inputs,
   haumea,
-  pkgs,
-}: {
+  ...
+}@inputs: {
   # Reusable functions
   systemTemplate = import ./systemTemplate.nix;
   droidTemplate = import ./droidTemplate.nix;
-  writeShellApplicationWrapper = import ./writeShellApplicationWrapper.nix;
-  writeWaybarModule = import ./writeWaybarModule.nix;
 
-  # Haumea-derived Attribute Sets
-  # TODO: Map these attributes
-  vars = import ./vars.nix {inherit inputs;};
-  optionalModules = import ./optionalModules.nix {inherit haumea;};
-  overlays = import ./overlays.nix {inherit haumea;};
-  baseNixosModules = import ./baseNixosModules.nix {inherit haumea;};
-  baseHomeModules = import ./baseHomeModules.nix {inherit haumea;};
+  writeShellApplicationWrapper = import ./writeShellApplicationWrapper.nix {inherit inputs;};
+  writeWaybarModule = import ./writeWaybarModule.nix {inherit inputs;};
+  vars = import ./vars.nix {inherit haumea inputs;};
+  optionalModules = import ./optionalModules.nix {inherit haumea inputs;};
+  overlays = import ./overlays.nix {inherit haumea inputs;};
+  baseNixosModules = import ./baseNixosModules.nix {inherit haumea inputs;};
+  baseHomeModules = import ./baseHomeModules.nix {inherit haumea inputs;};
 }
