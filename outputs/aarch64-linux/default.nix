@@ -1,10 +1,10 @@
-{...} @ customArgs: let
-  inherit (customArgs) inputs lib;
+{arguments}: let
+  inherit (arguments) inputs lib;
   inherit (inputs) haumea nix-on-droid;
 
   data = haumea.lib.load {
     src = ./src;
-    inputs = customArgs;
+    inputs = arguments;
   };
 
   dataWithoutPaths = builtins.attrValues data;
