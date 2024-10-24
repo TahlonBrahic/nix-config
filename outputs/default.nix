@@ -1,4 +1,5 @@
-{nixpkgs, ...} @ inputs: let
+{inputs}: let
+  inherit (inputs) nixpkgs;
   inherit (nixpkgs) lib;
   inherit (lib) genAttrs attrsets;
 
@@ -14,9 +15,14 @@
     overlays = localLib.${system}.overlays;
   });
 
-  systems = forAllSystems (system: import ./${system} (arguments.${system}));
+  systems = forAllSystems (system: import ./${system} {arguments = (arguments.${system});});
 
   systemValues = builtins.attrValues systems;
+
+  #DEBUG
+  #systemValues = lib.debug.traceSeqN 1 (builtins.attrValues systems)[1] {};
+  #systemValues = lib.debug.traceSeqN 1 (builtins.elemAt (builtins.attrValues systems) 1) {};
+  #systemValues = lib.debug.traceSeqN 2 (builtins.elemAt (builtins.attrValues systems) 1) (builtins.attrValues systems);
 
   localLib = forAllSystems (system:
     import ../lib {

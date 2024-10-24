@@ -1,18 +1,19 @@
 {
   inputs,
-  lib,
-  customLib,
-  vars,
   system,
-  ...
-} @ customArgs: let
-  inherit (customLib) modulesRoot;
+  lib,
+  localLib,
+  pkgs,
+  vars,
+  overlays
+}: let
+  inherit (localLib) modulesRoot droidTemplate;
 
   nixModules = with modulesRoot.nixos.opt; [ ];
 
   homeModules = with modulesRoot.home.opt; [ ];
 
-  customModules = {
+  modules = {
     nixos = nixModules;
     home = homeModules;
   };
@@ -21,7 +22,7 @@
 in {
   nixOnDroidConfigurations = {
     "cursor" = droidTemplate {
-      inherit customArgs customModules customVars;
+      inherit inputs system lib localLib pkgs vars overlays modules customVars;
     };
   };
 }

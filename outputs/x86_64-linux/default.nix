@@ -1,17 +1,10 @@
-{
-  inputs,
-  system,
-  lib,
-  localLib,
-  pkgs,
-  vars,
-  overlays,
-}: let
+{arguments}: let
+  inherit (arguments) inputs lib;
   inherit (inputs) haumea;
 
   data = haumea.lib.load {
     src = ./src;
-    inputs = {inherit inputs system lib localLib pkgs vars overlays;};
+    inputs = {inherit arguments;};
   };
 
   dataWithoutPaths = builtins.attrValues data;
