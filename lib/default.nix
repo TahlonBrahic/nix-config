@@ -1,16 +1,26 @@
 {
-  haumea,
-  ...
-}@inputs: {
-  # Reusable functions
-  systemTemplate = import ./systemTemplate.nix;
-  droidTemplate = import ./droidTemplate.nix;
+  inputs,
+  system,
+  pkgs,
+}: let
+  functions = [
+    "writeShellApplicationWrapper"
+    "writeWaybarModule"
+    "vars"
+    "optionalModules"
+    "overlays"
+    "baseNixosModules"
+    "baseHomeModules"
+  ];
 
-  writeShellApplicationWrapper = import ./writeShellApplicationWrapper.nix {inherit inputs;};
-  writeWaybarModule = import ./writeWaybarModule.nix {inherit inputs;};
-  vars = import ./vars.nix {inherit haumea inputs;};
-  optionalModules = import ./optionalModules.nix {inherit haumea inputs;};
-  overlays = import ./overlays.nix {inherit haumea inputs;};
-  baseNixosModules = import ./baseNixosModules.nix {inherit haumea inputs;};
-  baseHomeModules = import ./baseHomeModules.nix {inherit haumea inputs;};
-}
+  templates = [
+    "systemTemplate"
+    "droidTemplate"
+  ];
+
+  importedFunctions = inputs.nixpkgs.lib.genAttrs functions (function:  import ./${function}.nix {inherit inputs system pkgs;});
+
+  importedTemplates = inputs.nixpkgs.lib.genAttrs templates (template: import ./${template}.nix);
+
+  localLib = importedTemplates // importedFunctions;
+in { inherit localLib; }

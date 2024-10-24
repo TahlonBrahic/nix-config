@@ -1,18 +1,21 @@
-{...} @ inputs: let
-  inherit (inputs) pkgs system;
-  repo = pkgs.fetchFromGitHub {
+{inputs, pkgs}: let 
+  inherit (pkgs) fetchFromGitHub;
+  repo = fetchFromGitHub {
     owner = "tinted-theming";
     repo = "schemes";
-    src = "base16/everforest-dark-hard.yaml";
+    rev = "spec-0.11";
+    hash = "sha256-UCRGabAyj8+RFkKdSZBR8BPE6yLM3rPpdxXHmwd9rZ0=";
+    # src = "base16/everforest-dark-hard.yaml";
   };
 
   base16scheme = builtins.readFile (repo + "/base16/everforest-dark-hard.yaml");
 
-  wallpaperRepo = pkgs.fetchFromGitHub {
+  wallpaperRepo = fetchFromGitHub {
     owner = "TahlonBrahic";
     repo = "assets";
     rev = "main";
-    src = "wallpapers/everforest-dark-hard/nix";
+    hash = "";
+    # src = "wallpapers/everforest-dark-hard/nix";
   };
 
   wallpaper = "${wallpaperRepo}/wallpapers/everforest-dark-hard/nix.jpg";

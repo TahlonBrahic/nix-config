@@ -1,35 +1,40 @@
-{nixpkgs, haumea, ...} @ inputs: let
+{nixpkgs, ...} @ inputs: let
+  inherit (nixpkgs) lib;
+  inherit (lib) genAttrs attrsets;
 
   supportedSystems = ["x86_64-linux" "aarch64-linux"];
 
-  forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+  forAllSystems = genAttrs supportedSystems;
 
-  arguments = forAllSystems (system: { 
-    inherit inputs system;
-    inherit (lib.${system}) pkgs vars overlays
+  arguments = forAllSystems (system: {
+    inherit inputs system lib;
+    localLib = localLib.${system};
+    pkgs = pkgs.${system};
+    vars = localLib.${system}.vars;
+    overlays = localLib.${system}.overlays;
   });
-  
+
   systems = forAllSystems (system: import ./${system} (arguments.${system}));
 
   systemValues = builtins.attrValues systems;
 
-  local = forAllSystems (system: import ../lib {inherit inputs haumea pkgs system;});
+  localLib = forAllSystems (system:
+    import ../lib {
+      inherit inputs system;
+      pkgs = pkgs.${system};
+    });
 
-  lib = forAllSystems (system: nixpkgs.lib.attrsets.mergeAttrsList [nixpkgs.lib local.${system}]);
+  pkgs = forAllSystems (system: import nixpkgs {inherit system;});
 
-  ##TODO: FIX PACKAGES PKGS
+  ### FLAKE OUTPUTS ###
 
   packages = forAllSystems (system: nixpkgs.legacyPackages.${system} or {});
 
-  pkgs = forAllSystems (system: systems.${system}.packages);
-
   formatter = forAllSystems (system: pkgs.${system}.alejandra);
 
-  devShells = forAllSystems (system: import ../shell.nix (pkgs.${system});
+  devShells = forAllSystems (system: import ../shell.nix (pkgs.${system}));
 
-  nixosConfigurations = nixpkgs.lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) systemValues);
+  nixosConfigurations = attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) systemValues);
 
-  nixOnDroidConfigurations = nixpkgs.lib.attrsets.mergeAttrsList (map (it: it.nixOnDroidConfigurations or {}) systemValues);
-in {
-  inherit packages formatter devShells nixosConfigurations nixOnDroidConfigurations;
-}
+  nixOnDroidConfigurations = attrsets.mergeAttrsList (map (it: it.nixOnDroidConfigurations or {}) systemValues);
+in {inherit packages formatter devShells nixosConfigurations nixOnDroidConfigurations;}

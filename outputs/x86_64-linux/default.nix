@@ -1,10 +1,17 @@
-{...} @ customArgs: let
-  inherit (customArgs) inputs lib;
+{
+  inputs,
+  system,
+  lib,
+  localLib,
+  pkgs,
+  vars,
+  overlays,
+}: let
   inherit (inputs) haumea;
 
   data = haumea.lib.load {
     src = ./src;
-    inputs = customArgs;
+    inputs = {inherit inputs system lib localLib pkgs vars overlays;};
   };
 
   dataWithoutPaths = builtins.attrValues data;

@@ -1,5 +1,6 @@
-{haumea, ...} @ inputs: let
-  overlaysSet = haumea.lib.load {
+{inputs, ...}: let
+  inherit (inputs) haumea;
+  overlays = haumea.lib.load {
     src = ../overlays;
     loader = haumea.lib.loaders.path;
   };
