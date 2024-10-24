@@ -7,10 +7,7 @@
   vars,
   overlays
 }: let
-  #inherit (localLib) optionalModules systemTemplate;
-  systemTemplate = localLib.systemTemplate;
-  optionalModules = builtins.trace localLib.optionalModules localLib.optionalModules;
-  # systemTemplate = lib.debug.traceSeqN 2 localLib {};
+  inherit (localLib) optionalModules systemTemplate;
 
   modules = {
     nixos = with optionalModules.nixos; [
@@ -41,11 +38,14 @@
     ];
   };
 
-  specialVars = vars.users.tahlon // vars.hardware.yoru;
+  users = ["tahlon"];
+
+  hostName = "yoru";
+
 in {
   nixosConfigurations = {
-    "yoru" = systemTemplate {
-      inherit inputs system lib localLib pkgs vars overlays modules specialVars;
+    ${hostName} = systemTemplate {
+      inherit inputs system lib pkgs localLib vars overlays modules users hostName;
     };
   };
 }

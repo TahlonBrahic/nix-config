@@ -1,11 +1,4 @@
-{
-  lib,
-  customVars,
-  ...
-}:
-if customVars.hostName == "shilo"
-then {}
-else {
+{lib, ...}: {
   boot.loader = {
     grub = {
       enable = true;

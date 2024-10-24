@@ -1,24 +1,34 @@
 {
-  customVars,
+  users,
+  lib,
   pkgs,
+  config,
   ...
-}: {
-  users.mutableUsers = false;
+}: 
+let
+  forEachUser = builtins.attrVals users;
 
-  users.users."${customVars.username}" = {
-    home = "/home/${customVars.username}";
-    inherit (customVars) initialHashedPassword;
-    isNormalUser = true;
-    shell = pkgs."${customVars.shell}";
-    extraGroups = [
-      "${customVars.username}"
-      "users"
-      "networkmanager"
-      "wheel"
-      "docker"
-      "libvirtd"
-    ];
-  };
+  configList = forEachUser (map (user: {
+    users.mutableUsers = false;
+
+    users.users."${user.username}" = {
+      home = "/home/${user.username}";
+      inherit (user) initialHashedPassword;
+      isNormalUser = true;
+      shell = pkgs.zsh;
+      extraGroups = [
+        "${user.username}"
+        "users"
+        "networkmanager"
+        "wheel"
+        "docker"
+        "libvirtd"
+      ];
+    };
   
-  programs.${customVars.shell}.enable = true;
+  programs.zsh.enable = true;}) users);
+
+  config = lib.attrsets.mergeAttrsList configList; 
+in {
+  inherit config;
 }

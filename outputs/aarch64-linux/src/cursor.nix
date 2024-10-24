@@ -2,8 +2,8 @@
   inputs,
   system,
   lib,
-  localLib,
   pkgs,
+  localLib,
   vars,
   overlays
 }: let
