@@ -1,8 +1,5 @@
-{
-  lib,
-  inputs,
-  ...
-} @ customArgs: let
+{...} @ customArgs: let
+  inherit (customArgs) inputs lib;
   inherit (inputs) haumea;
 
   data = haumea.lib.load {

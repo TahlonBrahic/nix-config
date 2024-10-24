@@ -1,4 +1,4 @@
-{haumea}: let
+{haumea, ...} @ inputs: let
   baseHomeModulesSet = haumea.lib.load {
     src = ../modules/home/base;
     loader = haumea.lib.loaders.path;
