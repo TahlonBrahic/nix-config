@@ -1,13 +1,13 @@
 {
   config,
   lib,
-  customLib,
+  localLib,
   pkgs,
   inputs,
   ...
 }: let
-  writeCustomShellApplication = customLib.writeCustomShellApplication {inherit pkgs lib;};
-  writeWaybarModule = customLib.writeWaybarModule {inherit pkgs writeCustomShellApplication;};
+  writeCustomShellApplication = local.writeCustomShellApplication {inherit pkgs lib;};
+  writeWaybarModule = c.writeWaybarModule {inherit pkgs writeCustomShellApplication;};
   swayCfg = config.wayland.windowManager.sway;
   hyprlandCfg = config.wayland.windowManager.hyprland;
 in {

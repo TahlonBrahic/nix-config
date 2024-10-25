@@ -3,9 +3,9 @@
   system,
   pkgs,
 }: let
-  functions = [
-    "writeShellApplicationWrapper"
-    "writeWaybarModule"
+  inherit (inputs.nixpkgs.lib) genAttrs;
+
+  directories = [
     "vars"
     "optionalModules"
     "overlays"
@@ -13,14 +13,22 @@
     "baseHomeModules"
   ];
 
+  functions = [
+    "forEachUser"
+    "writeShellApplicationWrapper"
+    "writeWaybarModule"
+  ];
+
   templates = [
     "systemTemplate"
     "droidTemplate"
   ];
 
-  importedFunctions = inputs.nixpkgs.lib.genAttrs functions (function:  import ./${function}.nix {inherit inputs system pkgs;});
+  importedDirectories = genAttrs directories (directory: import ./${directory}.nix {inherit inputs system pkgs;});
 
-  importedTemplates = inputs.nixpkgs.lib.genAttrs templates (template: import ./${template}.nix);
+  importedFunctions = genAttrs functions (function: import ./${function}.nix);
 
-  localLib = importedTemplates // importedFunctions;
-in { inherit localLib; }
+  importedTemplates = genAttrs templates (template: import ./${template}.nix);
+
+  localLib = importedDirectories // importedTemplates // importedFunctions;
+in {inherit localLib;}

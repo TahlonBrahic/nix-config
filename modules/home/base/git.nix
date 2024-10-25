@@ -13,8 +13,8 @@
       navigate = true;
     };
 
-    userName = vars.username;
-    userEmail = vars.email;
+    userName = "TahlonBrahic";
+    userEmail = "tahlonbrahic@gmail.com";
 
     extraConfig = {
       init.defaultBranch = "main";

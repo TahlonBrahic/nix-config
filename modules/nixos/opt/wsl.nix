@@ -1,6 +1,7 @@
 {
   inputs, 
-  vars, 
+  hostName, 
+  users,
   ...
 }: 
 {  
@@ -9,14 +10,14 @@
 
   wsl = {
     enable = true;
-    defaultUser = vars.username;
+    defaultUser = users;
     startMenuLaunchers = true;
     
     wslConf = {
       automount.root = "/mnt";
       interop.appendWindowsPath = false;
       network.generateHosts = false;
-      network.hostname = "${vars.hostName}";
+      network.hostname = "${hostName}";
     };
   };
 
