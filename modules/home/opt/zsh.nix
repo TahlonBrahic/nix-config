@@ -25,6 +25,6 @@
     };
   };
   # Use this to only declare ZSH in home-manager
-  home.sessionVariables.SHELL = "/etc/profiles/per-user/${vars.username}/bin/zsh";
+  home.sessionVariables.SHELL = "/etc/profiles/per-user/tahlon/bin/zsh";
   config.programs.zsh.enable = true;
 }

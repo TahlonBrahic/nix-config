@@ -1,13 +1,13 @@
 {
   users,
   lib,
+  localLib,
   pkgs,
   config,
   ...
 }: 
 let
-  forEachUser = builtins.attrVals users;
-
+  forEachUser = localLib.forEachUser {inherit users;};
   configList = forEachUser (map (user: {
     users.mutableUsers = false;
 

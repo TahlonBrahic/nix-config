@@ -24,15 +24,14 @@ in
       ++ modules.nixos
       ++ [
         home-manager.nixosModules.home-manager
-        (map (user:
         {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
             inherit extraSpecialArgs;
             backupFileExtension = "backup_delete";
-            users."${user.username}".imports = baseHomeModules ++ modules.homeManager;
+            users."tbrahic".imports = baseHomeModules ++ modules.homeManager;
           };
-        }) users)
+        }
       ];
   }

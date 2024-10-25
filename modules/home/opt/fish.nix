@@ -83,8 +83,8 @@
       ];
     };
   };
-  home = {
-    sessionVariables.SHELL = "/etc/profiles/per-user/${vars.username}/bin/fish";
+  #home = {
+  #  sessionVariables.SHELL = "/etc/profiles/per-user/${vars.username}/bin/fish";
   };
   # These are not homemanager?
   #environment.pathsToLink = ["/share/fish"];
