@@ -1,4 +1,7 @@
-let
-  forEachUser = {users}: builtins.attrValues users;
+{
+  pkgs ? import <nixpkgs> {},
+  users,
+}: let
+  forEachUser = pkgs.lib.genAttrs users;
 in
   forEachUser

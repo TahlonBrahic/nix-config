@@ -1,22 +1,21 @@
 {
   pkgs,
   inputs,
+  lib,
   vars,
   ...
 }: 
 let
-  inherit (vars) themes;
+  inherit (vars.themes.everforest-dark-hard) base16Scheme image;
 in 
 {
-  imports = [inputs.stylix.homeManagerModules.stylix];
-
   stylix = {
     enable = true;
 
-    inherit (themes.everforest-dark-hard) image;
+    inherit base16Scheme;
 
     cursor = {
-      package = pkgs.bibata-cursors;
+      package = pkgs.bibata-cursor;
       name = "Bibata-Modern-Ice";
     };
 

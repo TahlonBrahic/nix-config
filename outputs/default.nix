@@ -11,8 +11,7 @@
     inherit inputs system lib;
     inherit (pkgs.${system}) pkgs;
     inherit (localLib.${system}) localLib;
-    inherit (localLib.${system}.vars) vars;
-    inherit (localLib.${system}.overlays) overlays;
+    inherit (localLib.${system}.localLib) vars;
   });
 
   systems = forAllSystems (system: import ./${system} (arguments.${system}));

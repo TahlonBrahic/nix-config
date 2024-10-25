@@ -1,17 +1,15 @@
 {
   pkgs,
+  lib,
   inputs,
   users,
   ...
 }: 
-let
-  forEachUser = builtins.attrVals users;
-in 
 {
   nix = {
     settings = {
       experimental-features = ["nix-command" "flakes"];
-      trusted-users = forEachUser (map (user: [ "${user.username}" ]) users);
+      trusted-users = [ "@wheel" ];
       accept-flake-config = true;
       auto-optimise-store = true;
     };
@@ -29,11 +27,11 @@ in
       automatic = true;
       options = "--delete-older-than 7d";
     };
-    package = pkgs.nixFlakes;
+    package = pkgs.nixVersions.stable;
     extraOptions = ''experimental-features = nix-command flakes'';
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfree = lib.mkOverride 10 true;
 
   # OOM configuration:
   systemd = {

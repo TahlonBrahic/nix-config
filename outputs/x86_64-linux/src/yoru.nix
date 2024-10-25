@@ -31,7 +31,6 @@
       password
       rofi
       starship
-      style
       waybar
       zellij
       zoxide
