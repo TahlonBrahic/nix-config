@@ -1,4 +1,4 @@
-{inputs}:
+{inputs, ...}:
 {
-  [ inputs.nur.overlay ];
+  inputs.nixpkgs.overlays = [ inputs.nur.overlay ];
 }

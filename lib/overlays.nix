@@ -1,8 +1,8 @@
-{inputs, ...}: let
+{inputs, system, pkgs}: let
   inherit (inputs) haumea;
   overlays = haumea.lib.load {
     src = ../overlays;
-    loader = haumea.lib.loaders.path;
+    inputs = {inherit inputs system pkgs;};
   };
 in
   overlays

@@ -1,10 +1,13 @@
-{arguments}: let
-  inherit (arguments) inputs lib;
+{
+  inputs,
+  lib,
+  ...
+} @ arguments: let
   inherit (inputs) haumea;
 
   data = haumea.lib.load {
     src = ./src;
-    inputs = {inherit arguments;};
+    inputs = arguments;
   };
 
   dataWithoutPaths = builtins.attrValues data;

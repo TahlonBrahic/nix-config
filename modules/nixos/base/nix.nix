@@ -1,13 +1,13 @@
 {
   pkgs,
   inputs,
-  customVars,
+  users,
   ...
 }: {
   nix = {
     settings = {
       experimental-features = ["nix-command" "flakes"];
-      trusted-users = [ "${customVars.username}" ];
+      trusted-users = (map (user: [ "${user.username}" ]) users);
       accept-flake-config = true;
       auto-optimise-store = true;
     };

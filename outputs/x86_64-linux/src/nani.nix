@@ -1,13 +1,15 @@
 {
   inputs,
+  system, 
   lib,
+  localLib,
+  pkgs,
   vars,
-  system,
-  ...
-} @ customArgs: let
-  inherit (lib) optionalModules systemTemplate;
+  overlays
+}: let
+  inherit (localLib) optionalModules systemTemplate;
 
-  customModules = {
+  modules = {
     nixos = with optionalModules.nixos; [
       greetd
       fhs
@@ -26,11 +28,14 @@
     ];
   };
 
-  customVars = vars.users.tahlon // vars.hardware.nani;
+  users = ["tahlon"];
+
+  hostName = "nani";
+
 in {
   nixosConfigurations = {
-    "nani" = systemTemplate {
-      inherit customArgs customModules customVars;
+    ${hostName} = systemTemplate {
+      inherit inputs system lib pkgs localLib vars overlays modules users hostName;
     };
   };
 }

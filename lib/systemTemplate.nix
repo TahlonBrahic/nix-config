@@ -2,16 +2,18 @@
   inputs,
   system,
   lib,
-  localLib,
   pkgs,
+  localLib,
   vars,
   overlays,
   modules,
-  specialVars,
+  users,
+  hostName
 }: let
   inherit (inputs) home-manager nur chaotic;
-  inherit (lib) baseNixosModules baseHomeModules;
-  specialArgs = {inherit inputs lib localLib vars specialVars;};
+  inherit (localLib) baseNixosModules baseHomeModules;
+  specialArgs = {inherit inputs system lib pkgs localLib vars overlays users hostName;};
+  extraSpecialArgs = {inherit inputs system lib pkgs localLib vars hostName;};
 in
   lib.nixosSystem {
     inherit system specialArgs;
@@ -22,14 +24,15 @@ in
       ++ modules.nixos
       ++ [
         home-manager.nixosModules.home-manager
+        (map (user:
         {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            extraSpecialArgs = specialArgs;
+            inherit extraSpecialArgs;
             backupFileExtension = "backup_delete";
-            users."${specialVars.username}".imports = baseHomeModules ++ modules.homeManager;
+            users."${user.username}".imports = baseHomeModules ++ modules.homeManager;
           };
-        }
+        }) users)
       ];
   }

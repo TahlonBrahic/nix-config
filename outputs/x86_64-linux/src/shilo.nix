@@ -1,13 +1,15 @@
 {
   inputs,
+  system, 
   lib,
+  localLib,
+  pkgs,
   vars,
-  system,
-  ...
-} @ customArgs: let
-  inherit (lib) optionalModules systemTemplate;
+  overlays
+}: let
+  inherit (localLib) optionalModules systemTemplate;
 
-  customModules = {
+  modules = {
     nixos = with optionalModules.nixos; [
       wsl
     ];
@@ -28,11 +30,14 @@
     ];
   };
 
-  customVars = builtins.trace customArgs.system vars.users.tbrahic;
+  users = ["tbrahic"];
+
+  hostName = "shilo";
+
 in {
   nixosConfigurations = {
-    "shilo" = systemTemplate {
-      inherit customArgs customModules customVars;
+    ${hostName} = systemTemplate {
+      inherit inputs system lib pkgs localLib vars overlays modules users hostName;
     };
   };
 }

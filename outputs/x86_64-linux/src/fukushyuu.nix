@@ -1,13 +1,15 @@
 {
   inputs,
+  system, 
   lib,
+  localLib,
+  pkgs,
   vars,
-  system,
-  ...
-} @ customArgs: let
-  inherit (lib) optionalModules systemTemplate;
+  overlays
+}: let
+  inherit (localLib) optionalModules systemTemplate;
 
-  customModules = {
+  modules = {
     nixos = with optionalModules.nixos; [
       fhs
       gnome
@@ -28,11 +30,14 @@
     ];
   };
 
-  customVars = vars.users.amy // vars.hardware.fukushyuu;
+  users = ["amy" "tahlon"];
+
+  hostName = "fukushyuu";
+
 in {
   nixosConfigurations = {
-    "fukushyuu" = systemTemplate {
-      inherit customArgs customModules customVars;
+    ${hostName} = systemTemplate {
+      inherit inputs system lib pkgs localLib vars overlays modules users hostName;
     };
   };
 }

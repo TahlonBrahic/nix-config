@@ -1,5 +1,8 @@
-{arguments}: let
-  inherit (arguments) inputs lib;
+{
+  inputs,
+  lib,
+  ...
+} @ arguments: let
   inherit (inputs) haumea nix-on-droid;
 
   data = haumea.lib.load {
