@@ -31,7 +31,7 @@
     extraOptions = ''experimental-features = nix-command flakes'';
   };
 
-  nixpkgs.config.allowUnfree = lib.mkOverride 10 true;
+  nixpkgs.config.allowUnfree = true;
 
   # OOM configuration:
   systemd = {
