@@ -1,24 +1,39 @@
 {inputs, pkgs}: let 
   inherit (pkgs) fetchFromGitHub;
-  repo = fetchFromGitHub {
-    owner = "tinted-theming";
-    repo = "schemes";
-    rev = "spec-0.11";
-    hash = "sha256-UCRGabAyj8+RFkKdSZBR8BPE6yLM3rPpdxXHmwd9rZ0=";
-    # src = "base16/everforest-dark-hard.yaml";
-  };
 
-  base16scheme = builtins.readFile (repo + "/base16/everforest-dark-hard.yaml");
+  base16Scheme = {
+    slug = "everforest-dark-hard";
+    scheme = "Everforest Dark Hard";
+    author = "Sainnhe Park (https://github.com/sainnhe)";
+    variant = "dark";
+    palette = {
+      base00 = "272e33"; 
+      base01 = "2e383c"; 
+      base02 = "414b50"; 
+      base03 = "859289"; 
+      base04 = "9da9a0"; 
+      base05 = "d3c6aa"; 
+      base06 = "edeada"; 
+      base07 = "fffbef"; 
+      base08 = "e67e80"; 
+      base09 = "e69875"; 
+      base0A = "dbbc7f"; 
+      base0B = "a7c080"; 
+      base0C = "83c092"; 
+      base0D = "7fbbb3"; 
+      base0E = "d699b6"; 
+      base0F = "9da9a0"; 
+    };
+  };
 
   wallpaperRepo = fetchFromGitHub {
-    owner = "TahlonBrahic";
-    repo = "assets";
+    owner = "Apeiros-46B";
+    repo = "everforest-walls";
     rev = "main";
-    hash = "";
-    # src = "wallpapers/everforest-dark-hard/nix";
+    hash = "sha256-RKebxSl3c18cqGQgiF/wOHezmwjEYKn+YhgEAc9nJPc=";
   };
 
-  wallpaper = "${wallpaperRepo}/wallpapers/everforest-dark-hard/nix.jpg";
+  image = "${wallpaperRepo}/close_up/flowers.png";
 in {
-  inherit base16scheme wallpaper;
+  inherit base16Scheme image;
 }

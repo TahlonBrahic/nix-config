@@ -20,7 +20,9 @@ then {
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  hardware.enableAllFirmware = true;
+  #hardware.enableAllFirmware = true;
+  hardware.enableRedistributableFirmware = true;
+  nixpkgs.config.allowUnfree = true;
   boot.kernelParams = [ "acpi_backlight=vendor" "acpi_osi=Linux" "snd-hda-intel" "model=laptop-dmic" ];
 
   fileSystems."/" = {

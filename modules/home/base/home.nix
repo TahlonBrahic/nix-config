@@ -1,12 +1,11 @@
-{vars, users, ...}: let
-  forEachUser = builtins.attrVals users;
+{lib, users, ...}: let
+  inherit (lib.attrsets) genAttrs; 
 in {
-  home = forEachUser (map (user: {
-    username = user;
-    homeDirectory = "/home/${user}";
-
+  home = {
+    username = "tahlon";
+    homeDirectory = "/home/tahlon";
     stateVersion = "24.05";
-  }; users));
+  };
 
   # github:nixcommunity/home-manager/issues/2064
   systemd.user.targets.tray = {
