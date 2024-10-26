@@ -23,7 +23,7 @@
   hostName = "curosr";
 
 in {
-  nixosConfigurations = {
+  nixOnDroidConfigurations = {
     ${hostName} = droidTemplate {
       inherit inputs system lib pkgs localLib vars overlays modules users hostName;
     };
