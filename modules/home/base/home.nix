@@ -1,9 +1,8 @@
-{lib, users, ...}: let
-  inherit (lib.attrsets) genAttrs; 
-in {
+{lib, user, ...}:
+{
   home = {
-    username = "tahlon";
-    homeDirectory = "/home/tahlon";
+    username = "${user}";
+    homeDirectory = "/home/${user}";
     stateVersion = "24.05";
   };
 

@@ -66,7 +66,7 @@ then {
 }
 # TODO: Standardize to this layout
 else
-  with vars.${hostName}.hardware; {
+  with vars.hardware.${hostName}; {
     imports =
       if builtins.isList modulesPath
       then map (systemImport: modulesPath + systemImport) systemImports
