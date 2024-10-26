@@ -1,28 +1,31 @@
+
 {
   inputs,
-  system,
+  system, 
   lib,
-  pkgs,
   localLib,
+  pkgs,
   vars,
   overlays
 }: let
-  inherit (localLib) modulesRoot droidTemplate;
-
-  nixModules = with modulesRoot.nixos.opt; [ ];
-
-  homeModules = with modulesRoot.home.opt; [ ];
+  inherit (localLib) optionalModules droidTemplate;
 
   modules = {
-    nixos = nixModules;
-    home = homeModules;
+    nixos = with optionalModules.nixos; [
+      fhs
+    ];
+
+    homeManager = with optionalModules.home; [ ];
   };
 
-  customVars = vars.users.tahlon;
+  users = ["tahlon"];
+
+  hostName = "curosr";
+
 in {
-  nixOnDroidConfigurations = {
-    "cursor" = droidTemplate {
-      inherit inputs system lib localLib pkgs vars overlays modules customVars;
+  nixosConfigurations = {
+    ${hostName} = droidTemplate {
+      inherit inputs system lib pkgs localLib vars overlays modules users hostName;
     };
   };
 }

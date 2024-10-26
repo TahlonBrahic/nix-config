@@ -18,12 +18,6 @@
 
   systemValues = builtins.attrValues systems;
 
-  #DEBUG
-  #systemValues = lib.debug.traceSeqN 1 (builtins.attrValues systems)[1] {};
-  #systemValues = builtins.trace arguments.x86_64-linux.inputs (builtins.attrValues systems);
-  #systemValues = builtins.trace  (builtins.attrValues systems);
-  #systemValues = lib.debug.traceSeqN 2 (builtins.elemAt (builtins.attrValues systems) 1) (builtins.attrValues systems);
-
   localLib = forAllSystems (system:
     import ../lib {
       inherit inputs system;
