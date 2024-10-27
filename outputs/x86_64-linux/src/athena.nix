@@ -15,7 +15,7 @@
       greetd
     ];
 
-    homeManager = with optionalModules.nixos; [
+    homeManager = with optionalModules.home; [
       sway
       kitty
       encryption

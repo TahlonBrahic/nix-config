@@ -13,7 +13,6 @@
     nixos = with optionalModules.nixos; [
       greetd
       fhs
-      style
     ];
 
     homeManager = with optionalModules.home; [

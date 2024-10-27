@@ -24,7 +24,7 @@
       pkgs = pkgs.${system};
     });
 
-  pkgs = forAllSystems (system: import nixpkgs {inherit system;});
+  pkgs = forAllSystems (system: import nixpkgs {inherit system; config.allowUnfree = true;});
 
   ### FLAKE OUTPUTS ###
 
