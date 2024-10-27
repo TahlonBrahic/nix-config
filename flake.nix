@@ -20,6 +20,9 @@
     nixpkgs = {
       url = "github:nixos/nixpkgs/nixos-unstable";
     };
+    nixpkgs-stable = {
+      url = "github:nixos/nixpkgs/nixos-24.05";
+    };  
     chaotic = {
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     };
@@ -55,17 +58,7 @@
       url = "github:nix-community/impermanence";
     };
   /*
-       ___           ___           ___           ___                       ___           ___           ___           ___           ___           ___           ___           ___     
-      /\  \         /\  \         /\  \         /\__\          ___        /\  \         /\  \         /\  \         /\  \         /\__\         /\  \         /\  \         /\  \    
-     /::\  \       /::\  \       /::\  \       /:/  /         /\  \       \:\  \       /::\  \       /::\  \        \:\  \       /:/  /        /::\  \       /::\  \       /::\  \   
-    /:/\:\  \     /:/\:\  \     /:/\:\  \     /:/__/          \:\  \       \:\  \     /:/\:\  \     /:/\:\  \        \:\  \     /:/  /        /:/\:\  \     /:/\:\  \     /:/\ \  \  
-   /::\~\:\  \   /::\~\:\  \   /:/  \:\  \   /::\  \ ___      /::\__\      /::\  \   /::\~\:\  \   /:/  \:\  \       /::\  \   /:/  /  ___   /::\~\:\  \   /::\~\:\  \   _\:\~\ \  \ 
-  /:/\:\ \:\__\ /:/\:\ \:\__\ /:/__/ \:\__\ /:/\:\  /\__\  __/:/\/__/     /:/\:\__\ /:/\:\ \:\__\ /:/__/ \:\__\     /:/\:\__\ /:/__/  /\__\ /:/\:\ \:\__\ /:/\:\ \:\__\ /\ \:\ \ \__\
-  \/__\:\/:/  / \/_|::\/:/  / \:\  \  \/__/ \/__\:\/:/  / /\/:/  /       /:/  \/__/ \:\~\:\ \/__/ \:\  \  \/__/    /:/  \/__/ \:\  \ /:/  / \/_|::\/:/  / \:\~\:\ \/__/ \:\ \:\ \/__/
-       \::/  /     |:|::/  /   \:\  \            \::/  /  \::/__/       /:/  /       \:\ \:\__\    \:\  \         /:/  /       \:\  /:/  /     |:|::/  /   \:\ \:\__\    \:\ \:\__\  
-       /:/  /      |:|\/__/     \:\  \           /:/  /    \:\__\       \/__/         \:\ \/__/     \:\  \        \/__/         \:\/:/  /      |:|\/__/     \:\ \/__/     \:\/:/  /  
-      /:/  /       |:|  |        \:\__\         /:/  /      \/__/                      \:\__\        \:\__\                      \::/  /       |:|  |        \:\__\        \::/  /   
-      \/__/         \|__|         \/__/         \/__/                                   \/__/         \/__/                       \/__/         \|__|         \/__/         \/__/    
+  INFRASTRUCTURE
   */
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL";
@@ -73,7 +66,17 @@
     };
     nix-on-droid = {
       url = "github:nix-community/nix-on-droid/release-24.05";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
+    };
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follow = "nixpkgs";
+    };
+    systems = {
+      url = "github:nix-systems/default-linux";
     };
   /*
       ___           ___           ___           ___       ___     
@@ -111,6 +114,10 @@
         home-manager.follows = "home-manager";
       };
     };
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+      inputs.systems.follows = "systems";
+    };
   /*
        ___                       ___           ___     
       /\__\          ___        /\  \         /\  \    
@@ -131,6 +138,13 @@
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    base16 = {
+      url = "github:SenchoPens/base16.nix";
+    };
+    tt-schemes = {
+      url = "github:tinted-theming/schemes";
+      flake = false;
     };
   };
 }
