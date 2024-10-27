@@ -13,7 +13,7 @@
   dataWithoutPaths = builtins.attrValues data;
 
   outputs = {
-    nixOnDroidConfigurations = lib.attrsets.mergeAttrsList (map (it: it.nixOnDroidConfigurations or {}) dataWithoutPaths);
+    nixOnDroidConfigurations.default = lib.attrsets.mergeAttrsList (map (it: it.nixOnDroidConfigurations or {}) dataWithoutPaths);
   };
 in
   outputs // {inherit data;}
