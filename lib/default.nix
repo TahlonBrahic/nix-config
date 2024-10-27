@@ -9,14 +9,15 @@
     "vars"
     "optionalModules"
     "overlays"
+    "functions"
     "baseNixosModules"
     "baseHomeModules"
   ];
 
   functions = [
     "forEachUser"
-    "writeShellApplicationWrapper"
-    "writeWaybarModule"
+    "writeCustomShellApplication"
+    "writeCustomWaybarModule"
   ];
 
   templates = [
@@ -26,9 +27,11 @@
 
   importedDirectories = genAttrs directories (directory: import ./${directory}.nix {inherit inputs system pkgs;});
 
-  importedFunctions = genAttrs functions (function: import ./${function}.nix);
+  #importedFunctions = genAttrs functions (function: import ./${function}.nix);
 
   importedTemplates = genAttrs templates (template: import ./${template}.nix);
+
+  importedFunctions = { imports = [ ./functions.nix ]; };
 
   localLib = importedDirectories // importedTemplates // importedFunctions;
 in {inherit localLib;}

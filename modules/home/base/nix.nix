@@ -7,4 +7,6 @@
     nix-melt
     nix-tree
   ];
+
+  nixpkgs.config.allowUnfree = true;
 }

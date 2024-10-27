@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     gzip
-    rar
+    #rar
     zip
     zstd
   ];

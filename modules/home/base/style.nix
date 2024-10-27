@@ -15,7 +15,7 @@ in
     inherit base16Scheme;
 
     cursor = {
-      package = pkgs.bibata-cursor;
+      package = pkgs.bibata-cursors;
       name = "Bibata-Modern-Ice";
     };
 
