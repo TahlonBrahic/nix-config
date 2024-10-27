@@ -10,7 +10,7 @@
 
   wsl = {
     enable = true;
-    defaultUser = users;
+    defaultUser = "tbrahic";
     startMenuLaunchers = true;
     
     wslConf = {
