@@ -34,5 +34,5 @@
 
   nixosConfigurations = attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) systemValues);
 
-  nixOnDroidConfigurations = attrsets.mergeAttrsList (map (it: it.nixOnDroidConfigurations or {}) systemValues);
+  nixOnDroidConfigurations.default = attrsets.mergeAttrsList (map (it: it.nixOnDroidConfigurations or {}) systemValues);
 in {inherit formatter devShells nixosConfigurations nixOnDroidConfigurations;}
