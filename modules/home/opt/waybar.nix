@@ -1,5 +1,5 @@
 {
-  config,
+  sysconfig ? (import <nixpkgs/nixos> {}).config,
   lib,
   localLib,
   pkgs,

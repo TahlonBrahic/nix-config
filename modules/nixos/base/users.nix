@@ -7,13 +7,13 @@
   ...
 }: let
   inherit (lib.attrsets) genAttrs;
-  test =
+  userlist =
     genAttrs users
     (user: {
       home = "/home/${user}";
       initialPassword = "temp";
       isNormalUser = true;
-      shell = pkgs.zsh;
+      shell = pkgs.fish;
       extraGroups = [
         "${user}"
         "users"
@@ -25,9 +25,8 @@
     });
 in {
   users = {
-    users = test;
+    users = userlist;
     mutableUsers = false;
   };
-
-  programs.zsh.enable = true;
+  programs.fish.enable = true;
 }

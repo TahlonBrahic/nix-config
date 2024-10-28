@@ -1,3 +1,4 @@
+{sysconfig ? (import <nixpkgs/nixos> {}).config, ...}:
 {
   programs.zellij = {
     enable = true;

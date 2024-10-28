@@ -33,15 +33,14 @@ in
             inherit extraSpecialArgs;
             users =
               lib.attrsets.genAttrs users
-              (user: {
-                imports = modules.homeManager ++
+              (user: { imports = 
                 # If this does not work I need to do some weird magic where I take the list of paths (baseHomeModules)
                 # then import each one of them with mappedArgs.${user}, I am not sure what dataset this created backup_delete
                 # I may need to devise a way to write to the nix store then return its aggregation as a path to append to 
                 # the imports list.
                 (map (module:
                   import module mappedArgs.${user})
-                baseHomeModules);});
+                (baseHomeModules ++ modules.homeManager));});
           };
         }
       ];

@@ -1,6 +1,6 @@
 {
   pkgs,
-  config,
+  sysconfig ? (import <nixpkgs/nixos> {}).config,
   lib,
   ...
 }: let
