@@ -40,10 +40,6 @@ in
       terminal = 2.0;
     };
 
-    targets = {
-      wofi.enable = true;
-    };
-
     polarity = "dark";
   };
 }

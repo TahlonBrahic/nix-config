@@ -73,7 +73,6 @@
     };
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follow = "nixpkgs";
     };
     systems = {
       url = "github:nix-systems/default-linux";
