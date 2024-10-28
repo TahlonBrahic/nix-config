@@ -1,7 +1,7 @@
 {
   pkgs,
   vars,
-  user,
+  config,
   ...
 }: {
   programs = {
@@ -26,5 +26,5 @@
     };
   };
   # Use this to only declare ZSH in home-manager
-  home.sessionVariables.SHELL = "/etc/profiles/per-user/${config.user}/bin/zsh";
+  home.sessionVariables.SHELL = "/etc/profiles/per-user/${config.home.username}/bin/zsh";
 }

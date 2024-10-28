@@ -85,6 +85,6 @@
   };
 
   home = {
-    sessionVariables.SHELL = "/etc/profiles/per-user/${config.user}/bin/fish";
+    sessionVariables.SHELL = "/etc/profiles/per-user/${config.home.username}/bin/fish";
   };
 }
