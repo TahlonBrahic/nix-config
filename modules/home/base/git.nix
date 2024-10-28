@@ -1,6 +1,4 @@
 {vars, ...}: {
-  #home.activation.removeExistingGitconfig = lib.hm.dag.entryBefore ["checkLinkTargets"] ''rm -f ${config.home.homeDirectory}/.gitconfig'';
-
   programs.git = {
     enable = true;
 

@@ -19,6 +19,7 @@
     tahlon.homeManager = with optionalModules.home; [
       encryption
       fetch
+      firefox
       fish
       fzf
       gpg
@@ -35,13 +36,9 @@
       zellij
       zoxide
     ];
-
-    tahlon2.homeManager = with optionalModules.home; [
-      zsh
-    ];
   };
 
-  users = ["tahlon" "tahlon2"];
+  users = ["tahlon"];
 
   hostName = "yoru";
 

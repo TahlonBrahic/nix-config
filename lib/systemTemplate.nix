@@ -18,15 +18,14 @@ in
     inherit system specialArgs;
     modules =
       baseNixosModules
-      ++ [nur.nixosModules.nur]
       ++ [chaotic.nixosModules.default]
       ++ modules.nixos
       ++ [
         home-manager.nixosModules.home-manager
         {
           home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
+            useGlobalPkgs = false;
+            useUserPackages = false;
             backupFileExtension = "backup_delete";
             extraSpecialArgs = specialArgs;
             users =
