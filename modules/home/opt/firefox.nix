@@ -1,4 +1,4 @@
-{sysconfig ? (import <nixpkgs/nixos> {}).config, ...}: {
+{
   programs.firefox = {
     enable = true;
 

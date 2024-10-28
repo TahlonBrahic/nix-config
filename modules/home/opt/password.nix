@@ -1,11 +1,9 @@
 {
   pkgs,
-  sysconfig ? (import <nixpkgs/nixos> {}).config,
   lib,
   ...
-}: let
-  passwordStoreDir = "${config.xdg.dataHome}/password-store";
-in {
+}: 
+{
   home.packages = with pkgs; [
     keepassxc
     keepassxc-go

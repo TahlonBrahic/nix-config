@@ -1,7 +1,7 @@
 {
-  sysconfig ? (import <nixpkgs/nixos> {}).config,
   lib,
   localLib,
+  config,
   pkgs,
   ...
 }: let

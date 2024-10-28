@@ -1,8 +1,7 @@
 {
-  sysconfig ? (import <nixpkgs/nixos> {}).config,
   vars,
   pkgs,
-  user,
+  config,
   ...
 }: {
   programs = {
@@ -86,8 +85,6 @@
   };
 
   home = {
-    sessionVariables.SHELL = "/etc/profiles/per-user/${user}/bin/fish";
+    sessionVariables.SHELL = "/etc/profiles/per-user/${config.user}/bin/fish";
   };
-  #sysconfig.environment.pathsToLink = ["/share/fish"];
-  #sysconfig.environment.shells = [pkgs.fish]; 
 }

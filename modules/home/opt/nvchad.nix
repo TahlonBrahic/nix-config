@@ -1,6 +1,5 @@
 {
   inputs,
-  sysconfig ? (import <nixpkgs/nixos> {}).config,
   pkgs,
   ...
 }: {
