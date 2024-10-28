@@ -1,7 +1,8 @@
 {
-  config,
+  sysconfig ? (import <nixpkgs/nixos> {}).config,
   vars,
   pkgs,
+  user,
   ...
 }: {
   programs = {
@@ -83,10 +84,10 @@
       ];
     };
   };
-  #home = {
-  #  sessionVariables.SHELL = "/etc/profiles/per-user/${vars.username}/bin/fish";
-  #};
-  # These are not homemanager?
-  #environment.pathsToLink = ["/share/fish"];
-  #environment.shells = [pkgs.fish]; 
+
+  home = {
+    sessionVariables.SHELL = "/etc/profiles/per-user/${user}/bin/fish";
+  };
+  #sysconfig.environment.pathsToLink = ["/share/fish"];
+  #sysconfig.environment.shells = [pkgs.fish]; 
 }
