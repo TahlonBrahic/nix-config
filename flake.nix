@@ -1,7 +1,7 @@
 {
   description = "NixOS configuration that supports multiple users, systems, and architectures.";
 
-  outputs = inputs@{flake-parts, ...}: flake-parts.lib.mkFlake {inherit inputs;} {imports = [ ./outputs ];};
+  outputs = inputs: import ./outputs {inherit inputs;};
 
   inputs = {
   /*
