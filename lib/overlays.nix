@@ -4,5 +4,6 @@
     src = ../overlays;
     inputs = {inherit inputs system pkgs;};
   };
+  overlayss = builtins.attrValues overlays;
 in
-  overlays
+  overlayss

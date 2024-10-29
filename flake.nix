@@ -138,6 +138,9 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    jeezyvim = {
+      url = "github:LGUG2Z/JeezyVim";
+    };
     base16 = {
       url = "github:SenchoPens/base16.nix";
     };
