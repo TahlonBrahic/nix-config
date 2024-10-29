@@ -2,7 +2,6 @@
   pkgs,
   vars,
   user,
-  sysconfig ? (import <nixpkgs/nixos> {}).config,
   ...
 }: {
   programs = {
@@ -27,6 +26,5 @@
     };
   };
   # Use this to only declare ZSH in home-manager
-  home.sessionVariables.SHELL = "/etc/profiles/per-user/${user}/bin/zsh";
-  sysconfig.programs.zsh.enable = true;
+  home.sessionVariables.SHELL = "/etc/profiles/per-user/${config.user}/bin/zsh";
 }

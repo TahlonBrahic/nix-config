@@ -16,7 +16,7 @@
       laptop
     ];
 
-    homeManager = with optionalModules.home; [
+    tahlon.homeManager = with optionalModules.home; [
       encryption
       fetch
       fish
@@ -35,9 +35,13 @@
       zellij
       zoxide
     ];
+
+    tahlon2.homeManager = with optionalModules.home; [
+      zsh
+    ];
   };
 
-  users = ["tahlon"];
+  users = ["tahlon" "tahlon2"];
 
   hostName = "yoru";
 

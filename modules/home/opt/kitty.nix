@@ -1,4 +1,3 @@
-{sysconfig ? (import <nixpkgs/nixos> {}).config, ...}:
 {
   programs.kitty = {
     enable = true;
