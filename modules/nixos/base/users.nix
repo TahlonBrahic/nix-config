@@ -28,5 +28,4 @@ in {
     users = userlist;
     mutableUsers = false;
   };
-  programs.fish.enable = true;
 }

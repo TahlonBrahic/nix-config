@@ -32,7 +32,7 @@ in
             users =
               lib.attrsets.genAttrs users (
               (user: { imports = (baseHomeModules ++ modules.${user}.homeManager);
-              config.${user} = user;}));
+              config.home.username = user;}));
           };
         }
       ];
