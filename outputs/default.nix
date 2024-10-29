@@ -1,5 +1,5 @@
 {inputs}: let
-  inherit (inputs) nixpkgs;
+  inherit (inputs) nixpkgs nixpkgs-stable;
   inherit (nixpkgs) lib;
   inherit (lib) genAttrs attrsets;
 
@@ -10,11 +10,12 @@
   arguments = forAllSystems (system: {
     inherit inputs system lib;
     inherit (pkgs.${system}) pkgs;
+    pkgs-stable = pkgs-stable.${system}.pkgs;
     inherit (localLib.${system}) localLib;
     inherit (localLib.${system}.localLib) vars;
   });
 
-  systems = forAllSystems (system: import ./${system} (arguments.${system}));
+  systems = forAllSystems (system: import ./${system} arguments.${system});
 
   systemValues = builtins.attrValues systems;
 
@@ -32,11 +33,13 @@
       inherit (localLib.${system}.localLib) overlays;
     });
 
+  pkgs-stable = forAllSystems (system: import nixpkgs-stable {inherit system;});
+
   ### FLAKE OUTPUTS ###
 
   formatter = forAllSystems (system: pkgs.${system}.alejandra);
 
-  devShells = forAllSystems (system: import ../shell.nix (pkgs.${system}));
+  devShells = forAllSystems (system: import ../shell.nix pkgs.${system});
 
   nixosConfigurations = attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) systemValues);
 
