@@ -24,10 +24,10 @@
       fzf
       gpg
       hyprland
+      jeezyvim
       kdeconnect
       kitty
       librewolf
-      nvchad
       nix-index
       password
       rofi
