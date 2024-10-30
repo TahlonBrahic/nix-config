@@ -1,8 +1,7 @@
 keys:
-  - &nani age1y04frsfh4qhyjccyalewmqx2s8789c5vujntxwakljpc3g4n49ssks409x
+  - &tahlon age1jl5n7apeujqh8sjyjxrpr8hkg7l8fyp47f77sukw3ysvuqk8hykstm824g
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
-    - age:
-      - *nani
-
+      - age:
+          - *tahlon
