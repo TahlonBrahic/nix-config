@@ -11,7 +11,7 @@
     inherit inputs system lib;
     inherit (pkgs.${system}) pkgs;
     inherit (localLib.${system}) localLib;
-    inherit (localLib.${system}.localLib) vars overlays;
+    inherit (localLib.${system}.localLib) vars;
   });
 
   systems = forAllSystems (system: import ./${system} (arguments.${system}));
@@ -24,7 +24,13 @@
       pkgs = pkgs.${system};
     });
 
-  pkgs = forAllSystems (system: import nixpkgs {inherit system; config.allowUnfree = true;});
+  pkgs = forAllSystems (system:
+    import nixpkgs
+    {
+      inherit system;
+      config.allowUnfree = true;
+      inherit (localLib.${system}.localLib) overlays;
+    });
 
   ### FLAKE OUTPUTS ###
 
@@ -34,5 +40,5 @@
 
   nixosConfigurations = attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) systemValues);
 
-  nixOnDroidConfigurations.default = attrsets.mergeAttrsList (map (it: it.nixOnDroidConfigurations or {}) systemValues);
+  nixOnDroidConfigurations = attrsets.mergeAttrsList (map (it: it.nixOnDroidConfigurations or {}) systemValues);
 in {inherit formatter devShells nixosConfigurations nixOnDroidConfigurations;}
