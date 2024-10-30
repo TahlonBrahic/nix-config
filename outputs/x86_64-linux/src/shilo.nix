@@ -14,7 +14,7 @@
       wsl
     ];
 
-    homeManager = with optionalModules.home; [
+    tbrahic.homeManager = with optionalModules.home; [
       broot
       encryption
       fetch
