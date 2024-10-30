@@ -1,11 +1,12 @@
 {
   inputs,
-  system, 
+  system,
   lib,
   localLib,
   pkgs,
+  pkgs-stable,
   vars,
-  overlays
+  overlays,
 }: let
   inherit (localLib) optionalModules systemTemplate;
 
@@ -21,8 +22,8 @@
       firefox
       fish
       fzf
+      jeezyvim
       lsd
-      nvchad
       nix-index
       starship
       zellij
@@ -33,11 +34,10 @@
   users = ["tbrahic"];
 
   hostName = "shilo";
-
 in {
   nixosConfigurations = {
     ${hostName} = systemTemplate {
-      inherit inputs system lib pkgs localLib vars overlays modules users hostName;
+      inherit inputs system lib pkgs pkgs-stable localLib vars overlays modules users hostName;
     };
   };
 }

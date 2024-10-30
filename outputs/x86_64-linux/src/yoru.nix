@@ -1,11 +1,12 @@
 {
   inputs,
-  system, 
+  system,
   lib,
   localLib,
   pkgs,
+  pkgs-stable,
   vars,
-  overlays
+  overlays,
 }: let
   inherit (localLib) optionalModules systemTemplate;
 
@@ -41,11 +42,10 @@
   users = ["tahlon"];
 
   hostName = "yoru";
-
 in {
   nixosConfigurations = {
     ${hostName} = systemTemplate {
-      inherit inputs system lib pkgs localLib vars overlays modules users hostName;
+      inherit inputs system lib pkgs pkgs-stable localLib vars overlays modules users hostName;
     };
   };
 }

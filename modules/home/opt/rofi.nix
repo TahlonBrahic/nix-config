@@ -1,14 +1,9 @@
-{
-  inputs,
-  lib,
-  pkgs,
-  ...
-}: {
+{pkgs-stable, ...}: {
   programs.rofi = {
     enable = true;
-    package = pkgs.rofi-wayland;
-    extraConfig = {
-      show-icons = true;
-    };
+    #package = pkgs-stable.rofi-wayland;
+    #extraConfig = {
+    #  show-icons = true;
+    #};
   };
 }
