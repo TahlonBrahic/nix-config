@@ -5,10 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-  }: {
+  outputs = {nixpkgs}: {
     packages.x86_64-linux = let
       pkgs = import nixpkgs {
         system = "x86_64-linux";
@@ -16,7 +13,7 @@
       inherit (pkgs) stdenv lib fetchFromGitHub;
       inherit (pkgs.linuxPackages_latest) kernel;
     in {
-      samsung-volatile-module = stdenv.mkDerivation rec {
+      samsung-volatile-module = stdenv.mkDerivation {
         pname = "samsung-volatile";
         version = "1.0";
         passthru.moduleName = "samsung-volatile";

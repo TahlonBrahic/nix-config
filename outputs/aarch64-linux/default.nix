@@ -3,7 +3,7 @@
   lib,
   ...
 } @ arguments: let
-  inherit (inputs) haumea nix-on-droid;
+  inherit (inputs) haumea;
 
   data = haumea.lib.load {
     src = ./src;

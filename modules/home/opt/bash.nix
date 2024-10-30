@@ -3,13 +3,13 @@
     bash = {
       enable = true;
       shellOptions = [
-        vi
+        "vi"
       ];
       shellAliases = {
         la = "ls -al";
         ll = "ls -l";
         ".." = "cd ..";
-        switch = "sudo nixos-rebuild switch"
+        switch = "sudo nixos-rebuild switch";
       };
     };
   };

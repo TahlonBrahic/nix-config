@@ -1,8 +1,4 @@
-{
-  lib,
-  hostName,
-  ...
-}:
+{hostName, ...}:
 if hostName == "shilo"
 then {}
 else {

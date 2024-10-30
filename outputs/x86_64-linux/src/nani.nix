@@ -1,11 +1,11 @@
 {
   inputs,
-  system, 
+  system,
   lib,
   localLib,
   pkgs,
   vars,
-  overlays
+  overlays,
 }: let
   inherit (localLib) optionalModules systemTemplate;
 
@@ -15,7 +15,7 @@
       fhs
     ];
 
-    homeManager = with optionalModules.home; [
+    tahlon.homeManager = with optionalModules.home; [
       librewolf
       encryption
       fetch
@@ -30,7 +30,6 @@
   users = ["tahlon"];
 
   hostName = "nani";
-
 in {
   nixosConfigurations = {
     ${hostName} = systemTemplate {

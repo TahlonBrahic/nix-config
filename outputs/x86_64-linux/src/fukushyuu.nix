@@ -1,11 +1,11 @@
 {
   inputs,
-  system, 
+  system,
   lib,
   localLib,
   pkgs,
   vars,
-  overlays
+  overlays,
 }: let
   inherit (localLib) optionalModules systemTemplate;
 
@@ -16,7 +16,7 @@
       steam
     ];
 
-    homeManager = with optionalModules.home; [
+    amy.homeManager = with optionalModules.home; [
       chrome
       discord
       encryption
@@ -33,7 +33,6 @@
   users = ["amy" "tahlon"];
 
   hostName = "fukushyuu";
-
 in {
   nixosConfigurations = {
     ${hostName} = systemTemplate {

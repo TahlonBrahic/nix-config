@@ -1,5 +1,7 @@
-{helperFunction, pkgs}: 
-let
+{
+  helperFunction,
+  pkgs,
+}: let
   inherit helperFunction pkgs;
   # Function that creates a custom Waybar Module
   writeCustomWaybarModule = {
@@ -25,5 +27,5 @@ let
           '{text:$text,tooltip:$tooltip,alt:$alt,class:$class,percentage:$percentage}'
       '';
     };
-in 
+in
   writeCustomWaybarModule

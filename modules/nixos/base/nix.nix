@@ -1,15 +1,12 @@
 {
   pkgs,
-  lib,
   inputs,
-  users,
   ...
-}: 
-{
+}: {
   nix = {
     settings = {
       experimental-features = ["nix-command" "flakes"];
-      trusted-users = [ "@wheel" ];
+      trusted-users = ["@wheel"];
       accept-flake-config = true;
       auto-optimise-store = true;
     };

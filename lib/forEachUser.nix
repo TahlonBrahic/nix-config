@@ -1,6 +1,0 @@
-#{
-#  users
-#}: 
-#{
-#  lib.genAttrs users
-#}

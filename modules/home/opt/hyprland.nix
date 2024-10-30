@@ -49,7 +49,7 @@
           "SUPER,t,exec,kitty"
           "SUPER,f,exec,librewolf"
           "SUPER,q,killactive"
-          "SUPER,a,exec,killall rofi || rofi -show"
+          "SUPER,a,exec,killall rofi || rofi -show drun"
           "SUPER,s,togglespecialworkspace"
           "SUPER,g,togglegroup"
           "SUPER,w,fullscreen"

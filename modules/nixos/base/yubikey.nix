@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  users,
   ...
 }: {
   environment.systemPackages = with pkgs; [
@@ -23,7 +22,7 @@
       enable = true;
       settings = {
         cue = false;
-        #authFile = "/home/${customVars.username}/.config/Yubico/u2f_keys";
+        authFile = "/etc/secure/Yubico/u2f_keys";
       };
     };
     services = {

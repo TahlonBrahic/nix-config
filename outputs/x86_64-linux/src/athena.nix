@@ -1,11 +1,11 @@
 {
   inputs,
-  system, 
+  system,
   lib,
   localLib,
   pkgs,
   vars,
-  overlays
+  overlays,
 }: let
   inherit (localLib) optionalModules systemTemplate;
 
@@ -15,7 +15,7 @@
       greetd
     ];
 
-    homeManager = with optionalModules.home; [
+    tahlon.homeManager = with optionalModules.home; [
       sway
       kitty
       encryption
@@ -28,7 +28,6 @@
   users = ["tahlon"];
 
   hostName = "athena";
-
 in {
   nixosConfigurations = {
     ${hostName} = systemTemplate {
@@ -36,4 +35,3 @@ in {
     };
   };
 }
-

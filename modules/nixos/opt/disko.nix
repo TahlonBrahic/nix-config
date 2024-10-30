@@ -1,9 +1,9 @@
 {
   vars,
   inputs,
-  hostname,
+  hostName,
   ...
 }: {
   imports = [inputs.disko.nixosModules.disko];
-  disko.devices = vars.${hostname}disko;
+  disko.devices = vars.${hostName}.disko;
 }
