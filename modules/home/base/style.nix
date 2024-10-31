@@ -31,9 +31,9 @@ in {
     };
 
     opacity = {
-      applications = .5;
-      popups = .5;
-      terminal = .5;
+      applications = .2;
+      popups = .2;
+      terminal = .7;
     };
 
     polarity = "dark";
