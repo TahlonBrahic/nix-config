@@ -5,14 +5,16 @@
   pkgs,
   ...
 }: let
-  writeCustomWaybarModule = import localLib.functions.writeCustomWaybarModule 
-    { helperFunction = writeCustomShellApplication; 
-      inherit pkgs; };
+  writeCustomWaybarModule =
+    import localLib.functions.writeCustomWaybarModule
+    {
+      helperFunction = writeCustomShellApplication;
+      inherit pkgs;
+    };
   writeCustomShellApplication = import localLib.functions.writeCustomShellApplication {inherit lib pkgs;};
   swayCfg = config.wayland.windowManager.sway;
   hyprlandCfg = config.wayland.windowManager.hyprland;
 in {
-
   config = {
     home.packages = with pkgs; [
       wlogout

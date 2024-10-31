@@ -1,12 +1,11 @@
-
 {
   inputs,
-  system, 
+  system,
   lib,
   localLib,
   pkgs,
   vars,
-  overlays
+  overlays,
 }: let
   inherit (localLib) optionalModules droidTemplate;
 
@@ -15,13 +14,12 @@
       fhs
     ];
 
-    homeManager = with optionalModules.home; [ ];
+    tahlon.homeManager = with optionalModules.home; [fish];
   };
 
   users = ["tahlon"];
 
-  hostName = "curosr";
-
+  hostName = "cursor";
 in {
   nixOnDroidConfigurations = {
     ${hostName} = droidTemplate {

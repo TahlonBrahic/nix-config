@@ -1,9 +1,7 @@
 {
   users,
   lib,
-  localLib,
   pkgs,
-  config,
   ...
 }: let
   inherit (lib.attrsets) genAttrs;

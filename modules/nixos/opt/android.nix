@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{pkgs, ...}: {
   android-integration = {
   };
 

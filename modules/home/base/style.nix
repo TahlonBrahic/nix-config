@@ -1,14 +1,10 @@
 {
   pkgs,
-  inputs,
-  lib,
   vars,
   ...
-}: 
-let
-  inherit (vars.themes.everforest-dark-hard) base16Scheme image;
-in 
-{
+}: let
+  inherit (vars.themes.everforest-dark-hard) base16Scheme;
+in {
   stylix = {
     enable = true;
 
@@ -35,11 +31,13 @@ in
     };
 
     opacity = {
-      applications = 4.0;
-      popups = 5.0;
-      terminal = 2.0;
+      applications = .5;
+      popups = .5;
+      terminal = .5;
     };
 
     polarity = "dark";
+
+    targets.rofi.enable = true;
   };
 }

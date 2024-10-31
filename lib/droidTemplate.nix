@@ -3,38 +3,38 @@
   system,
   lib,
   pkgs,
+  pkgs-stable ? {},
   localLib,
   vars,
   overlays,
   modules,
   users,
-  hostName
+  hostName,
 }: let
-  inherit (inputs) home-manager nix-on-droid nur chaotic;
+  inherit (inputs) home-manager chaotic nix-on-droid;
   inherit (localLib) baseNixosModules baseHomeModules optionalModules;
-  specialArgs = extraSpecialArgs // {inherit lib;};
-  extraSpecialArgs = {inherit inputs system pkgs localLib vars overlays users hostName;};
+  specialArgs = {inherit inputs system pkgs pkgs-stable localLib vars overlays users hostName;};
 in
   nix-on-droid.lib.nixOnDroidConfiguration {
     inherit system specialArgs;
     modules =
       baseNixosModules
-      ++ [ nur.nixosModules.nur ]
-      ++ [ chaotic.nixosModules.default ]
-      ++ [ optionalModules.opt.android ];
+      ++ [chaotic.nixosModules.default]
       ++ modules.nixos
+      ++ [optionalModules.opt.android]
       ++ [
         home-manager.nixosModules.home-manager
         {
           home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            inherit extraSpecialArgs;
+            useGlobalPkgs = false;
+            useUserPackages = false;
             backupFileExtension = "backup_delete";
-            sharedModules = baseHomeModules;
-            users = lib.attrsets.genAttrs users (user: { imports = modules.homeManager; });
+            extraSpecialArgs = specialArgs;
+            users = lib.attrsets.genAttrs users (user: {
+              imports = baseHomeModules ++ modules.${user}.homeManager;
+              config.home.username = user;
+            });
           };
         }
       ];
   }
-

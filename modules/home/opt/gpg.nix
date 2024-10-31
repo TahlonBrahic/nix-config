@@ -1,7 +1,7 @@
-{
+{config, ...}: {
   programs.gpg = {
     enable = true;
-    #homedir = "${config.home.homeDirectory}/.gnupg";
+    homedir = "${config.home.homeDirectory}/.config/gnupg";
     mutableTrust = false;
     mutableKeys = false;
 

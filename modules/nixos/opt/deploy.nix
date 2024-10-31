@@ -1,4 +1,4 @@
-{config, ...}: {
+{
   # This module is used for remote deployment
   # TODO: Add import for Disko config
   users.users = {

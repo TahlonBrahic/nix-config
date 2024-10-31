@@ -14,12 +14,6 @@
     "baseHomeModules"
   ];
 
-  functions = [
-    "forEachUser"
-    "writeCustomShellApplication"
-    "writeCustomWaybarModule"
-  ];
-
   templates = [
     "systemTemplate"
     "droidTemplate"
@@ -29,7 +23,7 @@
 
   importedTemplates = genAttrs templates (template: import ./${template}.nix);
 
-  importedFunctions = { imports = [ ./functions.nix ]; };
+  importedFunctions = {imports = [./functions.nix];};
 
   localLib = importedDirectories // importedTemplates // importedFunctions;
 in {inherit localLib;}
