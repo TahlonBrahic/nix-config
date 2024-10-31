@@ -6,6 +6,7 @@
   environment.systemPackages = with pkgs; [
     pam_u2f
     yubikey-manager
+    yubioath-flutter
   ];
 
   services = {
