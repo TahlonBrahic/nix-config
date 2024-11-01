@@ -38,6 +38,9 @@ in {
 
     polarity = "dark";
 
-    targets.rofi.enable = true;
+    targets = {
+      rofi.enable = true;
+      firefox.enable = false;
+    };
   };
 }
