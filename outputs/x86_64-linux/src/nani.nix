@@ -17,10 +17,8 @@
 
     tahlon.homeManager = with optionalModules.home; [
       librewolf
-      encryption
       fetch
       kitty
-      password
       sway
       waybar
       zellij

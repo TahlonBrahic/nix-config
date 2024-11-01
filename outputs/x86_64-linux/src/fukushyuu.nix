@@ -19,11 +19,9 @@
     amy.homeManager = with optionalModules.home; [
       chrome
       discord
-      encryption
       fetch
+      fish
       gaming
-      obsidian
-      password
       protonGTK
       streaming
       zellij
