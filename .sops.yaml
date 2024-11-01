@@ -1,7 +1,9 @@
 keys:
-  - &tahlon age1jl5n7apeujqh8sjyjxrpr8hkg7l8fyp47f77sukw3ysvuqk8hykstm824g
+  - &yoru age1jl5n7apeujqh8sjyjxrpr8hkg7l8fyp47f77sukw3ysvuqk8hykstm824g
+  - &shilo age1mm7xrs8rh0hllmw689406ah358tl9rjftedy6xu50w4qyyjwnsksnx6vu3
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
-          - *tahlon
+          - *yoru
+          - *shilo

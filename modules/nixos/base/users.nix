@@ -2,6 +2,7 @@
   users,
   lib,
   pkgs,
+  config,
   ...
 }: let
   inherit (lib.attrsets) genAttrs;
@@ -9,7 +10,7 @@
     genAttrs users
     (user: {
       home = "/home/${user}";
-      initialPassword = "temp";
+      hashedPasswordFile = config.sops.secrets."${user}/hashedPasswordFile".path;
       isNormalUser = true;
       shell = pkgs.fish;
       extraGroups = [
