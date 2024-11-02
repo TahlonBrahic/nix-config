@@ -17,11 +17,8 @@
     parted
     ethtool
     just
-    neofetch
     vim
     age
-    gnupg
-    broot
     tmux
     curl
     htop

@@ -9,8 +9,6 @@
     };
   };
 
-  services.dbus.apparmor = "enabled";
-
   environment.systemPackages = with pkgs; [
     apparmor-bin-utils
     apparmor-profiles
@@ -20,4 +18,15 @@
     apparmor-utils
     libapparmor
   ];
+
+  services = {
+    dbus.apparmor = "enabled";
+
+    clamav = {
+      daemon.enable = true;
+      updater.enable = true;
+    };
+
+    fail2ban.enable = true;
+  };
 }

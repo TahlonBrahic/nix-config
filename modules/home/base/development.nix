@@ -26,6 +26,11 @@
     age
     sops
     rclone
+
+    # Archival
+    gzip
+    zip
+    zstd
   ];
 
   programs = {

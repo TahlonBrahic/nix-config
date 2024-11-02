@@ -108,4 +108,11 @@ else
     };
 
     boot.initrd.availableKernelModules = ["ahci" "xhci_pci" "virtio_pci" "virtio_scsi" "thunderbolt" "sd_mod" "sr_mod" "virtio_blk" "nvme" "usb_storage" "sd_mod" "usbhid"];
+
+    zramSwap = {
+      enable = true;
+      algorithm = "zstd";
+      priority = 5;
+      memoryPercent = 50;
+    };
   }

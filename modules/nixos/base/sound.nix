@@ -11,7 +11,6 @@
     # wireplumber.enable = true;
   };
 
-  # This block seems to contradict itself but it is meant to grab pactl
   environment.systemPackages = with pkgs; [
     # pulseaudio
     alsa-utils
