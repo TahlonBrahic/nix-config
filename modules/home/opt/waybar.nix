@@ -19,6 +19,16 @@ in {
     home.packages = with pkgs; [
       wlogout
       wlr-randr
+      wl-clipboard
+      wl-kbptr
+      wl-gammactl
+      wl-screenrec
+      wl-mirror
+      wineWowPackages.wayland
+      clipman
+      grim
+      slurp
+      swappy
       brightnessctl
       wev
       playerctl
