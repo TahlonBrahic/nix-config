@@ -16,18 +16,11 @@
     ];
 
     tbrahic.homeManager = with optionalModules.home; [
-      broot
-      encryption
       fetch
       firefox
       fish
-      fzf
       jeezyvim
-      lsd
-      nix-index
-      starship
       zellij
-      zoxide
     ];
   };
 

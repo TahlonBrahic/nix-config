@@ -18,24 +18,16 @@
     ];
 
     tahlon.homeManager = with optionalModules.home; [
-      encryption
       fetch
       firefox
       fish
-      fzf
-      gpg
       hyprland
       jeezyvim
-      kdeconnect
       kitty
       librewolf
-      nix-index
-      password
       rofi
-      starship
       waybar
       zellij
-      zoxide
     ];
   };
 
