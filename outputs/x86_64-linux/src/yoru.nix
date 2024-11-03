@@ -26,7 +26,6 @@
       librewolf
       rofi
       waybar
-      zellij
     ];
   };
 
