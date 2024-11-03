@@ -35,10 +35,10 @@ in {
         apply_gpu_optimizations = "accept-responsibility";
         gpu_device = 0;
       };
-      custom = {
-        start = startscript.outPath;
-        end = endscript.outPath;
-      };
+      #custom = {
+      #  start = startscript.outPath;
+      #  end = endscript.outPath;
+      #};
     };
   };
 
