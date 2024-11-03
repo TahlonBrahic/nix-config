@@ -8,4 +8,5 @@
       powerKeyLongPress = "poweroff";
     };
   };
+  hardware.sensor.iio.enable = true;
 }
