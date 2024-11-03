@@ -22,7 +22,7 @@ in {
       wl-clipboard
       wl-kbptr
       wl-gammactl
-      wl-screenrec
+      #wl-screenrec
       wl-mirror
       wineWowPackages.wayland
       clipman
