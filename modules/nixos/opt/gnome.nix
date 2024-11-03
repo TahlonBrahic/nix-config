@@ -28,8 +28,17 @@ in {
   config = lib.mkIf cfg.enable {
     services.xserver = {
       enable = true;
-      displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
+      desktopManager.gnome = {
+        enable = true;
+        debug = true;
+      };
+      displayManager.gdm = {
+        enable = true;
+        wayland = true;
+        debug = true;
+        settings = {
+        };
+      };
       xkb.layout = "us";
     };
 
