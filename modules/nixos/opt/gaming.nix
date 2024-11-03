@@ -1,11 +1,10 @@
 {
   config,
   pkgs,
-  inputs,
   lib,
   ...
 }: let
-  inherit (inputs) nix-gaming;
+  #inherit (inputs) nix-gaming;
   inherit (lib) optionalString;
   hyprlandCfg = config.wayland.windowManager.hyprland.enable;
   hyprlandGamemode = config.hyprland.gamemode;
@@ -45,9 +44,9 @@ in {
 
   # REF: https://github.com/fufexan/nix-gaming/#pipewire-low-latency
   services.pipewire.lowLatency.enable = true;
-  imports = [
-    nix-gaming.nixosModules.pipewireLowLatency
-  ];
+  #imports = [
+  #  nix-gaming.nixosModules.pipewireLowLatency
+  #];
 
   programs.steam = {
     # Some location that should be persistent:
