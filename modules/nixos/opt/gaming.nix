@@ -74,11 +74,4 @@ in {
         ];
     };
   };
-
-  # Emulation, WINE, Proton, ect...
-  environment.systemPackages = [
-    lutris
-    bottles
-    cartidges
-  ];
 }
