@@ -1,30 +1,20 @@
 {
   config,
   pkgs,
-  lib,
   inputs,
+  lib,
   ...
 }: let
   inherit (inputs) nix-gaming;
-  programs = lib.makeBinPath [
-    config.programs.hyprland.package
-    pkgs.coreutils
-    pkgs.power-profiles-daemon
-  ];
-  # TODO: Add logic for scripts for different compositors
-  startscript = pkgs.writeShellScript "gamemode-start" ''
-    export PATH=$PATH:${programs}
-    export HYPRLAND_INSTANCE_SIGNATURE=$(ls -1 /tmp/hypr | tail -1)
-    hyprctl --batch 'keyword decoration:blur 0 ; keyword animations:enabled 0 ; keyword misc:vfr 0'
-    powerprofilesctl set performance
-  '';
+  inherit (lib) optionalString;
+  hyprlandCfg = config.wayland.windowManager.hyprland.enable;
+  hyprlandGamemode = config.hyprland.gamemode;
+  gnomeCfg = config.desktopManager.gnome.enable;
+  gnomeGamemode = config.gnome.gamemode;
 
-  endscript = pkgs.writeShellScript "gamemode-end" ''
-    export PATH=$PATH:${programs}
-    export HYPRLAND_INSTANCE_SIGNATURE=$(ls -1 /tmp/hypr | tail -1)
-    hyprctl --batch 'keyword decoration:blur 1 ; keyword animations:enabled 1 ; keyword misc:vfr 1'
-    powerprofilesctl set power-saver
-  '';
+  startscript = (optionalString gnomeCfg gnomeGamemode.startscript) + (optionalString hyprlandCfg hyprlandGamemode.startscript);
+
+  endscript = (optionalString gnomeCfg gnomeGamemode.endscript) + (optionalString hyprlandCfg hyprlandGamemode.startscript);
 in {
   /*
   Usage:
@@ -59,7 +49,7 @@ in {
     nix-gaming.nixosModules.pipewireLowLatency
   ];
 
-    programs.steam = {
+  programs.steam = {
     # Some location that should be persistent:
     #   ~/.local/share/Steam - The default Steam install location
     #   ~/.local/share/Steam/steamapps/common - The default Game install location
