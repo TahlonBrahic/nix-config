@@ -25,6 +25,12 @@
       streaming
       zellij
     ];
+
+    tahlon.homeManager = with optionalModules.home; [
+      firefox
+      zsh
+      zellij
+    ];
   };
 
   users = ["amy" "tahlon"];
