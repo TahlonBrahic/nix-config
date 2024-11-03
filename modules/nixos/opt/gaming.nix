@@ -36,7 +36,7 @@
   };
 
   # REF: https://github.com/fufexan/nix-gaming/#pipewire-low-latency
-  services.pipewire.lowLatency.enable = true;
+  #services.pipewire.lowLatency.enable = true;
   #imports = [
   #  nix-gaming.nixosModules.pipewireLowLatency
   #];
