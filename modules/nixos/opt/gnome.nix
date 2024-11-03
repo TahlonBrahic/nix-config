@@ -7,8 +7,8 @@
   cfg = config.gnome;
 in {
   options = {
-    gnome = lib.mkOption {
-      enable = {
+    gnome = {
+      enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
         example = false;
