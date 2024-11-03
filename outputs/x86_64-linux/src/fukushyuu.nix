@@ -11,9 +11,8 @@
 
   modules = {
     nixos = with optionalModules.nixos; [
-      fhs
       gnome
-      steam
+      gaming
     ];
 
     amy.homeManager = with optionalModules.home; [
