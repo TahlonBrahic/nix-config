@@ -1,20 +1,13 @@
+{pkgs, ...}:
+#inherit (inputs) nix-gaming;
+#inherit (lib) optionalString;
+#hyprlandCfg = config.wayland.windowManager.hyprland.enable;
+#hyprlandGamemode = config.hyprland.gamemode;
+#gnomeCfg = config.desktopManager.gnome.enable;
+#gnomeGamemode = config.gnome.gamemode;
+#startscript = (optionalString gnomeCfg gnomeGamemode.startscript) + (optionalString hyprlandCfg hyprlandGamemode.startscript);
+#endscript = (optionalString gnomeCfg gnomeGamemode.endscript) + (optionalString hyprlandCfg hyprlandGamemode.startscript);
 {
-  config,
-  pkgs,
-  lib,
-  ...
-}: let
-  #inherit (inputs) nix-gaming;
-  inherit (lib) optionalString;
-  hyprlandCfg = config.wayland.windowManager.hyprland.enable;
-  hyprlandGamemode = config.hyprland.gamemode;
-  gnomeCfg = config.desktopManager.gnome.enable;
-  gnomeGamemode = config.gnome.gamemode;
-
-  startscript = (optionalString gnomeCfg gnomeGamemode.startscript) + (optionalString hyprlandCfg hyprlandGamemode.startscript);
-
-  endscript = (optionalString gnomeCfg gnomeGamemode.endscript) + (optionalString hyprlandCfg hyprlandGamemode.startscript);
-in {
   /*
   Usage:
     1. For games/launchers which integrate GameMode support:
