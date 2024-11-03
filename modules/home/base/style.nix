@@ -41,6 +41,8 @@ in {
     targets = {
       rofi.enable = true;
       firefox.enable = false;
+      gnome.enable = false;
+      zellij.enable = false;
     };
   };
 }
