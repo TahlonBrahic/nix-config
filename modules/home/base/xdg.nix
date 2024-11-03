@@ -4,7 +4,7 @@ in {
   xdg = {
     userDirs = {
       enable = true;
-      createDirectories = true;
+      createDirectories = false;
       download = "${dir}/inbox";
       documents = "${dir}/documents";
       extraConfig = {

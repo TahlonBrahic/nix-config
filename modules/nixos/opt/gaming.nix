@@ -4,9 +4,7 @@
   lib,
   inputs,
   ...
-}:
-# REF: https://github.com/fufexan/dotfiles/blob/483680e121b73db8ed24173ac9adbcc718cbbc6e/system/programs/gamemode.nix
-let
+}: let
   inherit (inputs) nix-gaming;
   programs = lib.makeBinPath [
     config.programs.hyprland.package
@@ -14,8 +12,6 @@ let
     pkgs.power-profiles-daemon
   ];
   # TODO: Add logic for scripts for different compositors
-  # NOTE: In the mean time these will be deactived
-  /*
   startscript = pkgs.writeShellScript "gamemode-start" ''
     export PATH=$PATH:${programs}
     export HYPRLAND_INSTANCE_SIGNATURE=$(ls -1 /tmp/hypr | tail -1)
@@ -29,13 +25,8 @@ let
     hyprctl --batch 'keyword decoration:blur 1 ; keyword animations:enabled 1 ; keyword misc:vfr 1'
     powerprofilesctl set power-saver
   '';
-  */
 in {
   /*
-  NOTE: Optimize Linux system performance on demand
-  https://github.com/FeralInteractive/GameMode
-  https://wiki.archlinux.org/title/Gamemode
-
   Usage:
     1. For games/launchers which integrate GameMode support:
        https://github.com/FeralInteractive/GameMode#apps-with-gamemode-integration
@@ -49,14 +40,16 @@ in {
     settings = {
       general = {
         softrealtime = "auto";
-        renice = 15;
+        renice = -5;
       };
-      /*
+      gpu = {
+        apply_gpu_optimizations = "accept-responsibility";
+        gpu_device = 0;
+      };
       custom = {
         start = startscript.outPath;
         end = endscript.outPath;
       };
-      */
     };
   };
 
@@ -65,4 +58,30 @@ in {
   imports = [
     nix-gaming.nixosModules.pipewireLowLatency
   ];
+
+    programs.steam = {
+    # Some location that should be persistent:
+    #   ~/.local/share/Steam - The default Steam install location
+    #   ~/.local/share/Steam/steamapps/common - The default Game install location
+    #   ~/.steam/root        - A symlink to ~/.local/share/Steam
+    #   ~/.steam             - Some Symlinks & user info
+    enable = true;
+
+    # NOTE: Fix Gamescope inside Steam
+    package = pkgs.steam.override {
+      extraPkgs = pkgs:
+        with pkgs; [
+          keyutils
+          libkrb5
+          libpng
+          libpulseaudio
+          libvorbis
+          stdenv.cc.cc.lib
+          xorg.libXcursor
+          xorg.libXi
+          xorg.libXinerama
+          xorg.libXScrnSaver
+        ];
+    };
+  };
 }

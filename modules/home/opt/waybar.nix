@@ -29,6 +29,7 @@ in {
       grim
       slurp
       swappy
+      wpa_supplicant_gui
       brightnessctl
       wev
       playerctl

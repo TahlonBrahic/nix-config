@@ -11,7 +11,6 @@
 
   modules = {
     nixos = with optionalModules.nixos; [
-      fhs
       greetd
     ];
 

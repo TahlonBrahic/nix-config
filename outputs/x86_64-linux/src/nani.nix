@@ -12,7 +12,6 @@
   modules = {
     nixos = with optionalModules.nixos; [
       greetd
-      fhs
     ];
 
     tahlon.homeManager = with optionalModules.home; [

@@ -1,4 +1,10 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
+  imports = [inputs.nix-index-database.hmModules.nix-index];
+
   home.packages = with pkgs; [
     nix-output-monitor
     hydra-check
@@ -7,5 +13,16 @@
     nix-tree
   ];
 
-  nixpkgs.config.allowUnfree = true;
+  programs = {
+    nix-index = {
+      enable = true;
+      enableFishIntegration = true;
+      enableZshIntegration = true;
+    };
+    nix-index-database.comma.enable = true;
+  };
+
+  nixpkgs.overlays = [
+    inputs.nur.hmModules.nur
+  ];
 }
