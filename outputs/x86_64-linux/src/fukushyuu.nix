@@ -23,13 +23,11 @@
       gaming
       protonGTK
       streaming
-      zellij
     ];
 
     tahlon.homeManager = with optionalModules.home; [
       firefox
       zsh
-      zellij
     ];
   };
 
