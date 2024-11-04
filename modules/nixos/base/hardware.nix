@@ -10,7 +10,7 @@
 # TODO: Add option for WSL host
 if hostName == "shilo"
 then {}
-else if hostname == "fukushyuu"
+else if hostName == "fukushyuu"
 then {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
