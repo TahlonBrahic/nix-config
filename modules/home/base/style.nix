@@ -42,7 +42,6 @@ in {
       rofi.enable = true;
       firefox.enable = false;
       gnome.enable = false;
-      zellij.enable = false;
     };
   };
 }
