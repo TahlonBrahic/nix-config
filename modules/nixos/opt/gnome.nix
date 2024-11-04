@@ -32,14 +32,15 @@ in {
         enable = true;
         debug = true;
       };
-      displayManager.gdm = {
-        enable = true;
-        wayland = true;
-        debug = true;
-        settings = {
-        };
-      };
-      xkb.layout = "us";
+      #displayManager.gdm = {
+      #  enable = true;
+      #  wayland = true;
+      #  debug = true;
+      #  settings = {
+      #  };
+      #};
+      #xkb.layout = "us";
+      displayManager.lightdm.enable = true;
     };
 
     programs.dconf.enable = true;
