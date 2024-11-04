@@ -22,7 +22,7 @@
     settings = {
       general = {
         softrealtime = "auto";
-        renice = -5;
+        renice = 15;
       };
       gpu = {
         apply_gpu_optimizations = "accept-responsibility";
