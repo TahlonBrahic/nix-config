@@ -18,7 +18,6 @@
     tbrahic.homeManager = with optionalModules.home; [
       fetch
       firefox
-      fish
       jeezyvim
       zellij
     ];
