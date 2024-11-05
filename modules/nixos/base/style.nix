@@ -40,6 +40,7 @@
     targets = {
       grub.enable = false;
       gnome.enable = false;
+      lightdm.enable = false;
     };
 
     polarity = "dark";

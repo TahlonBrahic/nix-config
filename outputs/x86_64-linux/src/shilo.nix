@@ -20,6 +20,7 @@
       firefox
       fish
       jeezyvim
+      zellij
     ];
   };
 
