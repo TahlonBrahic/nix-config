@@ -25,8 +25,8 @@ in
         home-manager.nixosModules.home-manager
         {
           home-manager = {
-            useGlobalPkgs = false;
-            useUserPackages = false;
+            useGlobalPkgs = true;
+            useUserPackages = true;
             backupFileExtension = "backup_delete";
             extraSpecialArgs = specialArgs;
             users = lib.attrsets.genAttrs users (user: {
