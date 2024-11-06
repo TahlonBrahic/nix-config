@@ -27,7 +27,6 @@
 
     tahlon.homeManager = with optionalModules.home; [
       firefox
-      zsh
     ];
   };
 

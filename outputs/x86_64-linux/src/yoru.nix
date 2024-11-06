@@ -19,7 +19,6 @@
     tahlon.homeManager = with optionalModules.home; [
       fetch
       firefox
-      fish
       hyprland
       jeezyvim
       kitty

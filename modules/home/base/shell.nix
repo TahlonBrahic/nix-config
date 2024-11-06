@@ -2,15 +2,21 @@
   pkgs,
   config,
   lib,
+  user,
   ...
 }: let
-  cfg = config.customShell;
+  cfg = config.fuyuShell;
 in {
   options = {
-    customShell = {
+    fuyuShell = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
+      };
+      defaultShell = lib.mkOption {
+        type = lib.types.enum [pkgs.bash pkgs.fish pkgs.sh pkgs.zsh];
+        default = pkgs.fish;
+        example = pkgs.sh;
       };
       wsl.enable = lib.mkOption {
         type = lib.types.bool;
@@ -22,7 +28,22 @@ in {
 
   config = lib.mkIf cfg.enable {
     programs = {
-      fish = {
+      bash = lib.mkIf (cfg.defaultShell
+        == pkgs.bash) {
+        enable = true;
+        shellOptions = [
+          "vi"
+        ];
+        shellAliases = {
+          la = "ls -al";
+          ll = "ls -l";
+          ".." = "cd ..";
+          switch = "sudo nixos-rebuild switch";
+        };
+      };
+
+      fish = lib.mkIf (cfg.defaultShell
+        == pkgs.fish) {
         enable = true;
         interactiveShellInit = lib.strings.concatStringsSep " " [
           ''
@@ -100,8 +121,28 @@ in {
       };
     };
 
-    home = {
-      sessionVariables.SHELL = "/etc/profiles/per-user/${config.home.username}/bin/fish";
+    programs.zsh = lib.mkIf (cfg.defaultShell
+      == pkgs.zsh) {
+      enable = true;
+      enableCompletion = true;
+      oh-my-zsh = {
+        enable = true;
+        plugins = [
+          "git"
+          "kubectl"
+          "history"
+          "emoji"
+          "encode64"
+          "sudo"
+          "copyfile"
+          "copybuffer"
+          "history"
+        ];
+        theme = "jonathan";
+      };
+      #environment.pathsToLinks = ["/share/bash-completion"];
+      #home.sessionVariables.SHELL = "/etc/profiles/per-user/${user}/bin/fish";
+      #home.sessionVariables.SHELL = lib.strings.optionalString (cfg.defaultShell == pkgs.zsh) "/etc/profiles/per-user/${config.home.username}/bin/zsh";
     };
   };
 }
