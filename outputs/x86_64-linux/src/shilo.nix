@@ -18,7 +18,7 @@
     tbrahic.homeManager = with optionalModules.home; [
       fetch
       firefox
-      jeezyvim
+      nixvim
       zellij
     ];
   };
