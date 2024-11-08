@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     which
-    tree
+    cifs-utils
     rsync
     sysstat
     iotop
