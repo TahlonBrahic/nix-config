@@ -20,9 +20,9 @@
       fetch
       firefox
       hyprland
-      jeezyvim
       kitty
       librewolf
+      nixvim
       rofi
       waybar
       zellij
