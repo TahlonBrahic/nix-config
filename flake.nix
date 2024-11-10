@@ -140,6 +140,11 @@
     };
     jeezyvim = {
       url = "github:LGUG2Z/JeezyVim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    fuyuvim = {
+      url = "github:TahlonBrahic/fuyu-no-neovim";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     base16 = {
       url = "github:SenchoPens/base16.nix";
