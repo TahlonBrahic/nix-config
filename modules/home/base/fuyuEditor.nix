@@ -20,6 +20,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = cfg.defaultEditor;
+    home.packages = [ cfg.defaultEditor ];
   };
 }

@@ -18,7 +18,6 @@
       librewolf
       fetch
       kitty
-      sway
       waybar
       zellij
     ];

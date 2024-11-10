@@ -22,7 +22,6 @@
       hyprland
       kitty
       librewolf
-      nixvim
       rofi
       waybar
       zellij

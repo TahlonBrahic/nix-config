@@ -19,7 +19,6 @@
       chrome
       discord
       fetch
-      fish
       gaming
       protonGTK
       streaming
