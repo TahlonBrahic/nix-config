@@ -4,10 +4,10 @@
   config,
   ...
 }: let
-  cfg = config.customDevelopmentEnvironment;
+  cfg = config.fuyuEnv;
 in {
   options = {
-    customDevelopmentEnvironment.enable = lib.mkOption {
+    fuyuEnv.enable = lib.mkOption {
       default = true;
       example = false;
       description = "Whether to enable custom xdg directory handling.";

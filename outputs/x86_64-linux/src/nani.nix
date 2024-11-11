@@ -19,7 +19,6 @@
       fetch
       kitty
       waybar
-      zellij
     ];
   };
 
