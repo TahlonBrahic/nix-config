@@ -3,15 +3,14 @@
   lib,
   ...
 }: let
-  cfg = config.customXDG;
+  cfg = config.fuyuHome;
   dir = "${config.home.homeDirectory}";
 in {
   options = {
-    customXDG = {
-      enable = lib.mkEnableOption {
+    fuyuHome = {
+      enable = lib.mkOption {
         default = true;
         example = false;
-        description = "Whether to enable custom xdg directory handling.";
       };
     };
   };
@@ -36,5 +35,24 @@ in {
         };
       };
     };
+
+    home = {
+      homeDirectory = "/home/${config.home.username}";
+      stateVersion = "24.05";
+    };
+
+    systemd.user.targets.tray = {
+      Unit = {
+        Description = "Home Manager System Tray";
+        Requires = ["graphical-session-pre.target"];
+      };
+    };
+
+    home.sessionVariables = {
+      XDG_RUNTIME_VARIABLES = "/run/user/$UID";
+      EDITOR = "nvim";
+    };
+
+    programs.home-manager.enable = true;
   };
 }

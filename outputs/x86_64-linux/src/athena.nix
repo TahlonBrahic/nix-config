@@ -17,7 +17,6 @@
     tahlon.homeManager = with optionalModules.home; [
       sway
       kitty
-      zellij
     ];
   };
 

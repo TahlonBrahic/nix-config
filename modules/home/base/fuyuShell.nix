@@ -2,7 +2,6 @@
   pkgs,
   config,
   lib,
-  user,
   ...
 }: let
   cfg = config.fuyuShell;
@@ -13,16 +12,12 @@ in {
         type = lib.types.bool;
         default = true;
       };
-      defaultShell = lib.mkOption {
-        type = lib.types.enum [pkgs.bash pkgs.fish pkgs.sh pkgs.zsh];
-        default = pkgs.fish;
-        example = pkgs.sh;
-      };
-      wsl.enable = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        example = true;
-      };
+      wsl.enable = lib.mkEnableOption "WSL Integration";
+      defaultShell =
+        lib.mkPackageOption pkgs ["bash" "fish" "sh" "zsh"]
+        {
+          default = "fish";
+        };
     };
   };
 
@@ -140,9 +135,27 @@ in {
         ];
         theme = "jonathan";
       };
-      #environment.pathsToLinks = ["/share/bash-completion"];
-      #home.sessionVariables.SHELL = "/etc/profiles/per-user/${user}/bin/fish";
-      #home.sessionVariables.SHELL = lib.strings.optionalString (cfg.defaultShell == pkgs.zsh) "/etc/profiles/per-user/${config.home.username}/bin/zsh";
+    };
+    home.sessionVariables.SHELL = lib.strings.concatStringsSep "user-space error" [
+      (
+        lib.strings.optionalString
+        (cfg.defaultShell
+          == pkgs.fish)
+        "/etc/profiles/per-user/${config.home.username}/bin/fish"
+      )
+      (
+        lib.strings.optionalString
+        (cfg.defaultShell
+          == pkgs.zsh)
+        "/etc/profiles/per-user/${config.home.username}/bin/zsh"
+      )
+    ];
+
+    programs.zellij = {
+      enable = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+      enableZshIntegration = true;
     };
   };
 }
