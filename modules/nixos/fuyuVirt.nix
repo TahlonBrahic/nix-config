@@ -1,4 +1,11 @@
-{pkgs, ...}: {
+{
+  config,
+  hostName,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}: {
   virtualisation = {
     docker = {
       enable = true;
@@ -22,4 +29,21 @@
     qemu_kvm
     qemu
   ];
+  imports = [inputs.nixos-wsl.nixosModules.wsl];
+
+  wsl = {
+    enable = true;
+    defaultUser = "tbrahic";
+    startMenuLaunchers = true;
+
+    wslConf = {
+      automount.root = "/mnt";
+      interop.appendWindowsPath = false;
+      network.generateHosts = false;
+      network.hostname = "${hostName}";
+    };
+  };
+
+  # Enable auto-generated name servers
+  environment.etc."resolv.conf".source = /etc/resolv.conf;
 }
