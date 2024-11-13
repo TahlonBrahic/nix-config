@@ -10,7 +10,7 @@ in {
     fuyuEnv.enable = lib.mkOption {
       default = true;
       example = false;
-      description = "Whether to enable custom xdg directory handling.";
+      description = "Whether to enable the custom fuyu development environment.";
     };
   };
 

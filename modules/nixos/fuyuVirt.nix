@@ -14,6 +14,9 @@ in {
         type = lib.types.bool;
         default = true;
       };
+      wsl = {
+        enable = lib.mkEnableOption "WSL Integration";
+      };
     };
   };
 
@@ -43,7 +46,7 @@ in {
     ];
     imports = [inputs.nixos-wsl.nixosModules.wsl];
 
-    wsl = {
+    wsl = lib.mkIf cfg.wsl.enable {
       enable = true;
       defaultUser = "tbrahic";
       startMenuLaunchers = true;
@@ -57,6 +60,8 @@ in {
     };
 
     # Enable auto-generated name servers
-    environment.etc."resolv.conf".source = /etc/resolv.conf;
+    environment.etc."resolv.conf".source = lib.mkIf cfg.wsl.enable /etc/resolv.conf;
+
+    fuyuBoot.enable = lib.mkIf cfg.wsl.enable lib.mkForce false;
   };
 }
