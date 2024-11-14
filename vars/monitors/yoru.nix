@@ -1,4 +1,5 @@
 {
+  # TODO: Define monitors per fuyu-no-kosei specifications
   WAYLAND_DISPLAY = "wayland-1";
   ASPECT_RATIO = "16:10";
 
