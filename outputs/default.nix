@@ -1,5 +1,5 @@
 {inputs}: let
-  inherit (inputs) nixpkgs nixpkgs-stable;
+  inherit (inputs) nixpkgs;
   inherit (nixpkgs) lib;
   inherit (lib) genAttrs attrsets;
 
@@ -10,7 +10,6 @@
   arguments = forAllSystems (system: {
     inherit inputs system lib;
     inherit (pkgs.${system}) pkgs;
-    pkgs-stable = pkgs-stable.${system}.pkgs;
     inherit (localLib.${system}) localLib;
     inherit (localLib.${system}.localLib) vars;
   });
@@ -32,10 +31,6 @@
       config.allowUnfree = true;
       inherit (localLib.${system}.localLib) overlays;
     });
-
-  pkgs-stable = forAllSystems (system: import nixpkgs-stable {inherit system;});
-
-  ### FLAKE OUTPUTS ###
 
   formatter = forAllSystems (system: pkgs.${system}.alejandra);
 

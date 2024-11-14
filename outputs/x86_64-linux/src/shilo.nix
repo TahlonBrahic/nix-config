@@ -2,24 +2,12 @@
   inputs,
   system,
   lib,
-  localLib,
+  fuyuNoLib,
   pkgs,
-  pkgs-stable,
   vars,
   overlays,
 }: let
-  inherit (localLib) optionalModules systemTemplate;
-
-  modules = {
-    nixos = with optionalModules.nixos; [
-      wsl
-    ];
-
-    tbrahic.homeManager = with optionalModules.home; [
-      fetch
-      firefox
-    ];
-  };
+  inherit (fuyuNoLib) systemTemplate;
 
   users = ["tbrahic"];
 
@@ -27,7 +15,7 @@
 in {
   nixosConfigurations = {
     ${hostName} = systemTemplate {
-      inherit inputs system lib pkgs pkgs-stable localLib vars overlays modules users hostName;
+      inherit inputs system lib pkgs fuyuNoLib vars overlays users hostName;
     };
   };
 }

@@ -2,30 +2,12 @@
   inputs,
   system,
   lib,
-  localLib,
+  fuyuNoLib,
   pkgs,
-  pkgs-stable,
   vars,
   overlays,
 }: let
-  inherit (localLib) optionalModules systemTemplate;
-
-  modules = {
-    nixos = with optionalModules.nixos; [
-      greetd
-      laptop
-    ];
-
-    tahlon.homeManager = with optionalModules.home; [
-      fetch
-      firefox
-      hyprland
-      kitty
-      librewolf
-      rofi
-      waybar
-    ];
-  };
+  inherit (fuyuNoLib) systemTemplate;
 
   users = ["tahlon"];
 
@@ -33,7 +15,7 @@
 in {
   nixosConfigurations = {
     ${hostName} = systemTemplate {
-      inherit inputs system lib pkgs pkgs-stable localLib vars overlays modules users hostName;
+      inherit inputs system lib pkgs fuyuNoLib vars overlays users hostName;
     };
   };
 }
