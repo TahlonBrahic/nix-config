@@ -1,8 +1,16 @@
-{hostName, ...}:
-if hostName == "shilo"
-then {}
-else {
-  config = {
+{
+  config,
+  lib,
+  ...
+}: let
+  cfg = config.fuyuBoot;
+in {
+  options.fuyuBoot.enable = lib.mkOption {
+    type = lib.types.bool;
+    default = lib.mkDefault true;
+  };
+
+  config = lib.mkIf cfg.enable {
     boot.loader = {
       grub = {
         enable = true;
