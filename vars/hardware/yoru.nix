@@ -1,7 +1,3 @@
 {
-  hostName = "yoru";
-  bootFT = "vfat";
-  initrdKernelModules = ["dm-snapshot"];
-  kernelModules = ["kvm-intel"];
-  extraModulePackages = [];
+  # TODO: re-import hardware-configuration.nix
 }
