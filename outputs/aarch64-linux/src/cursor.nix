@@ -2,20 +2,12 @@
   inputs,
   system,
   lib,
-  localLib,
+  fuyuNoLib,
   pkgs,
   vars,
   overlays,
 }: let
-  inherit (localLib) optionalModules droidTemplate;
-
-  modules = {
-    nixos = with optionalModules.nixos; [
-      fhs
-    ];
-
-    tahlon.homeManager = with optionalModules.home; [fish];
-  };
+  inherit (fuyuNoLib) droidTemplate;
 
   users = ["tahlon"];
 
@@ -23,7 +15,7 @@
 in {
   nixOnDroidConfigurations = {
     ${hostName} = droidTemplate {
-      inherit inputs system lib pkgs localLib vars overlays modules users hostName;
+      inherit inputs system lib pkgs fuyuNoLib vars overlays users hostName;
     };
   };
 }
