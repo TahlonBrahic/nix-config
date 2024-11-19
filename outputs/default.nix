@@ -1,6 +1,6 @@
 {inputs}: let
   # Rebind `inputs` to `inputs.fuyuNoKosei` as all inputs are handled by fuyuNoKosei
-  inherit (inputs.fuyuNoKosei) inputs;
+  inherit inputs;
 
   # perSystem function to handle system-specific configurations
   perSystem = {system, ...}: let
