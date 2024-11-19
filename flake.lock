@@ -553,11 +553,11 @@
         "walls": "walls"
       },
       "locked": {
-        "lastModified": 1732068154,
-        "narHash": "sha256-wWBnt43NOyPAk17vUnbWHQ8oPHydoi/e6KSz8sm8lk8=",
+        "lastModified": 1732074539,
+        "narHash": "sha256-zLjtE1MUPQl7yPlMEFZi13nROBnRWLJU9QBA/I4u6bw=",
         "owner": "TahlonBrahic",
         "repo": "fuyu-no-kosei",
-        "rev": "a745cce7d2b23191cfe57f84b6ceab696ab0fc36",
+        "rev": "da6783c54040175674961a230e5c32c69f42d877",
         "type": "github"
       },
       "original": {
