@@ -8,25 +8,26 @@
   in
     import nixpkgs,
   ...
-}:
-pkgs.mkShell {
-  NIX_CONFIG = "extra-experimental-features = nix-command flakes";
-  nativeBuildInputs = with pkgs; [
-    # Nix
-    nix
-    home-manager
+}: {
+  default = pkgs.mkShell {
+    NIX_CONFIG = "extra-experimental-features = nix-command flakes";
+    nativeBuildInputs = with pkgs; [
+      # Nix
+      nix
+      home-manager
 
-    git
-    # Formatters & Linters
-    bashInteractive
-    alejandra
-    deadnix
-    statix
-    typos
-    nodePackages.prettier
+      git
+      # Formatters & Linters
+      bashInteractive
+      alejandra
+      deadnix
+      statix
+      typos
+      nodePackages.prettier
 
-    # Secrets Management
-    sops
-    age
-  ];
+      # Secrets Management
+      sops
+      age
+    ];
+  };
 }
