@@ -553,11 +553,11 @@
         "walls": "walls"
       },
       "locked": {
-        "lastModified": 1732074539,
-        "narHash": "sha256-zLjtE1MUPQl7yPlMEFZi13nROBnRWLJU9QBA/I4u6bw=",
+        "lastModified": 1732152797,
+        "narHash": "sha256-uSOOFqe0bgShu69CQ90DoCmAt+odVm0Lkf0861Zaj6s=",
         "owner": "TahlonBrahic",
         "repo": "fuyu-no-kosei",
-        "rev": "da6783c54040175674961a230e5c32c69f42d877",
+        "rev": "4a75005e33f034b2da38db65ec5700e87385ba67",
         "type": "github"
       },
       "original": {
@@ -1420,11 +1420,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1731676054,
-        "narHash": "sha256-OZiZ3m8SCMfh3B6bfGC/Bm4x3qc1m2SVEAlkV6iY7Yg=",
+        "lastModified": 1732014248,
+        "narHash": "sha256-y/MEyuJ5oBWrWAic/14LaIr/u5E0wRVzyYsouYY3W6w=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "5e4fbfb6b3de1aa2872b76d49fafc942626e2add",
+        "rev": "23e89b7da85c3640bbc2173fe04f4bd114342367",
         "type": "github"
       },
       "original": {
