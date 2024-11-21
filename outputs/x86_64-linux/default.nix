@@ -6,7 +6,7 @@
   inherit (inputs) haumea;
 
   data = haumea.lib.load {
-    src = ./src;
+    src = ./yoru/yoru.nix;
     inputs = arguments;
   };
 
