@@ -1,23 +1,13 @@
 {
   config,
-  lib,
   modulesPath,
+  lib,
   ...
-}: let
-  hostName = "yoru";
-  users = ["tahlon"];
-in {
+}: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
-
   config = {
-    fuyuNoKosei = {
-      compositor.hyprland.enable = true;
-      services.laptop.enable = true;
-      yubikey.enable = true;
-    };
-
     boot = {
       initrd = {
         availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "usbhid"];
