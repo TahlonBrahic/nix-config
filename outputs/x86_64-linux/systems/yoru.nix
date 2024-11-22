@@ -8,16 +8,21 @@
 }: let
   hostName = "yoru";
   users = ["tahlon"];
-  "tahlon" = {
-    config = {
-      home.username = "tahlon";
-      hyprland.enable = true;
+  fuyuConfig = {
+    fuyuNoKosei = {
+      compositor.hyprland.enable = true;
+      services.laptop.enable = true;
+      yubikey.enable = true;
+    };
+
+    users."tahlon" = {
+      config = {
+        hyprland.enable = true;
+      };
     };
   };
-  fuyuNoKosei = {
-    compositor.hyprland.enable = true;
-    services.laptop.enable = true;
-    yubikey.enable = true;
-  };
-in
-  lib.systemTemplate {inherit inputs pkgs system hostName users lib overlays;}
+in {
+  nixosConfigurations =
+    lib.systemTemplate
+    {inherit inputs pkgs system hostName fuyuConfig users lib overlays;};
+}
