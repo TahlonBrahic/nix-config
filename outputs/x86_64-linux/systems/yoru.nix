@@ -8,19 +8,21 @@
 }: let
   hostName = "yoru";
   users = ["tahlon"];
-  fuyuConfig = {
-    fuyuNoKosei = {
-      compositor.hyprland.enable = true;
-      services.laptop.enable = true;
-      yubikey.enable = true;
-    };
-
-    users."tahlon" = {
-      config = {
-        hyprland.enable = true;
+  fuyuConfig = [
+    {
+      fuyuNoKosei = {
+        compositor.hyprland.enable = true;
+        services.laptop.enable = true;
+        yubikey.enable = true;
       };
-    };
-  };
+
+      users."tahlon" = {
+        config = {
+          hyprland.enable = true;
+        };
+      };
+    }
+  ];
 in {
   nixosConfigurations =
     lib.systemTemplate

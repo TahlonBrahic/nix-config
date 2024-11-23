@@ -13,7 +13,7 @@
     args = forEachSystem (system: rec {
       inputs = fuyuNoKosei.inputs // {inherit nixosModules homeManagerModules;};
       inherit system;
-      inherit (pkgs.${system}) pkgs;
+      pkgs = fuyuNoKosei.pkgs.${system};
       lib = fuyuNoKosei.lib.${system};
     });
 
