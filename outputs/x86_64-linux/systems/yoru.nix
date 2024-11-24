@@ -11,6 +11,7 @@
   fuyuConfig = [
     {
       fuyuNoKosei = {
+        compositor.enable = true;
         compositor.hyprland.enable = true;
         services.laptop.enable = true;
         yubikey.enable = true;
