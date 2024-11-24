@@ -23,12 +23,12 @@
         };
       };
     }
+
+    import
+    ./hardware/hardware-configuration.nix
   ];
 in {
-  imports = [./hardware-configuration.nix];
-  config = {
-    nixosConfigurations =
-      lib.systemTemplate
-      {inherit inputs pkgs system hostName fuyuConfig users lib overlays;};
-  };
+  nixosConfigurations =
+    lib.systemTemplate
+    {inherit inputs pkgs system hostName fuyuConfig users lib overlays;};
 }
