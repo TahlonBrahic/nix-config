@@ -25,7 +25,10 @@
     }
   ];
 in {
-  nixosConfigurations =
-    lib.systemTemplate
-    {inherit inputs pkgs system hostName fuyuConfig users lib overlays;};
+  imports = [./hardware-configuration.nix];
+  config = {
+    nixosConfigurations =
+      lib.systemTemplate
+      {inherit inputs pkgs system hostName fuyuConfig users lib overlays;};
+  };
 }
