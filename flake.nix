@@ -11,11 +11,15 @@
     systemValues = builtins.attrValues systemConfigurations;
 
     args = forEachSystem (system: rec {
-      inputs = fuyuNoKosei.inputs // {inherit nixosModules homeManagerModules;};
       inherit system;
+      inputs = fuyuNoKosei.inputs // {inherit nixosModules homeManagerModules;};
       pkgs = fuyuNoKosei.pkgs.${system};
       lib = fuyuNoKosei.lib.${system};
     });
+
+    debugConfigurations =
+      builtins.trace
+      (genNixosConfig (map (it: it.nixosConfigurations or {}) systemValues)) {};
 
     formatter = forEachSystem (system: pkgs.${system}.alejandra);
 
@@ -23,6 +27,6 @@
 
     nixosConfigurations = genNixosConfig (map (it: it.nixosConfigurations or {}) systemValues);
   in {
-    inherit nixosConfigurations devShells formatter;
+    inherit nixosConfigurations debugConfigurations devShells formatter;
   };
 }
