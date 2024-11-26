@@ -12,8 +12,10 @@
 
   dataWithoutPaths = builtins.attrValues data;
 
+  mergedSystems = lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) dataWithoutPaths);
+
   outputs = {
-    nixosConfigurations = lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) dataWithoutPaths);
+    nixosConfigurations = builtins.trace mergedSystems mergedSystems;
   };
 in
   outputs // {inherit data;}
