@@ -13,10 +13,14 @@
     ./_configuration.nix
     ./_hardware-configuration.nix
   ];
+  debug = builtins.trace lib.systemTemplate {};
 in {
-  nixosConfigurations =
-    lib.systemTemplate
-    {
-      inherit inputs pkgs system hostName fuyuConfig users lib overlays;
-    };
+  inherit debug;
+  nixosConfigurations = {
+    ${hostName} =
+      lib.systemTemplate
+      {
+        inherit inputs pkgs system hostName fuyuConfig users lib overlays;
+      };
+  };
 }

@@ -17,16 +17,12 @@
       lib = fuyuNoKosei.lib.${system};
     });
 
-    debugConfigurations =
-      builtins.trace
-      (genNixosConfig (map (it: it.nixosConfigurations or {}) systemValues)) {};
-
     formatter = forEachSystem (system: pkgs.${system}.alejandra);
 
     devShells = forEachSystem (system: import ./shell.nix {inherit (pkgs.${system}) pkgs;});
 
     nixosConfigurations = genNixosConfig (map (it: it.nixosConfigurations or {}) systemValues);
   in {
-    inherit nixosConfigurations debugConfigurations devShells formatter;
+    inherit nixosConfigurations devShells formatter;
   };
 }
