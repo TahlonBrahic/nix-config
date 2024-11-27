@@ -6,15 +6,13 @@
   overlays,
   ...
 }: let
-  hostName = "yoru";
-  users = ["tahlon"];
+  hostName = "shilo";
+  users = ["tbrahic"];
   fuyuConfig = [
     ./_home.nix
     ./_configuration.nix
-    ./_hardware-configuration.nix
   ];
 in {
-  inherit debug;
   nixosConfigurations = {
     ${hostName} =
       lib.systemTemplate
