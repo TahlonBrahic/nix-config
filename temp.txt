@@ -1,0 +1,45 @@
+# networking tools
+tcpdump # command-line packet analyzer
+# bit-twist # packet generator and editor that complements tcpdump # may need to be packaged
+nmap # utility for network discovery
+nmapsi4 # Qt frontend for nmap
+netcat
+traceroute
+wireshark
+termshark
+iperf # tool to measure IP bandwidth
+netboot # pxe server
+nettools # Swiss army knife of AD troubleshooting
+ipcalc 
+python312Packages.scapy @ interactive packet manipulation and shell
+tcpreplay
+udpreplay 
+mtr # ping + traceroute
+dig
+whois
+arp-scan
+asn # OSINT cli tool for investigating network data
+
+# other stuff
+# toybox # lightweight implementation of some Unix utilities
+https://github.com/g4rcez/dotfiles/blob/master/config/zellij/config.kdl for zellij 
+avahi pkgs?
+services.avahi.enable
+
+# multimedia
+audacity
+gimp-with-plugins
+networking.useNetworkD = true @ what is the legacy script base system? it is network manager
+gnome-control-center
+
+# misc?
+5etools
+acpilight # acpi backlight gnome-control-center
+act # run your github actions locally
+age-plugin-yubikey
+alchemy # drawing application
+
+# android
+adb-sync-unstable
+adbfs-rootless-unstable
+
