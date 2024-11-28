@@ -8,7 +8,7 @@
 }: let
   hostName = "shilo";
   users = ["tbrahic"];
-  fuyuConfig = [
+  extraConfig = [
     ./_home.nix
     ./_configuration.nix
   ];
@@ -17,7 +17,7 @@ in {
     ${hostName} =
       lib.systemTemplate
       {
-        inherit inputs pkgs system hostName fuyuConfig users lib overlays;
+        inherit inputs pkgs system hostName extraConfig users lib overlays;
       };
   };
 }

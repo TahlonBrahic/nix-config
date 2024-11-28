@@ -8,18 +8,17 @@
 }: let
   hostName = "yoru";
   users = ["tahlon"];
-  fuyuConfig = [
+  extraConfig = [
     ./_home.nix
     ./_configuration.nix
     ./_hardware-configuration.nix
   ];
 in {
-  inherit debug;
   nixosConfigurations = {
     ${hostName} =
       lib.systemTemplate
       {
-        inherit inputs pkgs system hostName fuyuConfig users lib overlays;
+        inherit inputs pkgs system hostName extraConfig users lib overlays;
       };
   };
 }
