@@ -1,10 +1,8 @@
 {
-  home-manager.users."tahlon" = {
-    config = {
-      compositor = {
-        enable = true;
-        hyprland.enable = true;
-      };
+  home-manager.users."tahlon".fuyuNoKosei = {
+    compositor = {
+      enable = true;
+      hyprland.enable = true;
     };
   };
 }

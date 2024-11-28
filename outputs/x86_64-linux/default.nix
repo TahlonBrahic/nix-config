@@ -3,20 +3,16 @@
   lib,
   ...
 } @ arguments: let
-  inherit (inputs) haumea;
-
-  data = haumea.lib.load {
+  data = inputs.haumea.lib.load {
     src = ./systems;
     inputs = arguments;
   };
 
-  systems = builtins.attrValues data;
-  dataWithoutPaths = lib.attrsets.mergeAttrsList (map (it: it.shilo or {}) systems);
-
-  debug = builtins.trace dataWithoutPaths {};
+  systems = lib.attrsets.mergeAttrsList (map (it: it) (builtins.attrValues data)); # { yoru = {...} shilo = {...} }
+  systemConfigurations = builtins.attrValues systems; # [ { nixosConfigurations  = ...} { nixosConfigurations = ...} ]
 
   outputs = {
-    nixosConfigurations = lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) dataWithoutPaths);
+    nixosConfigurations = lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations) systemConfigurations);
   };
 in
-  outputs // {inherit data;} // debug
+  outputs // {inherit data;}
