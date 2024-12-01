@@ -11,13 +11,13 @@
 
   boot = {
     initrd = {
-      availableKernelModules = ["samsung-laptop" "xhci_pci" "thunderbolt" "nvme" "usbhid" "usb_storage" "sd_mod"];
+      availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "usbhid" "usb_storage" "sd_mod"]; # samsung-laptop?
       kernelModules = [];
       luks.devices."crypted".device = "/dev/disk/by-uuid/96ce0bc2-93c0-4b1a-b807-4b5a958e5c01";
     };
     kernelModules = ["kvm-intel"];
     extraModulePackages = [];
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_zen;
     kernelParams = ["acpi_backlight=vendor" "acpi_osi=Linux" "snd-hda-intel" "model=laptop-dmic"];
   };
 
