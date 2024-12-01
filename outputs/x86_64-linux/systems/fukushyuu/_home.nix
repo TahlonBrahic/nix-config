@@ -4,5 +4,9 @@
       enable = false;
       hyprland.enable = false;
     };
+    browser = {
+      chrome.enable = true;
+      chromium.enable = false;
+    };
   };
 }
