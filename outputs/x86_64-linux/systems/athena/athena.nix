@@ -6,7 +6,7 @@
   overlays,
   ...
 }: let
-  hostName = "yoru";
+  hostName = "athena";
   users = ["tahlon"];
   extraConfig = [
     ./_home.nix
