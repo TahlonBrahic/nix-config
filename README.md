@@ -24,6 +24,8 @@ git clone https://github.com/TahlonBrahic/nix-config.git .
 
 2. Define your own configuration in outputs or choose a pre-defined configuration:
 
+nix --extra-experimental-features 'nix-command flakes' run github:LGUG2Z/JeezyVim ./_disko.nix
+
 If you choose to use an already established configuration it is important to define your hardware specifications as either or a module or vars.
 
 3. Rebuild your system:
