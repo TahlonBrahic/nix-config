@@ -1,5 +1,4 @@
-{ config, lib, pkgs, modulesPath, ... }:
-
+{ config, lib, modulesPath, ... }:
 {
   imports =
     [ (modulesPath + "/installer/scan/not-detected.nix")
@@ -9,25 +8,25 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
-  boot.supportedFilesystems = [ "bcachefs" ];
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
 
   fileSystems."/" =
-    { device = "UUID=39f16b93-9ee6-432b-b0e1-acc4650d7c22";
-      fsType = "bcachefs";
+    { device = "/dev/disk/by-uuid/bb39b2aa-0cac-4289-9658-264eece94fd7";
+      fsType = "btrfs";
+      options = [ "subvol=@" ];
     };
-  fileSystems."/mnt/boot" =
-    { device = "/dev/disk/by-uuid/AD8C-FAB7";
+
+  boot.initrd.luks.devices."luks-f4ecfd19-106d-46b4-91d4-a5bc7aeb5e7f".device = "/dev/disk/by-uuid/f4ecfd19-106d-46b4-91d4-a5bc7aeb5e7f";
+
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/D593-4329";
       fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
+      options = [ "fmask=0077" "dmask=0077" ];
     };
 
   swapDevices = [ ];
- networking.useDHCP = lib.mkDefault true;
+
+  networking.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-
 }
-
