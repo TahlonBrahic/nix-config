@@ -10,3 +10,6 @@ yubikey-init:
 
 yubikey-test:
   nix-shell -p pamtester --run "pamtester login $USER authenticate && pamtester sudo $USER authenticate"
+
+sops-mkpasswd:
+  echo (read "Enter your password:") | mkpasswd -s
