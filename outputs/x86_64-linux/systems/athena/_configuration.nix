@@ -1,11 +1,8 @@
-{lib, ...}: {
+{
   fuyuNoKosei = {
-    yubikey.enable = false;
+    yubikey.enable = true;
     secrets.defaultSopsFile = ../../../../secrets/secrets.yaml;
-    services.gamemode.enable = true;
+    gaming.enable = true;
+    rgb.enable = true;
   };
-  users.users."tahlon".password = "p";
-  users.users."tahlon".hashedPasswordFile = lib.mkForce null;
-  users.users."root".password = "p";
-  users.mutableUsers = lib.mkForce true;
 }
