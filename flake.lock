@@ -576,11 +576,25 @@
         "walls": "walls"
       },
       "locked": {
+<<<<<<< HEAD
         "lastModified": 1734060011,
         "narHash": "sha256-1N37vV9oLNUHGrck9fxjW8piaE+O5re6UoUAPFGXZMo=",
+||||||| parent of 13e96bd (Update fukushyuu home and configurations)
+        "lastModified": 1733747843,
+        "narHash": "sha256-820QADh61tz6ES61EOz7maIgvlMEzTtn4PQ51j1QJ8Y=",
+=======
+        "lastModified": 1733889333,
+        "narHash": "sha256-6rGhV3Bg9TfLyjrBV8UXvwAdhL3eKtCtmBgpeF2RVsQ=",
+>>>>>>> 13e96bd (Update fukushyuu home and configurations)
         "owner": "TahlonBrahic",
         "repo": "fuyu-no-kosei",
+<<<<<<< HEAD
         "rev": "fd6089989999d0cf709ef7899a6d6580030f73ef",
+||||||| parent of 13e96bd (Update fukushyuu home and configurations)
+        "rev": "015f0c2681070b777d3ebe2a6707ce278968dc35",
+=======
+        "rev": "550c15f3c534f2c0527c8712fcb927e962c4996b",
+>>>>>>> 13e96bd (Update fukushyuu home and configurations)
         "type": "github"
       },
       "original": {
