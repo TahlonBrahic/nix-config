@@ -16,9 +16,17 @@
       luks.devices."crypted".device = "/dev/disk/by-uuid/96ce0bc2-93c0-4b1a-b807-4b5a958e5c01";
     };
     kernelModules = ["kvm-intel"];
-    extraModulePackages = [];
+    extraModulePackages = with config.boot.kernelPackages; [samsung-galaxybook-extras];
     kernelPackages = pkgs.linuxPackages_zen;
-    kernelParams = ["acpi_backlight=vendor" "acpi_osi=Linux" "snd-hda-intel" "model=laptop-dmic"];
+    kernelParams = [
+      "acpi_backlight=vendor"
+      "acpi_osi=Linux"
+      "snd-hda-intel"
+      "model=laptop-dmic"
+      "i915.enable_dpcd_backlight=3"
+      "i915.enable_dp_mst=0"
+      "i915.enable_psr2_sel_fetch=1"
+    ];
   };
 
   hardware = {
