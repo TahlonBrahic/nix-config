@@ -6,6 +6,7 @@
       tor-browser
       corectrl
       radeon-profile
+      vesktop
     ];
     fuyuNoKosei = {
       compositor = {
