@@ -5,7 +5,7 @@
 
   outputs = inputs: let
     inherit (inputs) fuyuNoKosei;
-    inherit (fuyuNoKosei) pkgs forEachSystem genNixosConfig nixosModules homeManagerModules;
+    inherit (fuyuNoKosei) pkgs forEachSystem genConfig nixosModules homeManagerModules;
 
     systemConfigurations = forEachSystem (system: import ./outputs/${system} args.${system});
     systemValues = builtins.attrValues systemConfigurations;
@@ -21,8 +21,9 @@
 
     devShells = forEachSystem (system: import ./shell.nix {inherit (pkgs.${system}) pkgs;});
 
-    nixosConfigurations = genNixosConfig (map (it: it.nixosConfigurations or {}) systemValues);
+    nixosConfigurations = genConfig (map (it: it.nixosConfigurations or {}) systemValues);
+    nixOnDroidConfigurations = genConfig (map (it: it.nixOnDroidConfigurations or {}) systemValues);
   in {
-    inherit nixosConfigurations devShells formatter;
+    inherit nixosConfigurations nixOnDroidConfigurations devShells formatter;
   };
 }
