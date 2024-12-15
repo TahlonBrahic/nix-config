@@ -2,11 +2,7 @@
   home-manager.users."amy" = {
     home.packages = with pkgs; [
       zoom-us
-      obs-studio
       tor-browser
-      corectrl
-      radeon-profile
-      vesktop
     ];
     fuyuNoKosei = {
       compositor = {
