@@ -16,7 +16,7 @@
       luks.devices."crypted".device = "/dev/disk/by-uuid/96ce0bc2-93c0-4b1a-b807-4b5a958e5c01";
     };
     kernelModules = ["kvm-intel"];
-    extraModulePackages = with config.boot.kernelPackages; [samsung-galaxybook-extras];
+    # extraModulePackages = with config.boot.kernelPackages; [samsung-galaxybook-extras];
     kernelPackages = pkgs.linuxPackages_zen;
     kernelParams = [
       "acpi_backlight=vendor"
