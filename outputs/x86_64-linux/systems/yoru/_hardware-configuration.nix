@@ -18,8 +18,6 @@
     kernelModules = ["kvm-intel"];
     extraModulePackages = [inputs.fuyu-no-nur.packages.x86_64-linux.samsung-galaxybook-extras];
     kernelParams = [
-      "acpi_backlight=vendor"
-      "acpi_osi=Linux"
       "snd-hda-intel"
       "model=laptop-dmic"
       "i915.enable_dpcd_backlight=3"
