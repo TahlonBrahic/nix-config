@@ -1,8 +1,8 @@
 {
   config,
+  inputs,
   lib,
   modulesPath,
-  pkgs,
   ...
 }: {
   imports = [
@@ -16,8 +16,7 @@
       luks.devices."crypted".device = "/dev/disk/by-uuid/96ce0bc2-93c0-4b1a-b807-4b5a958e5c01";
     };
     kernelModules = ["kvm-intel"];
-    # extraModulePackages = with config.boot.kernelPackages; [samsung-galaxybook-extras];
-    kernelPackages = pkgs.linuxPackages_zen;
+    extraModulePackages = [inputs.fuyu-no-nur.packages.x86_64-linux.samsung-galaxybook-extras];
     kernelParams = [
       "acpi_backlight=vendor"
       "acpi_osi=Linux"
@@ -68,4 +67,18 @@
 
   swapDevices = [];
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  services.udev.extraHwdb = ''
+    # Notebook and Galaxy Book series (SKU Number: SCAI-*)
+    evdev:atkbd:dmi:bvn*:bvr*:bd*:svn[sS][aA][mM][sS][uU][nN][gG]*:sku*SCAI*:*
+     KEYBOARD_KEY_81=!esc
+     KEYBOARD_KEY_ce=!prog1                                 # Fn+F1 launch settings
+     KEYBOARD_KEY_76=f21                                    # Fn+F5 Touchpad toggle
+     KEYBOARD_KEY_ae=!volumedown                            # Fn+F7 volume down
+     KEYBOARD_KEY_b0=!volumeup                              # Fn+F8 volume up
+     KEYBOARD_KEY_ac=unknown                                # Fn+F9 multi-level keyboard backlight toggle - handled by samsung-galaxybook
+     KEYBOARD_KEY_9f=unknown                                # Fn+F10 Camera and microphone toggle - handled by samsung-galaxybook
+     KEYBOARD_KEY_a8=!unknown                               # Fn+F12 Fn lock On - handled by hardware
+     KEYBOARD_KEY_a9=!unknown                               # Fn+F12 Fn lock Off - handled by hardware
+  '';
 }
