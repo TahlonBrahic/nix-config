@@ -1,7 +1,6 @@
-{pkgs, ...}: {
+{
   home-manager.users."tbrahic".fuyuNoKosei = {
-    compositor = {
-      enable = false;
-    };
+    browser.enable = false;
+    hyprland.enable = false;
   };
 }
