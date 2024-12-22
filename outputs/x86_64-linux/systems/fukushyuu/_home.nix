@@ -5,14 +5,12 @@
       tor-browser
     ];
     fuyuNoKosei = {
-      compositor = {
-        enable = false;
-        hyprland.enable = false;
-      };
-      browser = {
-        chrome.enable = true;
-        chromium.enable = false;
-      };
+      fileManager.enable = false;
+      homePackages.enable = true;
+      hyprland.enable = false;
+      passwordManagement.enable = true;
+      rofi.enable = false;
+      waybar.enable = false;
     };
   };
 }
