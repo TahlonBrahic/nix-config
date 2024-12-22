@@ -5,6 +5,6 @@
     syncthing.enable = true;
     secrets.defaultSopsFile = ../../../../secrets/secrets.yaml;
     ssh.enable = true;
-    yubikey.enable = true;
   };
+  users.users."test".password = "test";
 }
