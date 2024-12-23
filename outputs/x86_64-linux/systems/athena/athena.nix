@@ -7,7 +7,7 @@
   ...
 }: let
   hostName = "athena";
-  users = ["tahlon"];
+  users = ["tahlon" "test"];
   extraConfig = [
     ./_home.nix
     ./_configuration.nix
