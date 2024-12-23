@@ -6,5 +6,4 @@
     secrets.defaultSopsFile = ../../../../secrets/secrets.yaml;
     ssh.enable = true;
   };
-  users.users."test".password = "test";
 }
