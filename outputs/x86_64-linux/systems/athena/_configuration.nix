@@ -1,9 +1,10 @@
 {
   fuyuNoKosei = {
-    yubikey.enable = true;
+    boot.enable = true;
+    displayManager.enable = true;
+    syncthing.enable = true;
     secrets.defaultSopsFile = ../../../../secrets/secrets.yaml;
-    gaming.enable = true;
-    RGB.enable = true;
-	services.i2pd.enable = true;
+    ssh.enable = true;
+    yubikey.enable = true;
   };
 }

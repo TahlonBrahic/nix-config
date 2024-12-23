@@ -1,11 +1,16 @@
 {
   fuyuNoKosei = {
-    secrets.defaultSopsFile = ../../../../secrets/secrets.yaml;
-    GNOME.enable = true;
-    gaming.enable = true;
+    boot.enable = true;
     displayManager = {
-      tuigreet.enable = false;
+      enable = true;
       lightdm.enable = true;
     };
+    gaming.enable = true;
+    GNOME.enable = true;
+    microphone.enable = true;
+    syncthing.enable = true;
+    secrets.defaultSopsFile = ../../../../secrets/secrets.yaml;
+    ssh.enable = true;
+    yubikey.enable = true;
   };
 }
