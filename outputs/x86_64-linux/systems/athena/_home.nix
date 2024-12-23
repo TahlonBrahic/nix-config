@@ -4,7 +4,7 @@
     homePackages.enable = true;
     hyprland.enable = true;
     passwordManagement.enable = true;
-    rofilenable = true;
+    rofi.enable = true;
     waybar.enable = true;
   };
 }
