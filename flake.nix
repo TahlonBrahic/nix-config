@@ -23,8 +23,12 @@
     flake-parts.lib.mkFlake {inherit inputs self;} {
       inherit systems;
       perSystem = {system, ...}: {
-        formatter = fuyuNoKosei.pkgs.${system}.alejandra;
+        checks = let
+          inherit (inputs.fuyuNoKosei.inputs) pre-commit-hooks;
+        in
+          import ./checks/pre-commit.nix {inherit pre-commit-hooks system;};
         devShells = import ./shell.nix {inherit (pkgs.${system}) pkgs;};
+        formatter = fuyuNoKosei.pkgs.${system}.alejandra;
       };
       flake = {
         debug = true;
