@@ -13,3 +13,11 @@ yubikey-test:
 
 sops-mkpasswd:
   echo (read "Enter your password:") | mkpasswd -s
+
+lock:
+  nix flake update
+  nix run github:TahlonBrahic/nix-auto-follow -- -i
+  nix run github:TahlonBrahic/nix-auto-follow -- -c
+
+view-inputs:
+  nix run github:nix-community/nix-melt
