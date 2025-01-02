@@ -1,12 +1,12 @@
 {
   home-manager.users."tbrahic".fuyuNoKosei = {
-    browser = {
-      firefox.enable = true;
-      librewolf.enable = false;
-    };
-    developmentTools.enable = true;
     fileManager.enable = false;
-    homePackages.enable = false;
+    git = {
+      enable = true;
+      userName = "Tahlon Brahic";
+      userEmail = "tahlonbrahic@proton.me";
+    };
+    homePackages.enable = true;
     hyprland.enable = false;
     passwordManagement.enable = true;
     rofi.enable = false;
