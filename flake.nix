@@ -40,7 +40,7 @@
         in
           import ./checks/pre-commit.nix {inherit pre-commit-hooks system;};
 
-        # devShells = import ./shell.nix {inherit (inputs'.nixpkgs.legacyPackages) pkgs;};
+        devShells = import ./shell.nix {inherit (inputs'.nixpkgs.legacyPackages) pkgs;};
         # formatter = withSystem system nixpkgs.legacyPackages.${system}.alejandra;
       };
       flake = {
