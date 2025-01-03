@@ -2,7 +2,10 @@
   description = "NixOS configuration that follows fuyu-no-kosei.";
 
   inputs = {
-    fuyuNoKosei.url = "github:TahlonBrahic/fuyu-no-kosei";
+    fuyuNoKosei = {
+      url = "github:TahlonBrahic/fuyu-no-kosei";
+      inputs.nixpkgs.follows = "fuyuNoKosei";
+    };
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
   };
@@ -29,9 +32,8 @@
         ...
       }: {
         args = {
-          inherit system;
+          inherit system lib;
           inherit (self.inputs.fuyuNoKosei.pkgs.${system}) pkgs;
-          lib = self.inputs.fuyuNoKosei.lib.${system};
           inputs = self.inputs.fuyuNoKosei.inputs // {inherit nixosModules homeManagerModules;};
         };
 
@@ -41,7 +43,7 @@
           import ./checks/pre-commit.nix {inherit pre-commit-hooks system;};
 
         devShells = import ./shell.nix {inherit (inputs'.nixpkgs.legacyPackages) pkgs;};
-        # formatter = withSystem system nixpkgs.legacyPackages.${system}.alejandra;
+        formatter = inputs'.nixpkgs.legacyPackages.${system}.alejandra;
       };
       flake = {
         nixosConfigurations =
