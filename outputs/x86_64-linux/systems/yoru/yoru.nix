@@ -16,7 +16,7 @@
 in {
   nixosConfigurations = {
     ${hostName} =
-      lib.systemTemplate
+      inputs.fuyu-lib.systemTemplate
       {
         inherit inputs pkgs system hostName extraConfig users lib overlays;
       };
