@@ -4,56 +4,58 @@
   inputs = {
     fuyuNoKosei = {
       url = "github:TahlonBrahic/fuyu-no-kosei";
-      inputs.nixpkgs.follows = "fuyuNoKosei";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    haumea.url = "github:nix-community/haumea/v0.2.2";
   };
 
   outputs = inputs @ {
     self,
     flake-parts,
     nixpkgs,
+    haumea,
     ...
   }:
     flake-parts.lib.mkFlake {inherit inputs self;}
-    ({flake-parts-lib, ...}: let
-      inherit (inputs.fuyuNoKosei) nixosModules homeManagerModules;
+    ({
+      flake-parts-lib,
+      withSystem,
+      ...
+    }: let
       inherit (flake-parts-lib) importApply;
-      inherit (nixpkgs) lib;
-      flakeModules.default = importApply ./flake-parts/options/args.nix {localFlake = self.flake;};
+      lib = inputs.nixpkgs.lib // inputs.fuyuNoKosei.lib;
+      flakeModules =
+        lib.attrsets.genAttrs ["partitions"] (module:
+          importApply ./flake-parts/${module}/flake-module.nix {inherit withSystem;});
     in {
       debug = true;
       systems = ["x86_64-linux"];
-      imports = [flakeModules.default];
-      perSystem = {
-        system,
-        inputs',
-        ...
-      }: {
-        args = {
-          inherit system lib;
-          inherit (self.inputs.fuyuNoKosei.pkgs.${system}) pkgs;
-          inputs = self.inputs.fuyuNoKosei.inputs // {inherit nixosModules homeManagerModules;};
-        };
-
-        checks = let
-          inherit (inputs.fuyuNoKosei.inputs) pre-commit-hooks;
-        in
-          import ./checks/pre-commit.nix {inherit pre-commit-hooks system;};
-
-        devShells = import ./shell.nix {inherit (inputs'.nixpkgs.legacyPackages) pkgs;};
-        formatter = inputs'.nixpkgs.legacyPackages.${system}.alejandra;
+      imports =
+        [
+          flake-parts.flakeModules.flakeModules
+          flake-parts.flakeModules.modules
+          flake-parts.flakeModules.partitions
+        ]
+        ++ lib.attrsets.attrValues flakeModules;
+      perSystem = {pkgs, ...}: {
+        devShells = import ./shell.nix {inherit pkgs;};
       };
+
       flake = {
+        inherit flakeModules;
         nixosConfigurations =
-          lib.pipe
-          ["x86_64-linux"]
-          [
-            (map (system: import ./outputs/${system} self.args.${system}))
-            (map (system: builtins.getAttr "nixosConfigurations" system))
-            lib.attrsets.mergeAttrsList
-          ];
+          lib.attrsets.mergeAttrsList
+          (lib.lists.forEach (builtins.attrNames
+            (haumea.lib.load {
+              src = ./flake-parts/systems;
+              loader = haumea.lib.loaders.verbatim;
+            })) (system:
+            haumea.lib.load {
+              src = ./flake-parts/systems/${system};
+              inputs = {inherit inputs lib;};
+            }));
       };
     });
 }
