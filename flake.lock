@@ -41,15 +41,15 @@
         "flake-parts": "flake-parts_2",
         "haumea": "haumea",
         "nixpkgs": [
-          "fuyuNoKosei"
+          "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1735875697,
-        "narHash": "sha256-lZ1FF7DpRh7E2YWF8pMVIHemqsnfUFeieO7Q4LouxJ0=",
+        "lastModified": 1736128515,
+        "narHash": "sha256-EiJNFUMjIW9NNVMHUWii51pdwNw3Dp1kj+CCyQHgGB8=",
         "owner": "TahlonBrahic",
         "repo": "fuyu-no-kosei",
-        "rev": "8f2e3c2ad299462ff775895cb001584f473689b3",
+        "rev": "d7f16b53be4e1d57a2730328e8a6ac823a7caf3e",
         "type": "github"
       },
       "original": {
@@ -59,6 +59,28 @@
       }
     },
     "haumea": {
+      "inputs": {
+        "nixpkgs": [
+          "fuyuNoKosei",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1685133229,
+        "narHash": "sha256-FePm/Gi9PBSNwiDFq3N+DWdfxFq0UKsVVTJS3cQPn94=",
+        "owner": "nix-community",
+        "repo": "haumea",
+        "rev": "34dd58385092a23018748b50f9b23de6266dffc2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "v0.2.2",
+        "repo": "haumea",
+        "type": "github"
+      }
+    },
+    "haumea_2": {
       "inputs": {
         "nixpkgs": "nixpkgs"
       },
@@ -118,11 +140,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1735669367,
-        "narHash": "sha256-tfYRbFhMOnYaM4ippqqid3BaLOXoFNdImrfBfCp4zn0=",
+        "lastModified": 1736061677,
+        "narHash": "sha256-DjkQPnkAfd7eB522PwnkGhOMuT9QVCZspDpJJYyOj60=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "edf04b75c13c2ac0e54df5ec5c543e300f76f1c9",
+        "rev": "cbd8ec4de4469333c82ff40d057350c30e9f7d36",
         "type": "github"
       },
       "original": {
@@ -136,6 +158,7 @@
       "inputs": {
         "flake-parts": "flake-parts",
         "fuyuNoKosei": "fuyuNoKosei",
+        "haumea": "haumea_2",
         "nixpkgs": "nixpkgs_2"
       }
     }
