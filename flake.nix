@@ -2,10 +2,6 @@
   description = "NixOS configuration that follows fuyu-no-kosei.";
 
   inputs = {
-    assets = {
-      url = "github:TahlonBrahic/assets";
-    };
-    flake-parts.url = "github:hercules-ci/flake-parts";
     fuyuNoKosei = {
       url = "github:TahlonBrahic/fuyu-no-kosei";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -82,51 +78,28 @@
       };
     };
   };
-
   outputs = inputs @ {
     self,
-    flake-parts,
-    nixpkgs,
-    haumea,
+    flake-utils,
     ...
-  }:
-    flake-parts.lib.mkFlake {inherit inputs self;}
-    ({
-      flake-parts-lib,
-      withSystem,
-      ...
-    }: let
-      inherit (flake-parts-lib) importApply;
-      lib = inputs.nixpkgs.lib // inputs.fuyuNoKosei.lib;
-      flakeModules =
-        lib.attrsets.genAttrs ["partitions"] (module:
-          importApply ./flake-parts/${module}/flake-module.nix {inherit withSystem;});
+  }: let
+    inherit (inputs.nixpkgs) lib;
+  in
+    flake-utils.lib.eachDefaultSystemPassThrough (system: {
+      nixosConfigurations = let
+        loadSystems = inputs.haumea.lib.load {
+          src = ./partitions/systems;
+          loader = inputs.haumea.lib.loaders.verbatim;
+        };
+        systemNames = builtins.attrNames loadSystems;
+      in
+        lib.attrsets.genAttrs systemNames
+        (systemName:
+          import ./partitions/systems/${systemName}/${systemName}.nix {inherit self inputs lib;});
+    })
+    // flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
     in {
-      debug = true;
-      systems = ["x86_64-linux"];
-      imports =
-        [
-          flake-parts.flakeModules.flakeModules
-          flake-parts.flakeModules.partitions
-        ]
-        ++ lib.attrsets.attrValues flakeModules;
-      perSystem = {pkgs, ...}: {
-        devShells = import ./shell.nix {inherit pkgs;};
-      };
-
-      flake = {
-        inherit flakeModules;
-        nixosConfigurations =
-          lib.attrsets.mergeAttrsList
-          (lib.lists.forEach (builtins.attrNames
-            (haumea.lib.load {
-              src = ./flake-parts/systems;
-              loader = haumea.lib.loaders.verbatim;
-            })) (system:
-            haumea.lib.load {
-              src = ./flake-parts/systems/${system};
-              inputs = {inherit inputs lib;};
-            }));
-      };
+      devShells = import ./shell.nix {inherit pkgs;};
     });
 }
