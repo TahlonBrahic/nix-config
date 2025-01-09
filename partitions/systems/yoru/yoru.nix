@@ -18,6 +18,7 @@ in
     inherit system specialArgs;
     modules =
       [
+        inputs.fuyuNoKosei.modules.nixos
         inputs.home-manager.nixosModules.home-manager
         {
           home-manager = {
@@ -27,17 +28,11 @@ in
             extraSpecialArgs = specialArgs;
             # Iterates over a list of users provided in the function call
             users = inputs.nixpkgs.lib.attrsets.genAttrs users (user: {
-              imports =
-                map (module: inputs.fuyuNoKosei.modules.home.${module})
-                (builtins.attrNames
-                  inputs.fuyuNoKosei.modules.home);
+              imports = inputs.fuyuNoKosei.modules.home;
               config.home.username = user;
             });
           };
         }
       ]
-      ++ extraModules
-      ++ (map (module: inputs.fuyuNoKosei.modules.nixos.${module})
-        (builtins.attrNames
-          inputs.fuyuNoKosei.modules.nixos));
+      ++ extraModules;
   }
