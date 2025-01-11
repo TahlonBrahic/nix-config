@@ -1,9 +1,10 @@
 {
   inputs,
-  self,
   lib,
+  pkgs,
   ...
 }: let
+  inherit (inputs) kosei home-manager;
   hostName = "yoru";
   users = ["tahlon"];
   system = "x86_64-linux";
@@ -12,14 +13,13 @@
     ./_configuration.nix
     ./_hardware-configuration.nix
   ];
-  specialArgs = {inherit self inputs hostName system users;};
+  specialArgs = {inherit inputs hostName pkgs system users;};
 in
   lib.nixosSystem {
     inherit system specialArgs;
     modules =
       [
-        inputs.fuyuNoKosei.modules.nixos
-        inputs.home-manager.nixosModules.home-manager
+        home-manager.nixosModules.home-manager
         {
           home-manager = {
             backupFileExtension = "bak";
@@ -28,11 +28,17 @@ in
             extraSpecialArgs = specialArgs;
             # Iterates over a list of users provided in the function call
             users = inputs.nixpkgs.lib.attrsets.genAttrs users (user: {
-              imports = inputs.fuyuNoKosei.modules.home;
+              imports =
+                lib.forEach
+                (builtins.attrNames kosei.modules.home)
+                (module: builtins.getAttr module kosei.modules.home);
               config.home.username = user;
             });
           };
         }
       ]
-      ++ extraModules;
+      ++ extraModules
+      ++ lib.forEach
+      (builtins.attrNames kosei.modules.nixos)
+      (module: builtins.getAttr module kosei.modules.nixos);
   }

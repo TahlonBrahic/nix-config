@@ -1,5 +1,5 @@
 {
-  home-manager.users."tahlon".fuyuNoKosei = {
+  home-manager.users."tahlon".kosei = {
     browser.firefox.enable = true;
     fileManager.enable = true;
     git = {
