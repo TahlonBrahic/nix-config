@@ -1,6 +1,42 @@
 {
   description = "NixOS configuration that follows fuyu-no-kosei.";
 
+  outputs = inputs @ {
+    flake-utils,
+    nixpkgs,
+    ...
+  }: let
+    inherit (inputs.nixpkgs) lib;
+  in
+    flake-utils.lib.eachDefaultSystemPassThrough (system: let
+      basePkgs = import inputs.nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+      pkgs =
+        basePkgs.appendOverlays
+        [
+          inputs.fuyuvim.overlays.default
+          inputs.nur.overlays.default
+        ];
+    in {
+      nixosConfigurations = let
+        loadSystems = inputs.haumea.lib.load {
+          src = ./src/systems;
+          loader = inputs.haumea.lib.loaders.verbatim;
+        };
+        systemNames = builtins.attrNames loadSystems;
+      in
+        lib.attrsets.genAttrs systemNames
+        (systemName:
+          import ./src/systems/${systemName}/${systemName}.nix {inherit inputs lib pkgs;});
+    })
+    // flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+    in {
+      devShells = import ./src/dev/shell.nix {inherit pkgs;};
+    });
+
   inputs = {
     assets = {
       url = "github:TahlonBrahic/assets";
@@ -73,40 +109,4 @@
       };
     };
   };
-  outputs = inputs @ {
-    self,
-    flake-utils,
-    nixpkgs,
-    ...
-  }: let
-    inherit (inputs.nixpkgs) lib;
-  in
-    flake-utils.lib.eachDefaultSystemPassThrough (system: let
-      basePkgs = import (inputs.nixpkgs) {
-        inherit system;
-        config.allowUnfree = true;
-      };
-      pkgs =
-        basePkgs.appendOverlays
-        [
-          inputs.fuyuvim.overlays.default
-          inputs.nur.overlays.default
-        ];
-    in {
-      nixosConfigurations = let
-        loadSystems = inputs.haumea.lib.load {
-          src = ./src/systems;
-          loader = inputs.haumea.lib.loaders.verbatim;
-        };
-        systemNames = builtins.attrNames loadSystems;
-      in
-        lib.attrsets.genAttrs systemNames
-        (systemName:
-          import ./src/systems/${systemName}/${systemName}.nix {inherit inputs lib pkgs;});
-    })
-    // flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = inputs.nixpkgs.legacyPackages.${system};
-    in {
-      devShells = import ./src/shell.nix {inherit pkgs;};
-    });
 }
