@@ -822,11 +822,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1736826349,
-        "narHash": "sha256-Khw7Vm57gqm/wwJeNxOV/d5cScKxPGOs8QAuzFkFNbg=",
+        "lastModified": 1736911443,
+        "narHash": "sha256-BObL0P7+KToiShDvct8ZUSHLDSgRJXWJChofNNm6rUY=",
         "owner": "TahlonBrahic",
         "repo": "fuyu-no-kosei",
-        "rev": "25d0f28472e1aa9a8165ac4b9d9c690f9e7d8623",
+        "rev": "c08c2bf56d9122ae107890096e2bdcfd60e9847a",
         "type": "github"
       },
       "original": {
@@ -977,11 +977,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1736684107,
-        "narHash": "sha256-vH5mXxEvZeoGNkqKoCluhTGfoeXCZ1seYhC2pbMN0sg=",
+        "lastModified": 1736867362,
+        "narHash": "sha256-i/UJ5I7HoqmFMwZEH6vAvBxOrjjOJNU739lnZnhUln8=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "635e887b48521e912a516625eee7df6cf0eba9c1",
+        "rev": "9c6b49aeac36e2ed73a8c472f1546f6d9cf1addc",
         "type": "github"
       },
       "original": {
@@ -1059,11 +1059,11 @@
         "treefmt-nix": "treefmt-nix_3"
       },
       "locked": {
-        "lastModified": 1736826136,
-        "narHash": "sha256-vpK7aOUezdRjOEFe5gtnvo8Dl3DU8LL3NEbflBwXp9Q=",
+        "lastModified": 1736906856,
+        "narHash": "sha256-IcfP9cGZ0u3KVqNztzqDGlZlP98igxLtCYPDyB1KVXQ=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "183539828371c556242e40f5412d5fb065d38b1b",
+        "rev": "8f89d09df9f5094218c30b2bb719a4c9f18c35f9",
         "type": "github"
       },
       "original": {
@@ -1146,15 +1146,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1736808430,
-        "narHash": "sha256-wlgdf/n7bJMLBheqt1jmPoxJFrUP6FByKQFXuM9YvIk=",
-        "owner": "Mic92",
+        "lastModified": 1736908817,
+        "narHash": "sha256-vvcsJoCuf1EP5PFr7/zsrA0JXwjkyKD8lVMqase4+yw=",
+        "owner": "TahlonBrahic",
         "repo": "sops-nix",
-        "rev": "553c7cb22fed19fd60eb310423fdc93045c51ba8",
+        "rev": "6029cd7de286da5b254af526c7e5155ffed39a08",
         "type": "github"
       },
       "original": {
-        "owner": "Mic92",
+        "owner": "TahlonBrahic",
         "repo": "sops-nix",
         "type": "github"
       }

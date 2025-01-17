@@ -21,3 +21,6 @@ lock:
 
 view-inputs:
   nix run github:nix-community/nix-melt
+
+pause-yubikey-agent:
+  killall -HUP yubikey-agent
