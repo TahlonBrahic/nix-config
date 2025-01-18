@@ -3,11 +3,13 @@ keys:
   - &shilo age1mm7xrs8rh0hllmw689406ah358tl9rjftedy6xu50w4qyyjwnsksnx6vu3
   - &fukushyuu age1wyzx73w2n3v8mwajrx7z7mj9mth9z40f88en6su99q0freakq3ws66mhjx
   - &athena age1aul3zle6h0zdkqvdtyw9f52p3llkf508y3ea4mrps5vhk5f52gxqyhw3zn
+  - &cursor age1yubikey1qtscgtcwefydpmemhm6kx0c42suyc5hfaaazv9nh0en2nk9jhf5sjhsapwn
 creation_rules:
-  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+  - path_regex: ^src/secrets/secrets\.yaml$
     key_groups:
       - age:
           - *yoru
           - *shilo
           - *fukushyuu
           - *athena
+          - *cursor
