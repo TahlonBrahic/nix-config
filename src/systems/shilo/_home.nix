@@ -1,5 +1,6 @@
 {
   home-manager.users."tbrahic".fuyuNoKosei = {
+    browser.firefox.enable = true;
     fileManager.enable = false;
     git = {
       enable = true;

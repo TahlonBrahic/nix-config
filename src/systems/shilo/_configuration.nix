@@ -1,10 +1,9 @@
 {lib, ...}: {
-  fuyuNoKosei = {
+  kosei = {
     audio.enable = false;
     boot.enable = false;
     displayManager.enable = false;
     RGB.enable = false;
-    secrets.defaultSopsFile = ../../secrets/secrets.yaml;
     virtualization.wsl.enable = true;
     wsl.enable = true;
   };
