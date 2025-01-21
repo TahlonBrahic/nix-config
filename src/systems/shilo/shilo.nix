@@ -2,6 +2,7 @@
   inputs,
   lib,
   pkgs,
+  outPath,
   ...
 }: let
   hostName = "shilo";
@@ -12,4 +13,4 @@
     ./_configuration.nix
   ];
 in
-  inputs.kosei.lib.systemTemplate {inherit extraModules hostName inputs lib pkgs system users;}
+  inputs.kosei.lib.systemTemplate {inherit extraModules hostName inputs lib outPath pkgs system users;}

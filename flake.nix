@@ -4,37 +4,25 @@
   outputs = inputs @ {
     flake-utils,
     nixpkgs,
+    kosei,
     ...
   }: let
     inherit (inputs.nixpkgs) lib;
+    outPath = ./.;
   in
     flake-utils.lib.eachDefaultSystemPassThrough (system: let
-      basePkgs = import inputs.nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      };
-      pkgs =
-        basePkgs.appendOverlays
-        [
-          inputs.fuyuvim.overlays.default
-          inputs.nur.overlays.default
-        ];
-    in {
-      nixosConfigurations = let
-        loadSystems = inputs.haumea.lib.load {
-          src = ./src/systems;
-          loader = inputs.haumea.lib.loaders.verbatim;
+      basePkgs =
+        import nixpkgs
+        {
+          inherit system;
+          config.allowUnfree = true;
         };
-        systemNames = builtins.attrNames loadSystems;
-      in
-        lib.attrsets.genAttrs systemNames
-        (systemName:
-          import ./src/systems/${systemName}/${systemName}.nix {inherit inputs lib pkgs;});
-    })
-    // flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = inputs.nixpkgs.legacyPackages.${system};
+      pkgs = basePkgs.appendOverlays [inputs.fuyuvim.overlays.default inputs.nur.overlays.default];
     in {
-      devShells = import ./src/dev/shell.nix {inherit pkgs;};
+      nixosConfigurations = kosei.lib.loadConfigurations "scoped" {
+        inherit inputs lib pkgs outPath;
+        src = ./src/systems;
+      };
     });
 
   inputs = {
@@ -91,7 +79,7 @@
       };
     };
     sops-nix = {
-      url = "github:TahlonBrahic/sops-nix";
+      url = "github:Mic92/sops-nix";
       inputs = {
         nixpkgs.follows = "nixpkgs";
       };

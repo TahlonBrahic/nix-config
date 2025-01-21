@@ -1,5 +1,6 @@
 {inputs, ...}: {
   config = {
+    programs.dconf.enable = true;
     kosei = {
       boot.enable = true;
       displayManager.enable = true;
@@ -8,12 +9,14 @@
         enableHyprlandSupport = true;
       };
       microphone.enable = true;
-      syncthing.enable = true;
-      secrets.defaultSopsFile = ../../secrets/secrets.yaml;
-      ssh.enable = true;
+      ssh = {
+        enable = true;
+        publicKeys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDRUJCFyU2Bhag5GHGq2ihZL6LljX8EZygeKU6KDzHL8 tbrahic@proton.me"
+        ];
+      };
       yubikey.enable = true;
       design = {
-        wallpaper = "${inputs.assets}/wallpapers/anime/a_waterfall_in_the_rain.jpg";
         theme = "${inputs.assets}/themes/nord.yaml";
       };
     };

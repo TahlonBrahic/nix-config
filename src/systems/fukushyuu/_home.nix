@@ -15,6 +15,7 @@
       homePackages.enable = true;
       hyprland.enable = false;
       passwordManagement.enable = true;
+      syncthing.enable = true;
       rofi.enable = false;
       waybar.enable = false;
     };
