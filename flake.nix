@@ -47,8 +47,8 @@
         fuyu-no-nur.follows = "fuyu-no-nur";
       };
     };
-    haumea = {
-      url = "github:nix-community/haumea/v0.2.2";
+    eris = {
+      url = "github:TahlonBrahic/eris";
     };
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
