@@ -12,7 +12,6 @@
       homePackages.enable = true;
       hyprland = {
         enable = true;
-        monitors = ["eDP-1"];
       };
       passwordManagement.enable = true;
       rofi.enable = true;
