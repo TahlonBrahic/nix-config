@@ -817,11 +817,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1737944325,
-        "narHash": "sha256-oCZEK4vLhPxpreiKjo/eE3pwrpJ4ZKSuYlYNWQ0zgnE=",
+        "lastModified": 1738155449,
+        "narHash": "sha256-la5DzNNgAAkhK4JIGwqreDk6VKL/ihm9ZQV8X8EWr/w=",
         "owner": "TahlonBrahic",
         "repo": "fuyu-no-kosei",
-        "rev": "a268fadbe56c72f2d2ef2dbfe1251858d023b4b3",
+        "rev": "0023ce7be7ad5d40db918f96d9ba9516e0b99062",
         "type": "github"
       },
       "original": {
