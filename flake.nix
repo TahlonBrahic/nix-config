@@ -11,13 +11,12 @@
     outPath = ./.;
   in
     flake-utils.lib.eachDefaultSystemPassThrough (system: let
-      basePkgs =
+      pkgs =
         import nixpkgs
         {
           inherit system;
           config.allowUnfree = true;
         };
-      pkgs = basePkgs.appendOverlays [inputs.fuyuvim.overlays.default inputs.nur.overlays.default];
     in {
       nixosConfigurations = kosei.lib.loadConfigurations "scoped" {
         inherit inputs lib pkgs outPath;
@@ -42,16 +41,12 @@
     };
     fuyuvim = {
       url = "github:TahlonBrahic/fuyu-no-neovim";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        fuyu-no-nur.follows = "fuyu-no-nur";
-      };
     };
     eris = {
       url = "github:TahlonBrahic/eris";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager";
       inputs = {
         nixpkgs.follows = "nixpkgs";
       };
@@ -65,7 +60,7 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
       inputs = {
@@ -85,9 +80,10 @@
       };
     };
     stylix = {
-      url = "github:danth/stylix/release-24.11";
+      url = "github:Flameopathic/stylix/optional-image";
       inputs = {
         nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
       };
     };
     nixos-wsl = {
