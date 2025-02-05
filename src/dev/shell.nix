@@ -1,6 +1,6 @@
-{pkgs ? import <nixpkgs> {system = "x86_64-linux";}}: {
+{pkgs}: {
   default = pkgs.mkShell {
-    NIX_CONFIG = "extra-experimental-features = nix-command flakes";
+    NIX_CONFIG = "extra-experimental-features = nix-command flakes pipe-operators";
     nativeBuildInputs = with pkgs; [
       # Nix
       nix
