@@ -22,6 +22,8 @@
         inherit inputs lib pkgs outPath;
         src = ./src/systems;
       };
+
+      devShells.${system} = import ./src/dev/shell.nix {inherit pkgs;};
     });
 
   inputs = {
