@@ -1,30 +1,7 @@
 {
   description = "NixOS configuration that follows fuyu-no-kosei.";
 
-  outputs = inputs @ {
-    flake-utils,
-    nixpkgs,
-    kosei,
-    ...
-  }: let
-    inherit (inputs.nixpkgs) lib;
-    outPath = ./.;
-  in
-    flake-utils.lib.eachDefaultSystemPassThrough (system: let
-      pkgs =
-        import nixpkgs
-        {
-          inherit system;
-          config.allowUnfree = true;
-        };
-    in {
-      nixosConfigurations = kosei.lib.loadConfigurations "scoped" {
-        inherit inputs lib pkgs outPath;
-        src = ./src/systems;
-      };
-
-      devShells.${system} = import ./src/dev/shell.nix {inherit pkgs;};
-    });
+  outputs = inputs: import ./outputs.nix inputs;
 
   inputs = {
     assets = {
@@ -34,6 +11,9 @@
     kosei = {
       url = "github:TahlonBrahic/fuyu-no-kosei";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    flake-utils = {
+      url = "github:numtide/flake-utils";
     };
     fuyu-no-nur = {
       url = "github:TahlonBrahic/fuyu-no-nur";
