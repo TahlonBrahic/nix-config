@@ -24,3 +24,6 @@ view-inputs:
 
 pause-yubikey-agent:
   killall -HUP yubikey-agent
+
+build-iso:
+  nix build .#nixosConfigurations.iso.config.system.build.isoImage
