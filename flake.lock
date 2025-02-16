@@ -299,6 +299,24 @@
     },
     "flake-parts_4": {
       "inputs": {
+        "nixpkgs-lib": "nixpkgs-lib_3"
+      },
+      "locked": {
+        "lastModified": 1738453229,
+        "narHash": "sha256-7H9XgNiGLKN1G1CgRh0vUL4AheZSYzPm+zmZ7vxbJdo=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "32ea77a06711b758da0ad9bd6a844c5740a87abd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "flake-parts_5": {
+      "inputs": {
         "nixpkgs-lib": [
           "nur",
           "nixpkgs"
@@ -803,16 +821,17 @@
     "kosei": {
       "inputs": {
         "eris": "eris_2",
+        "flake-parts": "flake-parts_4",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1739415688,
-        "narHash": "sha256-AQf7IxdTLBuoHVd+ab8Q6i+6aowaHMqWbGAN5d4Jrp0=",
+        "lastModified": 1739731206,
+        "narHash": "sha256-j+T+B8CkVTMtsVyShyNzDfG6vE7P27+eCyVYXkdfzbU=",
         "owner": "TahlonBrahic",
         "repo": "fuyu-no-kosei",
-        "rev": "7d7b08fb85117d4ee8d2d96c1792f35f5750a8e9",
+        "rev": "361133c5a075dc89f37370151218c2a5ad26400b",
         "type": "github"
       },
       "original": {
@@ -935,6 +954,18 @@
       }
     },
     "nixpkgs-lib_2": {
+      "locked": {
+        "lastModified": 1738452942,
+        "narHash": "sha256-vJzFZGaCpnmo7I6i416HaBLpC+hvcURh/BQwROcGIp8=",
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/072a6db25e947df2f31aab9eccd0ab75d5b2da11.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/072a6db25e947df2f31aab9eccd0ab75d5b2da11.tar.gz"
+      }
+    },
+    "nixpkgs-lib_3": {
       "locked": {
         "lastModified": 1738452942,
         "narHash": "sha256-vJzFZGaCpnmo7I6i416HaBLpC+hvcURh/BQwROcGIp8=",
@@ -1070,7 +1101,7 @@
     },
     "nur": {
       "inputs": {
-        "flake-parts": "flake-parts_4",
+        "flake-parts": "flake-parts_5",
         "nixpkgs": [
           "nixpkgs"
         ],
