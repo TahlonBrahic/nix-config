@@ -18,8 +18,5 @@
       syncthing.enable = true;
       waybar.enable = true;
     };
-    #"gnome-test".kosei = {
-    #  gnome.enable = true;
-    #};
   };
 }

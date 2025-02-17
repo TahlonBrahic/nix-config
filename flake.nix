@@ -1,7 +1,7 @@
 {
   description = "NixOS configuration that follows fuyu-no-kosei.";
 
-  outputs = inputs: import ./outputs.nix inputs;
+  outputs = inputs: import ./flake/outputs.nix inputs;
 
   inputs = {
     assets = {
@@ -12,6 +12,7 @@
       url = "github:TahlonBrahic/fuyu-no-kosei";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    flake-parts.url = "github:hercules-ci/flake-parts";
     flake-utils = {
       url = "github:numtide/flake-utils";
     };

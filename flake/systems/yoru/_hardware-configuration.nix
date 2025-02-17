@@ -10,6 +10,10 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
+  nixpkgs.hostPlatform = "x86_64-linux";
+  system.name = "yoru";
+  nixpkgs.config.allowUnfree = true;
+
   boot = {
     initrd = {
       availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "usbhid" "usb_storage" "sd_mod"];
