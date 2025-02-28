@@ -1,4 +1,12 @@
-{pkgs}: {
+{
+  kosei,
+  system,
+}: let
+  pkgs = import kosei.inputs.nixpkgs {
+    inherit system;
+    config.allowUnfree = true;
+  };
+in {
   default = pkgs.mkShell {
     NIX_CONFIG = "extra-experimental-features = nix-command flakes pipe-operators";
     nativeBuildInputs = with pkgs; [

@@ -9,10 +9,20 @@
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
+  system.includeBuildDependencies = true;
+  nixpkgs.system = "x86_64-linux";
 
-  nixpkgs.hostPlatform = "x86_64-linux";
-  system.name = "yoru";
-  nixpkgs.config.allowUnfree = true;
+  networking = {
+    hostName = "yoru";
+  };
+
+  #system.etc.overlay = {
+  #  enable = lib.mkForce false;
+  #  mutable = lib.mkforce true;
+  #};
+  #systemd.tmpfiles.rules = [
+  #  "d /etc/resolv.conf 0777 root root"
+  #];
 
   boot = {
     initrd = {

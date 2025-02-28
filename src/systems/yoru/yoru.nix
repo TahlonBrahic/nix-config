@@ -3,7 +3,7 @@
   outPath,
 }: let
   users = ["tahlon"];
-  system = builtins.currentSystem;
+  system = "x86_64-linux";
   extraModules = [
     ./_home.nix
     ./_configuration.nix
