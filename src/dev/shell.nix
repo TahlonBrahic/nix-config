@@ -23,9 +23,7 @@ in {
       typos
       nodePackages.prettier
 
-      # Secrets Management
-      sops
-      age
+	  # TODO: link binary for kosei sops and age
     ];
   };
 }
