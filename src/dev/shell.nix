@@ -7,23 +7,28 @@
     config.allowUnfree = true;
   };
 in {
-  default = pkgs.mkShell {
-    NIX_CONFIG = "extra-experimental-features = nix-command flakes pipe-operators";
-    nativeBuildInputs = with pkgs; [
-      # Nix
-      nix
-      home-manager
+  default =
+    pkgs.mkShell {
+      NIX_CONFIG = "
+	extra-experimental-features = nix-command flakes pipe-operators
+	pure-eval = false
+	";
+      nativeBuildInputs = with pkgs; [
+        # Nix
+        nix
+        home-manager
+        nixos-generators
 
-      git
-      # Formatters & Linters
-      bashInteractive
-      alejandra
-      deadnix
-      statix
-      typos
-      nodePackages.prettier
+        git
+        # Formatters & Linters
+        bashInteractive
+        alejandra
+        deadnix
+        statix
+        typos
+        nodePackages.prettier
 
-	  # TODO: link binary for kosei sops and age
-    ];
-  };
+        # TODO: link binary for kosei sops and age
+      ];
+    };
 }
