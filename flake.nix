@@ -1,29 +1,51 @@
 {
   description = "NixOS configuration that follows fuyu-no-kosei.";
-
-  outputs = {
-    flake-utils,
+  outputs = inputs @ {
+    flake-parts,
     kosei,
-    self,
     ...
-  } @ inputs: let
-    outPath = ./.;
-  in
-    flake-utils.lib.eachDefaultSystem (system: {
-      devShells = import ./src/dev/shell.nix {inherit kosei system;};
-      formatter = inputs.nixpkgs.legacyPackages.${system}.alejandra;
-    })
-    // flake-utils.lib.eachDefaultSystemPassThrough (_: {
-      nixosConfigurations = kosei.lib.loadConfigurations "scoped" {
-        inherit outPath;
-        inputs = self.inputs // self.inputs.kosei.inputs;
-        src = ./src/systems;
+  }:
+    flake-parts.lib.mkFlake {inherit inputs;}
+    ({self, ...}: {
+      debug = true;
+
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
+
+      imports = [
+        flake-parts.flakeModules.modules
+        flake-parts.flakeModules.partitions
+      ];
+
+      partitions = {
+        dev = {
+          module = ./src/dev;
+          extraInputsFlake = ./src/dev;
+        };
+      };
+
+      partitionedAttrs = {
+        checks = "dev";
+        devShells = "dev";
+        herculesCI = "dev";
+      };
+
+      perSystem = {system, ...}: {
+        formatter = inputs.nixpkgs.legacyPackages.${system}.alejandra;
+      };
+
+      flake = {
+        nixosConfigurations = kosei.lib.loadConfigurations "scoped" {
+          outPath = ./.;
+          inputs = self.inputs // self.inputs.kosei.inputs;
+          src = ./src/systems;
+        };
       };
     });
 
   inputs = {
-    flake-utils.url = "github:numtide/flake-utils";
     kosei.url = "github:TahlonBrahic/fuyu-no-kosei";
-    systems.url = "github:nix-systems/x86_64-linux";
   };
 }
