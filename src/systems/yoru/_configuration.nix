@@ -1,6 +1,5 @@
 {inputs, ...}: {
   config = {
-    nixpkgs.config.allowUnfree = true;
     kosei = {
       boot.enable = true;
       displayManager.enable = true;

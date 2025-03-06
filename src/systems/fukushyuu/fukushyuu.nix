@@ -1,7 +1,5 @@
 {
   inputs,
-  lib,
-  pkgs,
   outPath,
   ...
 }: let
@@ -13,4 +11,4 @@
     ./_hardware-configuration.nix
   ];
 in
-  inputs.kosei.lib.systemTemplate {inherit extraModules hostName inputs lib outPath pkgs users;}
+  inputs.kosei.lib.systemTemplate {inherit extraModules hostName inputs outPath users;}

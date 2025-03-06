@@ -3,7 +3,6 @@
     home.packages = with pkgs; [
       zoom-us
       tor-browser
-      vesktop
       google-chrome
     ];
     kosei = {

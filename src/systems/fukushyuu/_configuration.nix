@@ -1,4 +1,4 @@
-{inputs, ...}: {
+_: {
   kosei = {
     boot.enable = true;
     displayManager = {
