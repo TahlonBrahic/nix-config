@@ -10,7 +10,7 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
   system.includeBuildDependencies = true;
-  nixpkgs.system = "x86_64-linux";
+  #nixpkgs.system = "x86_64-linux";
 
   networking = {
     hostName = "yoru";

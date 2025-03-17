@@ -1,7 +1,16 @@
-{inputs, ...}: {
+{
+  inputs,
+  config,
+  ...
+}: {
   config = {
     kosei = {
+      email.address = "tahlonbrahic@gmail.com";
       boot.enable = true;
+      #home-assistant = {
+      #  enable = true;
+      #  domain = "localhost";
+      #};
       displayManager.enable = true;
       laptopSupport = {
         enable = true;

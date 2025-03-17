@@ -38,7 +38,7 @@
 
       flake = {
         nixosConfigurations = kosei.lib.loadConfigurations "scoped" {
-          outPath = ./.;
+          inherit (self) outPath;
           inputs = self.inputs // self.inputs.kosei.inputs;
           src = ./src/systems;
         };
@@ -47,5 +47,6 @@
 
   inputs = {
     kosei.url = "github:TahlonBrahic/fuyu-no-kosei";
+    flake-parts.url = "github:hercules-ci/flake-parts";
   };
 }

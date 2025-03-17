@@ -28,6 +28,10 @@
           name = "NIX_CONFIG";
           value = "experimental-features = nix-command flakes pipe-operators";
         }
+        {
+          name = "NIXPKGS_ALLOW_UNFREE";
+          value = 1;
+        }
       ];
       commands = [
         {
@@ -36,6 +40,18 @@
             nix repl
           '';
           help = "Enter this flake's REPL";
+        }
+        {
+          name = "rebuild";
+          command = ''
+            sudo nixos-rebuild switch --max-jobs 2 --cores 2 -vv
+          '';
+          help = "Rebuild the flake with limited system utilization and verbose logging";
+        }
+        {
+          name = "update";
+          command = "nix flake update kosei";
+          help = "Pull upstream flake inputs from Kosei";
         }
       ];
       packages = [
